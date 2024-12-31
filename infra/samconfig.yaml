@@ -1,0 +1,11 @@
+version: 0.1
+default:
+  global:
+    parameters:
+      region: us-east-1
+      confirm_changeset: false
+      capabilities: CAPABILITY_NAMED_IAM
+      resolve_s3: true
+      manifest: ./package.json
+      template_file: ./template.yaml
+      tags: Service=blog

@@ -1,0 +1,137 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  Environment:
+    Type: String
+    Description: Environment
+    Default: stg
+    AllowedValues:
+      - stg
+      - prd
+
+Resources:
+  WebBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub ${AWS::StackName}-s3-web-${AWS::AccountId}
+      VersioningConfiguration:
+        Status: Enabled
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+  WebBucketBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref WebBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          # TODO: deploy 用 IAM role も
+          - Principal:
+              Service: cloudfront.amazonaws.com
+            Action:
+              - s3:GetObject
+            Effect: Allow
+            Resource:
+              - !Sub ${WebBucket.Arn}/*
+            Condition:
+              StringEquals:
+                AWS:SourceArn:
+                  - !Sub arn:aws:cloudfront::${AWS::AccountId}:distribution/${Distribution}
+          - Principal:
+              Service: cloudfront.amazonaws.com
+            Action:
+              - s3:ListBucket
+            Effect: Allow
+            Resource:
+              - !Sub ${WebBucket.Arn}
+            Condition:
+              StringEquals:
+                AWS:SourceArn:
+                  - !Sub arn:aws:cloudfront::${AWS::AccountId}:distribution/${Distribution}
+  Distribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        DefaultCacheBehavior:
+          TargetOriginId: WebBucketOrigin
+          Compress: true
+          ViewerProtocolPolicy: redirect-to-https
+          AllowedMethods:
+            - GET
+            - HEAD
+          CachedMethods:
+            - GET
+            - HEAD
+          CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6 # CachingOptimized
+          OriginRequestPolicyId: acba4595-bd28-49b8-b9fe-13317c0390fa # UserAgentRefererHeaders
+          LambdaFunctionAssociations:
+            - LambdaFunctionARN: !Sub ${IndexSupplierFunction.Version}
+              EventType: origin-request
+        PriceClass: PriceClass_200
+        DefaultRootObject: index.html
+        Enabled: true
+        Origins:
+          - DomainName: !GetAtt WebBucket.RegionalDomainName
+            Id: WebBucketOrigin
+            OriginAccessControlId: !GetAtt WebBucketOriginAccessControl.Id
+            S3OriginConfig:
+              OriginAccessIdentity: ''
+  WebBucketOriginAccessControl:
+    Type: AWS::CloudFront::OriginAccessControl
+    Properties:
+      OriginAccessControlConfig:
+        SigningBehavior: always
+        OriginAccessControlOriginType: s3
+        SigningProtocol: sigv4
+        Name: !Sub ${AWS::StackName}-oac
+  IndexSupplierFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub ${AWS::StackName}-lambdaedge-index-supplier-role
+      Path: /
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - edgelambda.amazonaws.com
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+  IndexSupplierFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-lambdaedge-index-supplier
+      Handler: ./src/index-supplier/index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      MemorySize: 128
+      Timeout: 5
+      Role: !GetAtt IndexSupplierFunctionRole.Arn
+      AutoPublishAlias: !Ref Environment
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: esm
+        Minify: false
+        OutExtension:
+          - .js=.mjs
+        Target: "es2020"
+        Sourcemap: true
+        EntryPoints:
+          - ./src/index-supplier/index.ts
+        External:
+          - esbuild
+
+Outputs:
+  DistributionUrl:
+    Description: URL for website hosted on CloudFront
+    Value: !GetAtt Distribution.DomainName
