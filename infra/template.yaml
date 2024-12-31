@@ -9,6 +9,12 @@ Parameters:
     AllowedValues:
       - stg
       - prd
+  Org:
+    Type: String
+    Default: wand2016
+  Repo:
+    Type: String
+    Default: blog
 
 Resources:
   WebBucket:
@@ -34,24 +40,25 @@ Resources:
               Service: cloudfront.amazonaws.com
             Action:
               - s3:GetObject
-            Effect: Allow
-            Resource:
-              - !Sub ${WebBucket.Arn}/*
-            Condition:
-              StringEquals:
-                AWS:SourceArn:
-                  - !Sub arn:aws:cloudfront::${AWS::AccountId}:distribution/${Distribution}
-          - Principal:
-              Service: cloudfront.amazonaws.com
-            Action:
               - s3:ListBucket
             Effect: Allow
             Resource:
+              - !Sub ${WebBucket.Arn}/*
               - !Sub ${WebBucket.Arn}
             Condition:
               StringEquals:
                 AWS:SourceArn:
                   - !Sub arn:aws:cloudfront::${AWS::AccountId}:distribution/${Distribution}
+          - Principal:
+              AWS: !GetAtt DeploymentRole.Arn
+            Action:
+              - s3:PutObject
+              - s3:DeleteObject
+              - s3:ListBucket
+            Effect: Allow
+            Resource:
+              - !Sub ${WebBucket.Arn}/*
+              - !Sub ${WebBucket.Arn}
   Distribution:
     Type: AWS::CloudFront::Distribution
     Properties:
@@ -94,7 +101,7 @@ Resources:
       RoleName: !Sub ${AWS::StackName}-lambdaedge-index-supplier-role
       Path: /
       AssumeRolePolicyDocument:
-        Version: 2012-10-17
+        Version: '2012-10-17'
         Statement:
           - Effect: Allow
             Principal:
@@ -130,8 +137,43 @@ Resources:
           - ./src/index-supplier/index.ts
         External:
           - esbuild
+  DeploymentRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub ${AWS::StackName}-deployment-role
+      Path: /
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated:
+                - !Sub "arn:aws:iam::${AWS::AccountId}:oidc-provider/token.actions.githubusercontent.com"
+            Action:
+              - sts:AssumeRoleWithWebIdentity
+            Condition:
+              "StringLike":
+                "token.actions.githubusercontent.com:sub": !Sub "repo:${Org}/${Repo}:*"
+              "StringEquals":
+                "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+      Policies:
+        - PolicyName: !Sub ${AWS::StackName}-deployment-role-policy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:PutObject
+                  - s3:DeleteObject
+                  - s3:ListBucket
+                Resource:
+                  - !Sub ${WebBucket.Arn}/*
+                  - !Sub ${WebBucket.Arn}
 
 Outputs:
   DistributionUrl:
     Description: URL for website hosted on CloudFront
     Value: !GetAtt Distribution.DomainName
+  DeploymentRoleArn:
+    Description: ARN of deployment role
+    Value: !GetAtt DeploymentRole.Arn
