@@ -1,0 +1,34 @@
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read  # This is required for actions/checkout
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v4
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502
+        with:
+          role-to-assume: ${{ secrets.DEPLOYMENT_ROLE_ARN_STG }}
+          role-session-name: deploy
+          aws-region: us-east-1
+      - name: install
+        run: npm ci
+        working-directory: template
+      - name: build
+        run: npm run build
+        working-directory: template
+        env:
+          MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
+          MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
+          BASE_URL: https://stg.${{ secrets.DOMAIN }}/
+      - name: Copy index.html to s3
+        run: |
+          aws s3 sync --delete ./out/ s3://${{ secrets.BUCKET_NAME_STG }}/
+        working-directory: template
