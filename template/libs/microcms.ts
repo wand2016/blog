@@ -58,6 +58,17 @@ export const getList = async (queries?: MicroCMSQueries) => {
   return listData;
 };
 
+// ブログの全IDを取得
+export const getAllBlogIds = async (filters?: string) => {
+  const listData = await client
+    .getAllContentIds({
+      endpoint: 'blog',
+      filters,
+    })
+    .catch(notFound);
+  return listData;
+};
+
 // ブログの詳細を取得
 export const getDetail = async (contentId: string, queries?: MicroCMSQueries) => {
   const detailData = await client
@@ -77,6 +88,18 @@ export const getTagList = async (queries?: MicroCMSQueries) => {
     .getList<Tag>({
       endpoint: 'tags',
       queries,
+    })
+    .catch(notFound);
+
+  return listData;
+};
+
+// タグの全IDを取得
+export const getAllTagIds = async (filters?: string) => {
+  const listData = await client
+    .getAllContentIds({
+      endpoint: 'tags',
+      filters,
     })
     .catch(notFound);
 

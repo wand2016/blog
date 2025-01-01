@@ -1,4 +1,4 @@
-import { getList, getTagList } from '@/libs/microcms';
+import { getAllTagIds, getList } from '@/libs/microcms';
 import { LIMIT } from '@/constants';
 import Pagination from '@/components/Pagination';
 import ArticleList from '@/components/ArticleList';
@@ -10,9 +10,9 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  const data = await getTagList();
+  const data = await getAllTagIds();
 
-  return data.contents.map((tag) => ({ tagId: tag.id }));
+  return data.map((tagId) => ({ tagId }));
 }
 
 export default async function Page({ params }: Props) {

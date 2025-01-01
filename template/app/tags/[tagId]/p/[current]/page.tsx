@@ -1,4 +1,4 @@
-import { getList, getTagList } from '@/libs/microcms';
+import { getAllBlogIds, getAllTagIds, getList } from '@/libs/microcms';
 import { LIMIT } from '@/constants';
 import Pagination from '@/components/Pagination';
 import ArticleList from '@/components/ArticleList';
@@ -11,21 +11,20 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  const data = await getTagList();
+  const data = await getAllTagIds();
 
-  return Promise.all(
-    data.contents.map(async (tag) => ({
-      tagId: tag.id,
-      ...(await generatePageStaticParams(tag.id)),
-    })),
+  const parallel = await Promise.all(
+    data.map(async (tagId) => {
+      const ps = await generatePageStaticParams(tagId);
+      return ps.map((p) => ({ tagId, ...p }));
+    }),
   );
+  return parallel.flat();
 }
 
 async function generatePageStaticParams(tagId: string) {
-  const data = await getList({
-    filters: `tags[contains]${tagId}`,
-  });
-  const page = Math.ceil(data.totalCount / LIMIT);
+  const data = await getAllBlogIds(`tags[contains]${tagId}`);
+  const page = Math.ceil(data.length / LIMIT);
 
   return Array.from({ length: page }).map((_, i) => ({ current: `${i + 1}` }));
 }

@@ -1,4 +1,4 @@
-import { getList } from '@/libs/microcms';
+import { getAllBlogIds, getList } from '@/libs/microcms';
 import { LIMIT } from '@/constants';
 import Pagination from '@/components/Pagination';
 import ArticleList from '@/components/ArticleList';
@@ -10,8 +10,8 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  const data = await getList();
-  const page = Math.ceil(data.totalCount / LIMIT);
+  const data = await getAllBlogIds();
+  const page = Math.ceil(data.length / LIMIT);
 
   return Array.from({ length: page }).map((_, i) => ({ current: `${i + 1}` }));
 }

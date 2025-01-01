@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
-import { getList, getDetail } from '@/libs/microcms';
+import { getList, getDetail, getAllBlogIds } from '@/libs/microcms';
 import Article from '@/components/Article';
+import { LIMIT } from '@/constants';
 
 type Props = {
   params: {
@@ -24,9 +25,9 @@ type Props = {
 // }
 
 export async function generateStaticParams() {
-  const data = await getList();
+  const data = await getAllBlogIds();
 
-  return data.contents.map((content) => ({ slug: content.id }));
+  return data.map((blogId) => ({ slug: blogId }));
 }
 
 export default async function Page({ params }: Props) {
