@@ -102,6 +102,11 @@ Resources:
           CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6 # CachingOptimized
           OriginRequestPolicyId: acba4595-bd28-49b8-b9fe-13317c0390fa # UserAgentRefererHeaders
           LambdaFunctionAssociations:
+            - !If
+              - UseAccessControl
+              - LambdaFunctionARN: !Sub ${AccessControlFunction.Version}
+                EventType: viewer-request
+              - !Ref AWS::NoValue
             - LambdaFunctionARN: !Sub ${IndexSupplierFunction.Version}
               EventType: origin-request
         PriceClass: PriceClass_200
@@ -186,6 +191,160 @@ Resources:
           - app.ts
         External:
           - aws-lambda
+
+  CognitoUserPool:
+    Type: AWS::Cognito::UserPool
+    Condition: UseAccessControl
+    Properties:
+      UserPoolName: !Sub ${AWS::StackName}-userpool
+      UserPoolTier: LITE
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 8
+          RequireLowercase: true
+          RequireNumbers: true
+          RequireSymbols: true
+          RequireUppercase: true
+          TemporaryPasswordValidityDays: 7
+      AdminCreateUserConfig:
+        AllowAdminCreateUserOnly: true
+      AccountRecoverySetting:
+        RecoveryMechanisms:
+          - Name: verified_email
+            Priority: 1
+      UsernameConfiguration:
+        CaseSensitive: false
+      VerificationMessageTemplate:
+        DefaultEmailOption: CONFIRM_WITH_CODE
+      MfaConfiguration: 'ON'
+      EnabledMfas:
+        - SOFTWARE_TOKEN_MFA
+      Schema:
+        - Name: email
+          AttributeDataType: String
+          Mutable: true
+          Required: true
+      EmailConfiguration:
+        EmailSendingAccount: COGNITO_DEFAULT
+  CognitoUserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Condition: UseAccessControl
+    Properties:
+      UserPoolId: !Ref CognitoUserPool
+      ClientName: !Sub ${AWS::StackName}-userpoolclient
+      GenerateSecret: false
+      ExplicitAuthFlows:
+        - ALLOW_USER_SRP_AUTH
+        - ALLOW_REFRESH_TOKEN_AUTH
+      PreventUserExistenceErrors: ENABLED
+      AllowedOAuthFlows:
+        - code
+      AllowedOAuthScopes:
+        - email
+        - openid
+        - phone
+        - profile
+      AllowedOAuthFlowsUserPoolClient: true
+      SupportedIdentityProviders:
+        - COGNITO
+      CallbackURLs:
+        - !If
+          - IsProd
+          - !Sub https://${Domain}
+          - !Sub https://${Environment}.${Domain}
+      LogoutURLs: []
+  CognitoUserPoolDomain:
+    Type: AWS::Cognito::UserPoolDomain
+    Condition: UseAccessControl
+    Properties:
+      UserPoolId: !Ref CognitoUserPool
+      Domain: !Sub ${AWS::StackName}
+      ManagedLoginVersion: 1
+  CognitoUserPoolIdParameter:
+    Type: AWS::SSM::Parameter
+    Condition: UseAccessControl
+    Properties:
+      Name: !Sub '/${AWS::StackName}-lambdaedge-access-control/user-pool-id'
+      Tier: Standard
+      Type: String
+      Value: !GetAtt CognitoUserPool.UserPoolId
+  CognitoUserPoolClientIdParameter:
+    Type: AWS::SSM::Parameter
+    Condition: UseAccessControl
+    Properties:
+      Name: !Sub '/${AWS::StackName}-lambdaedge-access-control/user-pool-client-id'
+      Tier: Standard
+      Type: String
+      Value: !GetAtt CognitoUserPoolClient.ClientId
+  CognitoUserPoolDomainParameter:
+    Type: AWS::SSM::Parameter
+    Condition: UseAccessControl
+    Properties:
+      Name: !Sub '/${AWS::StackName}-lambdaedge-access-control/user-pool-domain'
+      Tier: Standard
+      Type: String
+      Value: !Sub ${CognitoUserPoolDomain}.auth.${AWS::Region}.amazoncognito.com
+  AccessControlFunctionRole:
+    Type: AWS::IAM::Role
+    Condition: UseAccessControl
+    Properties:
+      RoleName: !Sub ${AWS::StackName}-lambdaedge-access-control-role
+      Path: /
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - edgelambda.amazonaws.com
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: !Sub ${AWS::StackName}-lambdaedge-access-control-role-policy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  # NOTE: GetParameters は順序が保証されないので使用しない
+                  - ssm:GetParameter
+                Resource:
+                  - !Sub 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${AWS::StackName}-lambdaedge-access-control/*'
+  AccessControlFunction:
+    Type: AWS::Serverless::Function
+    Condition: UseAccessControl
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-lambdaedge-access-control
+      CodeUri: ./src/access-control/
+      Handler: app.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      MemorySize: 128
+      Timeout: 5
+      Role: !GetAtt AccessControlFunctionRole.Arn
+      AutoPublishAlias: !Ref Environment
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: esm
+        Minify: false
+        OutExtension:
+          - .js=.mjs
+        Target: "es2020"
+        Sourcemap: false
+        EntryPoints:
+          - app.ts
+        External:
+          - aws-lambda
+          - '@aws-sdk/*'
+        # HACK: crypto の dynanic require のエラーを回避する
+        # see https://github.com/aws/aws-sam-cli/issues/4827#issuecomment-1574080427
+        Banner:
+          - js=import { createRequire } from 'module'; const require = createRequire(import.meta.url);
   DeploymentRole:
     Type: AWS::IAM::Role
     Properties:
@@ -229,3 +388,7 @@ Outputs:
   DeploymentRoleArn:
     Description: ARN of deployment role
     Value: !GetAtt DeploymentRole.Arn
+  UserPoolDomain:
+    Condition: UseAccessControl
+    Description: Domain of the Cognito User Pool
+    Value: !Sub ${CognitoUserPoolDomain}.auth.${AWS::Region}.amazoncognito.com

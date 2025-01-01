@@ -12,9 +12,12 @@
   "devDependencies": {
     "@types/aws-lambda": "^8.10.146",
     "@types/node": "^22.10.2",
+    "prettier": "^3.4.2",
     "typescript": "^5.7.2"
   },
   "dependencies": {
+    "@aws-sdk/client-ssm": "^3.716.0",
+    "cognito-at-edge": "^1.5.3",
     "esbuild": "^0.24.2"
   }
 }
