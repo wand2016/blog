@@ -28,6 +28,9 @@ jobs:
           MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
           MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
           BASE_URL: https://stg.${{ secrets.DOMAIN }}/
+          USE_DRAFT: 'true'
+          NEXT_PUBLIC_MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
+          NEXT_PUBLIC_MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
       - name: Copy index.html to s3
         run: |
           aws s3 sync --delete ./out/ s3://${{ secrets.BUCKET_NAME_STG }}/
