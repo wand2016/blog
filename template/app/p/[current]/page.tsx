@@ -9,7 +9,12 @@ type Props = {
   };
 };
 
-export const revalidate = 60;
+export async function generateStaticParams() {
+  const data = await getList();
+  const page = Math.ceil(data.totalCount / LIMIT);
+
+  return Array.from({ length: page }).map((_, i) => ({ current: `${i + 1}` }));
+}
 
 export default async function Page({ params }: Props) {
   const current = parseInt(params.current as string, 10);
