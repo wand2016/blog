@@ -1,4 +1,4 @@
-import { getTag } from '@/libs/microcms';
+import { getAllTagIds, getTag } from '@/libs/microcms';
 import TagListItem from '@/components/TagListItem';
 import styles from './layout.module.css';
 
@@ -8,6 +8,12 @@ type Props = {
     tagId: string;
   };
 };
+
+export async function generateStaticParams() {
+  const data = await getAllTagIds();
+
+  return data.map((tagId) => ({ tagId }));
+}
 
 export default async function TagsLayout({ children, params }: Props) {
   const { tagId } = params;

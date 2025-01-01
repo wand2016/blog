@@ -13,3 +13,16 @@
     margin: 0 24px;
   }
 }
+
+.resultItem {
+
+}
+
+.resultItem__title {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.resultItem__excerpt {
+  text-indent: 16px;
+}

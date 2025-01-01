@@ -1,25 +1,10 @@
 'use client';
 
+import { pagefind, loadPagefind } from './pagefind';
 import type { PagefindSearchResult, PagefindSearchFragment } from './types';
 import styles from './index.module.css';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-
-declare global {
-  interface Window {
-    pagefind: any;
-  }
-}
-async function loadPagefind() {
-  if (typeof window.pagefind === 'undefined') {
-    // pagefindの読み出しを行う
-    const pf = await import(
-      // @ts-expect-error pagefind.js generated after build
-      /* webpackIgnore: true */ '/pagefind/pagefind.js'
-    );
-    window.pagefind = pf;
-  }
-}
 
 export default function SearchField() {
   const [results, setResults] = useState<PagefindSearchResult[]>([]);
@@ -29,9 +14,11 @@ export default function SearchField() {
   }, []);
 
   async function searchQuery(query: string) {
-    if (window.pagefind) {
-      const search = await window.pagefind.search(query);
-      setResults(search.results);
+    if (pagefind) {
+      const search = await pagefind.debouncedSearch(query);
+      if (!!search) {
+        setResults(search.results);
+      }
     }
   }
 
@@ -44,11 +31,11 @@ export default function SearchField() {
         defaultValue={''}
         onChange={(e) => searchQuery(e.target.value)}
       />
-      <ul id="results">
+      <ol>
         {results.map((result) => (
           <ResultItem key={result.id} result={result} />
         ))}
-      </ul>
+      </ol>
     </>
   );
 }
@@ -67,8 +54,16 @@ const ResultItem = ({ result }: { result: PagefindSearchResult }) => {
   }, [data, result]);
 
   return data ? (
-    <li>
-      <Link href={data.url}>{data.content}</Link>
+    <li className={styles.resultItem}>
+      <p className={styles.resultItem__title}>
+        <Link href={data.url}>{data.meta.title}</Link>
+      </p>
+      <p
+        className={styles.resultItem__excerpt}
+        dangerouslySetInnerHTML={{
+          __html: data.excerpt,
+        }}
+      />
     </li>
   ) : null;
 };

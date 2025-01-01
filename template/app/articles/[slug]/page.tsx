@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
-import { getList, getDetail, getAllBlogIds } from '@/libs/microcms';
+import { getDetail, getAllBlogIds } from '@/libs/microcms';
 import Article from '@/components/Article';
-import { LIMIT } from '@/constants';
 
 type Props = {
   params: {
@@ -9,20 +8,19 @@ type Props = {
   };
 };
 
-// TODO: OGP とか何とかする
-// export async function generateMetadata({ params }: Props): Promise<Metadata> {
-//   const data = await getDetail(params.slug);
-//
-//   return {
-//     title: data.title,
-//     description: data.description,
-//     openGraph: {
-//       title: data.title,
-//       description: data.description,
-//       images: [data?.thumbnail?.url || ''],
-//     },
-//   };
-// }
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const data = await getDetail(params.slug);
+
+  return {
+    title: data.title,
+    description: data.description,
+    openGraph: {
+      title: data.title,
+      description: data.description,
+      images: [data?.thumbnail?.url ?? ''],
+    },
+  };
+}
 
 export async function generateStaticParams() {
   const data = await getAllBlogIds();
