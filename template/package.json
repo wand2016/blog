@@ -36,7 +36,6 @@
     "eslint-config-prettier": "^8.7.0",
     "highlight.js": "^11.7.0",
     "lucide-react": "^0.469.0",
-    "lucide-static": "^0.469.0",
     "microcms-js-sdk": "^3.1.2",
     "next": "^13.4.4",
     "prettier": "^2.8.4",

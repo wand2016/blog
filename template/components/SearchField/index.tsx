@@ -5,6 +5,7 @@ import type { PagefindSearchResult, PagefindSearchFragment } from './types';
 import styles from './index.module.css';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { Search } from 'lucide-react';
 
 export default function SearchField() {
   const [results, setResults] = useState<PagefindSearchResult[]>([]);
@@ -24,13 +25,16 @@ export default function SearchField() {
 
   return (
     <>
-      <input
-        className={styles.search}
-        type="search"
-        placeholder="Search..."
-        defaultValue={''}
-        onChange={(e) => searchQuery(e.target.value)}
-      />
+      <div className={styles.searchWrapper}>
+        <Search width="24px" height="24px" className={styles.searchIcon} />
+        <input
+          className={styles.search}
+          type="search"
+          placeholder="Search..."
+          defaultValue=""
+          onChange={(e) => searchQuery(e.target.value)}
+        />
+      </div>
       <ol>
         {results.map((result) => (
           <ResultItem key={result.id} result={result} />
