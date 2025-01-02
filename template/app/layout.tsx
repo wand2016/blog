@@ -15,7 +15,7 @@ export const metadata = {
     title: 'wandfuldays|創造的な活動で人生を豊かに',
     description:
       '新しいスキルや経験を積み重ね、日々の暮らしをより豊かに。「創造的なこと」をテーマに、自分らしい人生を築くための挑戦をシェアしています。',
-    images: '/ogp.png',
+    images: '/blog_ogp.png',
   },
   alternates: {
     canonical: '/',
