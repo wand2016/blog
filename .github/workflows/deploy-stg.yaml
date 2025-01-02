@@ -33,6 +33,6 @@ jobs:
           NEXT_PUBLIC_MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
       - name: Copy index.html to s3
         run: |
-          aws s3 sync --delete --exclude *.html --exclude *.txt --exclude *.xml ./out/ s3://${{ secrets.BUCKET_NAME_STG }}/ --cache-control max-age=600,public
-          aws s3 sync --delete --exclude * --include *.html --include *.txt --include *.xml ./out/ s3://${{ secrets.BUCKET_NAME_STG }}/ --cache-control no-cache,no-store
+          aws s3 sync --delete --exclude '*.html' --exclude '*.txt' --exclude '*.xml' ./out/ s3://${{ secrets.BUCKET_NAME_STG }}/ --cache-control max-age=600,public
+          aws s3 sync --delete --exclude '*' --include '*.html' --include '*.txt' --include '*.xml' ./out/ s3://${{ secrets.BUCKET_NAME_STG }}/ --cache-control no-cache,no-store
         working-directory: template
