@@ -85,6 +85,31 @@ Resources:
           - !Sub ${Environment}.${Domain}
           HostedZoneId: !Ref HostedZoneId
       ValidationMethod: DNS
+  WebACL:
+    Type: AWS::WAFv2::WebACL
+    Properties:
+      DefaultAction:
+        Allow: {}
+      Name: !Sub ${AWS::StackName}-cf-webacl
+      Scope: CLOUDFRONT
+      Rules:
+        -
+          Name: AWS-AWSManagedRulesCommonRuleSet
+          Priority: 1
+          Statement:
+            ManagedRuleGroupStatement:
+              VendorName: AWS
+              Name: AWSManagedRulesCommonRuleSet
+          OverrideAction:
+            None: {}
+          VisibilityConfig:
+            CloudWatchMetricsEnabled: true
+            SampledRequestsEnabled: false
+            MetricName: AWS-AWSManagedRulesCommonRuleSet
+      VisibilityConfig:
+        CloudWatchMetricsEnabled: true
+        MetricName: !Sub ${AWS::StackName}-cf-waf-metric
+        SampledRequestsEnabled: true
   Distribution:
     Type: AWS::CloudFront::Distribution
     Properties:
@@ -110,6 +135,7 @@ Resources:
             - LambdaFunctionARN: !Sub ${IndexSupplierFunction.Version}
               EventType: origin-request
         PriceClass: PriceClass_200
+        WebACLId: !GetAtt WebACL.Arn
         DefaultRootObject: index.html
         Enabled: true
         Origins:
