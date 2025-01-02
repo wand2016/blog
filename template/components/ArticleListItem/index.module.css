@@ -12,6 +12,14 @@
   height: auto;
 }
 
+.noImage {
+  width: 240px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .title {
   font-size: 1.6rem;
   font-weight: bold;
@@ -22,10 +30,20 @@
   .link {
     display: block;
   }
+
   .image {
     width: 100%;
     height: auto;
     margin-bottom: 1rem;
+  }
+
+  .noImage {
+    width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .title {

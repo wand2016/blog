@@ -26,8 +26,8 @@ export default function SearchField() {
     <>
       <input
         className={styles.search}
-        type="text"
-        placeholder="Searach..."
+        type="search"
+        placeholder="Search..."
         defaultValue={''}
         onChange={(e) => searchQuery(e.target.value)}
       />
