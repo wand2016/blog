@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import { ImageOff } from 'lucide-react';
 import { Article } from '@/libs/microcms';
 import styles from './index.module.css';
 import TagList from '../TagList';
@@ -33,13 +33,9 @@ export default function ArticleListItem({ article }: Props) {
             />
           </picture>
         ) : (
-          <Image
-            className={styles.image}
-            src="/no-image.png"
-            alt="No Image"
-            width={1200}
-            height={630}
-          />
+          <div className={styles.noImage}>
+            <ImageOff color="#999999" />
+          </div>
         )}
         <dl className={styles.content}>
           <dt className={styles.title}>{article.title}</dt>
