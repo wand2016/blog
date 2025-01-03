@@ -12,12 +12,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await getDetail(params.slug);
 
   return {
-    title: data.title,
-    description: data.description,
+    title: `wandfuldays|${data.title}`,
+    description:
+      data.description ||
+      'ハンドメイド、家庭菜園、DIY、プログラミングといった創造的な活動を記録するブログです。新しいスキルや経験を積み重ね、日々の暮らしをより豊かに。「創造的なこと」をテーマに、自分らしい人生を築くための挑戦をシェアしています。',
     openGraph: {
-      title: data.title,
-      description: data.description,
-      images: [data?.thumbnail?.url ?? ''],
+      title: `wandfuldays|${data.title}`,
+      description:
+        data.description ||
+        'ハンドメイド、家庭菜園、DIY、プログラミングといった創造的な活動を記録するブログです。新しいスキルや経験を積み重ね、日々の暮らしをより豊かに。「創造的なこと」をテーマに、自分らしい人生を築くための挑戦をシェアしています。',
+      images: [data?.thumbnail?.url ?? '/blog_ogp.png'],
     },
   };
 }
@@ -31,5 +35,5 @@ export async function generateStaticParams() {
 export default async function Page({ params }: Props) {
   const data = await getDetail(params.slug);
 
-  return <Article data={data} />;
+  return <Article data={data} shareUrl={`${process.env.BASE_URL}/articles/${data.id}`} />;
 }

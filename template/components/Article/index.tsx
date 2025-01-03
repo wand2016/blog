@@ -4,12 +4,14 @@ import PublishedDate from '../Date';
 import styles from './index.module.css';
 import TagList from '../TagList';
 import Profile from '../Profile';
+import Share from '@/components/Share';
 
 type Props = {
   data: Article;
+  shareUrl?: string;
 };
 
-export default function Article({ data }: Props) {
+export default function Article({ data, shareUrl }: Props) {
   return (
     <main className={styles.main} data-pagefind-body>
       <h1 className={styles.title}>{data.title}</h1>
@@ -42,6 +44,14 @@ export default function Article({ data }: Props) {
           __html: `${formatRichText(data.content)}`,
         }}
       />
+      {/*TODO: タグは吟味する*/}
+      {shareUrl && (
+        <Share
+          url={shareUrl}
+          title={data.title}
+          hashtags={data.tags?.map((tag) => tag.name) ?? []}
+        />
+      )}
       <Profile writer={data.writer} />
     </main>
   );
