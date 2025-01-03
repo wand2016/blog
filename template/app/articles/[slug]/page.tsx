@@ -35,5 +35,9 @@ export async function generateStaticParams() {
 export default async function Page({ params }: Props) {
   const data = await getDetail(params.slug);
 
-  return <Article data={data} shareUrl={`${process.env.BASE_URL}/articles/${data.id}`} />;
+  // avoid `/` duplication
+  const baseUrlRaw = process.env.BASE_URL ?? '';
+  const baseUrl = baseUrlRaw.endsWith('/') ? baseUrlRaw : `${baseUrlRaw}/`;
+
+  return <Article data={data} shareUrl={`${baseUrl}articles/${data.id}`} />;
 }
