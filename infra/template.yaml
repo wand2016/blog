@@ -138,6 +138,7 @@ Resources:
         WebACLId: !GetAtt WebACL.Arn
         DefaultRootObject: index.html
         Enabled: true
+        HttpVersion: http2and3
         Origins:
           - DomainName: !GetAtt WebBucket.RegionalDomainName
             Id: WebBucketOrigin
