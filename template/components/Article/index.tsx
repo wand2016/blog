@@ -49,7 +49,7 @@ export default function Article({ data, shareUrl }: Props) {
         <Share
           url={shareUrl}
           title={data.title}
-          hashtags={data.tags?.map((tag) => tag.name) ?? []}
+          hashtags={['wandfuldays', ...(data.tags?.map((tag) => tag.name) ?? [])]}
         />
       )}
       <Profile writer={data.writer} />
