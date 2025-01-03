@@ -1,36 +1,23 @@
 on:
-  workflow_dispatch:
-
-permissions:
-  id-token: write # This is required for requesting the JWT
-  contents: read  # This is required for actions/checkout
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
 
 jobs:
-  deploy:
+  check-license:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 1
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v4
-      - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502
-        with:
-          role-to-assume: ${{ secrets.DEPLOYMENT_ROLE_ARN_PRD }}
-          role-session-name: deploy
-          aws-region: us-east-1
       - name: install
         run: npm ci
         working-directory: template
-      - name: build
-        run: npm run build
-        working-directory: template
-        env:
-          MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
-          MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
-          BASE_URL: https://${{ secrets.DOMAIN }}/
-          USE_DRAFT: 'false'
-      - name: Copy index.html to s3
-        run: |
-          aws s3 sync --delete --exclude '*.html' --exclude '*.txt' --exclude '*.xml' --exclude 'pagefind/*' ./out/ s3://${{ secrets.BUCKET_NAME_PRD }}/ --cache-control max-age=21600,public
-          aws s3 sync --delete --exclude '*' --include '*.html' --include '*.txt' --include '*.xml' --include 'pagefind/*' ./out/ s3://${{ secrets.BUCKET_NAME_PRD }}/ --cache-control no-cache,no-store
+      - name: check licenses
+        run: npm run check-license
+        continue-on-error: false
         working-directory: template
