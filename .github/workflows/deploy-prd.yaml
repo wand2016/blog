@@ -31,6 +31,6 @@ jobs:
           USE_DRAFT: 'false'
       - name: Copy index.html to s3
         run: |
-          aws s3 sync --delete --exclude '*.html' --exclude '*.txt' --exclude '*.xml' --exclude 'pagefind/*' ./out/ s3://${{ secrets.BUCKET_NAME_PRD }}/ --cache-control max-age=21600,public
+          aws s3 sync --delete --exclude '*.html' --exclude '*.txt' --exclude '*.xml' --exclude 'pagefind/*' ./out/ s3://${{ secrets.BUCKET_NAME_PRD }}/ --cache-control max-age=31536000,public
           aws s3 sync --delete --exclude '*' --include '*.html' --include '*.txt' --include '*.xml' --include 'pagefind/*' ./out/ s3://${{ secrets.BUCKET_NAME_PRD }}/ --cache-control no-cache,no-store
         working-directory: template

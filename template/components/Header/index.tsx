@@ -8,7 +8,7 @@ export default function Header() {
       <Link href="/">
         <Image
           src="/blog_logo.svg"
-          alt=""
+          alt="wandfuldays"
           className={styles.logo}
           width={520}
           height={120}
