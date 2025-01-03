@@ -1,0 +1,23 @@
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  check-license:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v4
+      - name: install
+        run: npm ci
+        working-directory: template
+      - name: check licenses
+        run: npm run check-license
+        continue-on-error: false
+        working-directory: template
