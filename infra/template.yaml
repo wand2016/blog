@@ -4,32 +4,38 @@ Transform: AWS::Serverless-2016-10-31
 Parameters:
   Environment:
     Type: String
-    Description: Environment
+    Description: "デプロイ先環境"
     Default: stg
     AllowedValues:
       - stg
       - prd
   Org:
     Type: String
+    Description: "CI/CD ワークフローが配置されている GitHub repository の org 名 (個人の場合は username)"
     Default: wand2016
   Repo:
     Type: String
+    Description: "CI/CD ワークフローが配置されている GitHub repository の repo 名"
     Default: blog
   Domain:
     Type: String
-    Description: Domain name to hosting the blog.
+    Description: "デプロイ先ドメイン。ゾーン頂点を想定。ステージング環境はこのドメインの stg サブドメインにデプロイされる。"
   HostedZoneId:
     Type: String
-    Description: Hosted Zone Id of the Domain.
+    Description: "デプロイ先ドメインの Route53 Hosted Zone ID"
 
 Conditions:
   IsProd: !Equals
     - !Ref Environment
     - 'prd'
+  # 本番以外ではアクセス制限をかける。
   UseAccessControl: !Not
     - !Condition IsProd
 
 Resources:
+  # ============================================================================
+  # S3 bucket + policy for CloudFront origin
+  # ============================================================================
   WebBucket:
     Type: AWS::S3::Bucket
     Properties:
@@ -71,6 +77,18 @@ Resources:
             Resource:
               - !Sub ${WebBucket.Arn}/*
               - !Sub ${WebBucket.Arn}
+  WebBucketOriginAccessControl:
+    Type: AWS::CloudFront::OriginAccessControl
+    Properties:
+      OriginAccessControlConfig:
+        SigningBehavior: always
+        OriginAccessControlOriginType: s3
+        SigningProtocol: sigv4
+        Name: !Sub ${AWS::StackName}-oac
+
+  # ============================================================================
+  # CloudFront distribution + WAF + Certificate + A Record
+  # ============================================================================
   ACMCertificate:
     Type: AWS::CertificateManager::Certificate
     Properties:
@@ -167,14 +185,6 @@ Resources:
         - !Sub ${Domain}
         - !Sub ${Environment}.${Domain}
       Type: A
-  WebBucketOriginAccessControl:
-    Type: AWS::CloudFront::OriginAccessControl
-    Properties:
-      OriginAccessControlConfig:
-        SigningBehavior: always
-        OriginAccessControlOriginType: s3
-        SigningProtocol: sigv4
-        Name: !Sub ${AWS::StackName}-oac
   IndexSupplierFunctionRole:
     Type: AWS::IAM::Role
     Properties:
@@ -218,7 +228,9 @@ Resources:
           - app.ts
         External:
           - aws-lambda
-
+  # ============================================================================
+  # Access Control with Lambda@Edge + Cognito User Pool (cognito-at-edge)
+  # ============================================================================
   CognitoUserPool:
     Type: AWS::Cognito::UserPool
     Condition: UseAccessControl
@@ -368,10 +380,13 @@ Resources:
         External:
           - aws-lambda
           - '@aws-sdk/*'
-        # HACK: crypto の dynanic require のエラーを回避する
+        # HACK: crypto の dynamic require のエラーを回避する
         # see https://github.com/aws/aws-sam-cli/issues/4827#issuecomment-1574080427
         Banner:
           - js=import { createRequire } from 'module'; const require = createRequire(import.meta.url);
+  # ============================================================================
+  # CI/CD deployment role
+  # ============================================================================
   DeploymentRole:
     Type: AWS::IAM::Role
     Properties:
@@ -406,16 +421,15 @@ Resources:
                   - !Sub ${WebBucket.Arn}
 
 Outputs:
+  BucketName:
+    Description: "bucket name of the origin web bucket"
+    Value: !Ref WebBucket
   DistributionUrl:
-    Description: URL for website hosted on CloudFront
+    Description: "URL for website hosted on CloudFront"
     Value: !If
       - IsProd
       - !Sub ${Domain}
       - !Sub ${Environment}.${Domain}
   DeploymentRoleArn:
-    Description: ARN of deployment role
+    Description: "ARN of deployment role"
     Value: !GetAtt DeploymentRole.Arn
-  UserPoolDomain:
-    Condition: UseAccessControl
-    Description: Domain of the Cognito User Pool
-    Value: !Sub ${CognitoUserPoolDomain}.auth.${AWS::Region}.amazoncognito.com
