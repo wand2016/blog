@@ -16,14 +16,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: data.title,
     description:
       data.description ||
-      'ハンドメイド、家庭菜園、DIY、プログラミングといった創造的な活動を記録するブログです。新しいスキルや経験を積み重ね、日々の暮らしをより豊かに。「創造的なこと」をテーマに、自分らしい人生を築くための挑戦をシェアしています。',
+      'ハンドメイド、家庭菜園、DIY、プログラミングなど、さまざまな「つくる」活動を記録し、新しいスキルや経験を積み重ねながら、日々の暮らしを豊かにしていきます。',
     keywords: data.tags?.map((tag) => tag.name),
     openGraph: {
       siteName: 'wandfuldays',
       title: data.title,
       description:
         data.description ||
-        '新しいスキルや経験を積み重ね、日々の暮らしをより豊かに。「創造的なこと」をテーマに、自分らしい人生を築くための挑戦をシェアしています。',
+        'ハンドメイド、家庭菜園、DIY、プログラミングなど、さまざまな「つくる」活動を記録し、新しいスキルや経験を積み重ねながら、日々の暮らしを豊かにしていきます。',
       images: [data?.thumbnail?.url ?? '/blog_ogp.png'],
     },
   };
