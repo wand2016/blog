@@ -22,7 +22,7 @@ Parameters:
     Description: "デプロイ先ドメイン。ゾーン頂点を想定。ステージング環境はこのドメインの stg サブドメインにデプロイされる。"
   HostedZoneId:
     Type: String
-    Description: "デプロイ先ドメインの Route53 Hosted Zone ID"
+    Description: "デプロイ先ドメインの Route53 Hosted Zone ID。 ACM Certificate を自動で認証するために必須。"
 
 Conditions:
   IsProd: !Equals
@@ -422,14 +422,14 @@ Resources:
 
 Outputs:
   BucketName:
-    Description: "bucket name of the origin web bucket"
+    Description: "Web bucket name"
     Value: !Ref WebBucket
+  DeploymentRoleArn:
+    Description: "ARN of the deployment role"
+    Value: !GetAtt DeploymentRole.Arn
   DistributionUrl:
-    Description: "URL for website hosted on CloudFront"
+    Description: "URL of the website hosted on CloudFront"
     Value: !If
       - IsProd
-      - !Sub ${Domain}
-      - !Sub ${Environment}.${Domain}
-  DeploymentRoleArn:
-    Description: "ARN of deployment role"
-    Value: !GetAtt DeploymentRole.Arn
+      - !Sub "https://${Domain}/"
+      - !Sub "https://${Environment}.${Domain}/"
