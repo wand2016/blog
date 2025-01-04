@@ -11,7 +11,8 @@ type Props = {
 
 export async function generateStaticParams() {
   const data = await getAllBlogIds();
-  const page = Math.ceil(data.length / LIMIT);
+  // NOTE: 最低1ページ用意しないと SSG が失敗する
+  const page = Math.max(Math.ceil(data.length / LIMIT), 1);
 
   return Array.from({ length: page }).map((_, i) => ({ current: `${i + 1}` }));
 }

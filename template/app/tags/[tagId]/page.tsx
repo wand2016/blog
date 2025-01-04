@@ -1,4 +1,4 @@
-import { getList } from '@/libs/microcms';
+import { getAllTagIds, getList } from '@/libs/microcms';
 import { LIMIT } from '@/constants';
 import Pagination from '@/components/Pagination';
 import ArticleList from '@/components/ArticleList';
