@@ -13,7 +13,7 @@
     "check-license": "license-checker --summary | grep -qvzi gpl"
   },
   "engines": {
-    "node": ">=22.x"
+    "node": ">=18.x"
   },
   "dependencies": {
     "@next/third-parties": "^15.1.3",
