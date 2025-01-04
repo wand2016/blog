@@ -6,6 +6,7 @@ import Nav from '@/components/Nav';
 import './globals.css';
 import styles from './layout.module.css';
 import { Metadata } from 'next';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
@@ -42,6 +43,7 @@ export default async function RootLayout({ children }: Props) {
         <Nav tags={tags.contents} />
         <main className={styles.main}>{children}</main>
         <Footer />
+        <GoogleAnalytics gaId={process.env.GA_ID ?? ''} />
       </body>
     </html>
   );
