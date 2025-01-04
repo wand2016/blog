@@ -1,5 +1,13 @@
-AWS にデプロイするためのインフラ一式を配置します。
+# infra
+
+AWS にデプロイするためのインフラ一式です。
+
+## デプロイ
 
 ```shell
-ENVIRONMENT=stg DOMAIN=xxx ./deploy
+# staging
+ENVIRONMENT=stg DOMAIN=xxx ./deploy.sh
+
+# production
+ENVIRONMENT=prd DOMAIN=xxx ./deploy.sh
 ```
