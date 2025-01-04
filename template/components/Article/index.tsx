@@ -5,6 +5,7 @@ import styles from './index.module.css';
 import TagList from '../TagList';
 import Profile from '../Profile';
 import Share from '@/components/Share';
+import Script from 'next/script';
 
 type Props = {
   data: Article;
@@ -53,6 +54,8 @@ export default function Article({ data, shareUrl }: Props) {
         />
       )}
       <Profile writer={data.writer} />
+      {/*NOTE: 読み込まないと、 router で遷移してきたときに GitHub 等の埋め込みリンクが動作しない*/}
+      <Script src="https://cdn.iframe.ly/embed.js" />
     </main>
   );
 }
