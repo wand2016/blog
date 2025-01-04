@@ -5,12 +5,16 @@ import Footer from '@/components/Footer';
 import Nav from '@/components/Nav';
 import './globals.css';
 import styles from './layout.module.css';
+import { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
-  title: 'wandfuldays|創造的な活動で人生を豊かに',
+  applicationName: 'wandfuldays',
+  title: '創造的な活動で人生を豊かに',
   description:
     'ハンドメイド、家庭菜園、DIY、プログラミングといった創造的な活動を記録するブログです。新しいスキルや経験を積み重ね、日々の暮らしをより豊かに。「創造的なこと」をテーマに、自分らしい人生を築くための挑戦をシェアしています。',
+  // TODO: 実際に投稿したら記述する
+  // keywords: ['プログラミング'],
   openGraph: {
     siteName: 'wandfuldays',
     title: '創造的な活動で人生を豊かに',
