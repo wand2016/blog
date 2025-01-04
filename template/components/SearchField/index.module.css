@@ -4,7 +4,7 @@
 }
 .searchIcon {
   position: absolute;
-  transform: translate(16px,8px);
+  transform: translate(16px, 8px);
 }
 .search {
   padding: 0 24px 0 48px;
@@ -22,7 +22,6 @@
 }
 
 .resultItem {
-
 }
 
 .resultItem__title {

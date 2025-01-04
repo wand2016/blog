@@ -1,10 +1,6 @@
 # ブログテンプレート
 
-microCMS 公式のシンプルなブログのテンプレートから派生して作成しました。
-
-## 動作環境
-
-Node.js 18 以上
+microCMS 製の [nextjs-simple-blog-template](https://github.com/microcmsio/nextjs-simple-blog-template) を改変して利用しています。
 
 ## 環境変数の設定
 
@@ -18,24 +14,41 @@ Node.js 18 以上
 npm ci
 ```
 
-2. 開発環境の起動
-
-```bash
-npm run dev
-```
-
-3. 開発環境へのアクセス  
-   [http://localhost:3000](http://localhost:3000)にアクセス
-
-
-4. ビルド
+2. ビルド
 
 ```bash
 npm run build
 ```
 
-5. ビルド結果に基づいて dev のインデクシング
+> [!WARNING]
+> microCMS 側で「ブログ」「タグ」を1つ以上作成しないとビルドが失敗します。
+
+3. ビルド結果のプレビュー
+ 
+```bash
+npm run preview
+```
+
+> [!TIP]
+> SSG では next start を使えないので http-server を動かしています。
+
+3. ビルド結果に基づいて dev のインデクシング
+
+サイト内検索を [Pagefind](https://pagefind.app/) で実現しています。
+Pagefind のインデクシングを行うためにビルドが必要です。
 
 ```bash
 npm run dev:indexing
 ```
+
+4. 開発環境の起動
+
+```bash
+npm run dev
+```
+
+> [!WARNING]
+> microCMS 側で「ブログ」「タグ」を1つ以上作成しないとビルドが失敗します。
+
+[http://localhost:3000](http://localhost:3000) にアクセス
+
