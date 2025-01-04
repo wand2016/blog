@@ -14,7 +14,7 @@ export default async function Page() {
       <Pagination totalCount={data.totalCount} />
       <Share
         url={process.env.BASE_URL ?? ''}
-        title={'wandfuldays|創造的な活動で人生を豊かに'}
+        title={'wandfuldays|「つくる」を通じて人生を豊かに'}
         hashtags={['wandfuldays']}
       />
     </>

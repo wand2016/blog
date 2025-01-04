@@ -11,16 +11,14 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
   applicationName: 'wandfuldays',
-  title: 'wandfuldays|創造的な活動で人生を豊かに',
+  title: 'wandfuldays|「つくる」を通じて人生を豊かに',
   description:
-    'ハンドメイド、家庭菜園、DIY、プログラミングといった創造的な活動を記録するブログです。新しいスキルや経験を積み重ね、日々の暮らしをより豊かに。「創造的なこと」をテーマに、自分らしい人生を築くための挑戦をシェアしています。',
-  // TODO: 実際に投稿したら記述する
-  // keywords: ['プログラミング'],
+    'ハンドメイド、家庭菜園、DIY、プログラミングなど、さまざまな「つくる」活動を記録し、新しいスキルや経験を積み重ねながら、日々の暮らしを豊かにしていきます。',
   openGraph: {
     siteName: 'wandfuldays',
-    title: '創造的な活動で人生を豊かに',
+    title: '「つくる」を通じて人生を豊かに',
     description:
-      '新しいスキルや経験を積み重ね、日々の暮らしをより豊かに。「創造的なこと」をテーマに、自分らしい人生を築くための挑戦をシェアしています。',
+      'ハンドメイド、家庭菜園、DIY、プログラミングなど、さまざまな「つくる」活動を記録し、新しいスキルや経験を積み重ねながら、日々の暮らしを豊かにしていきます。',
     images: '/blog_ogp.png',
   },
   alternates: {
