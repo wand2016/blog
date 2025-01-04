@@ -1,9 +1,13 @@
-## template
+# ブログ
 
-Next.js 製のブログテンプレートです。
+microCMS + Next.js (SSG) のブログシステムです。
 
-microCMS の simple blog template を使用しています。
+## ./template/
 
-## infra
+ブログテンプレート (フロントエンド) です。
+
+microCMS 製の [nextjs-simple-blog-template](https://github.com/microcmsio/nextjs-simple-blog-template) を改変して利用しています。
+
+## ./infra/
 
 AWS にデプロイするためのインフラ一式です。

@@ -5,20 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "dev:indexing": "pagefind --site out --output-path public/pagefind",
-    "build": "next build && pagefind --site out --output-path out/pagefind",
-    "postbuild": "next-sitemap",
-    "start": "next start",
+    "build": "next build",
+    "postbuild": "pagefind --site out --output-path out/pagefind && next-sitemap",
+    "preview": "http-server out -p 3000",
     "lint": "next lint",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}'",
     "check-license": "license-checker --summary | grep -qvzi gpl"
-  },
-  "prettier": {
-    "trailingComma": "all",
-    "tabWidth": 2,
-    "semi": true,
-    "singleQuote": true,
-    "jsxSingleQuote": false,
-    "printWidth": 100
   },
   "engines": {
     "node": ">=18.x"
@@ -47,6 +39,7 @@
     "typescript": "4.9.5"
   },
   "devDependencies": {
+    "http-server": "^14.1.1",
     "license-checker": "^25.0.1",
     "next-sitemap": "^4.2.3",
     "pagefind": "^1.3.0"
