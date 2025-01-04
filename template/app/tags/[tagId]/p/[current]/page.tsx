@@ -1,4 +1,4 @@
-import { getAllBlogIds, getAllTagIds, getList } from '@/libs/microcms';
+import { getAllBlogIds, getList } from '@/libs/microcms';
 import { LIMIT } from '@/constants';
 import Pagination from '@/components/Pagination';
 import ArticleList from '@/components/ArticleList';
@@ -10,21 +10,16 @@ type Props = {
   };
 };
 
-export async function generateStaticParams() {
-  const data = await getAllTagIds();
+type ParentParams = {
+  params: {
+    tagId: string;
+  };
+};
 
-  const parallel = await Promise.all(
-    data.map(async (tagId) => {
-      const ps = await generatePageStaticParams(tagId);
-      return ps.map((p) => ({ tagId, ...p }));
-    }),
-  );
-  return parallel.flat();
-}
-
-async function generatePageStaticParams(tagId: string) {
-  const data = await getAllBlogIds(`tags[contains]${tagId}`);
-  const page = Math.ceil(data.length / LIMIT);
+export async function generateStaticParams({ params }: ParentParams) {
+  const data = await getAllBlogIds(`tags[contains]${params.tagId}`);
+  // NOTE: 最低1ページ用意しないと SSG が失敗する
+  const page = Math.max(Math.ceil(data.length / LIMIT), 1);
 
   return Array.from({ length: page }).map((_, i) => ({ current: `${i + 1}` }));
 }
