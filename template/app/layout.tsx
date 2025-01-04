@@ -12,7 +12,8 @@ export const metadata = {
   description:
     'ハンドメイド、家庭菜園、DIY、プログラミングといった創造的な活動を記録するブログです。新しいスキルや経験を積み重ね、日々の暮らしをより豊かに。「創造的なこと」をテーマに、自分らしい人生を築くための挑戦をシェアしています。',
   openGraph: {
-    title: 'wandfuldays|創造的な活動で人生を豊かに',
+    siteName: 'wandfuldays',
+    title: '創造的な活動で人生を豊かに',
     description:
       '新しいスキルや経験を積み重ね、日々の暮らしをより豊かに。「創造的なこと」をテーマに、自分らしい人生を築くための挑戦をシェアしています。',
     images: '/blog_ogp.png',
