@@ -26,6 +26,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         'ハンドメイド、家庭菜園、DIY、プログラミングなど、さまざまな「つくる」活動を記録し、新しいスキルや経験を積み重ねながら、日々の暮らしを豊かにしていきます。',
       images: [data?.thumbnail?.url ?? '/blog_ogp.png'],
     },
+    alternates: {
+      canonical: `/articles/${params.slug}`,
+    },
   };
 }
 
@@ -42,5 +45,5 @@ export default async function Page({ params }: Props) {
   const baseUrlRaw = process.env.BASE_URL ?? '';
   const baseUrl = baseUrlRaw.endsWith('/') ? baseUrlRaw : `${baseUrlRaw}/`;
 
-  return <Article data={data} shareUrl={`${baseUrl}articles/${data.id}`} />;
+  return <Article data={data} shareUrl={`${baseUrl}articles/${params.slug}`} />;
 }
