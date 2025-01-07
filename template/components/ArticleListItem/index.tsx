@@ -34,7 +34,7 @@ export default function ArticleListItem({ article }: Props) {
           </picture>
         ) : (
           <div className={styles.noImage}>
-            <ImageOff color="#999999" />
+            <ImageOff color="#666666" />
           </div>
         )}
         <dl className={styles.content}>
