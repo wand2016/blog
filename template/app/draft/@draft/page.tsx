@@ -5,6 +5,7 @@ import Article from '@/components/Article';
 import { notFound, useSearchParams } from 'next/navigation';
 import { createClient, MicroCMSContentId, MicroCMSDate } from 'microcms-js-sdk';
 import { useEffect, useState } from 'react';
+import { formatRichText } from '@/libs/utils';
 
 type Props = {};
 
@@ -25,6 +26,7 @@ export default function Page({}: Props) {
     }),
   );
   const [data, setData] = useState<(Blog & MicroCMSContentId & MicroCMSDate) | null>(null);
+  const [content, setContent] = useState<string>('');
 
   useEffect(() => {
     let ignore = false;
@@ -50,5 +52,21 @@ export default function Page({}: Props) {
     };
   }, [client, draftKey, id]);
 
-  return data ? <Article data={data} /> : 'loading...';
+  useEffect(() => {
+    let ignore = false;
+
+    const handle = async () => {
+      if (!ignore && data) {
+        setContent(await formatRichText(data.content));
+      }
+    };
+
+    void handle();
+
+    return () => {
+      ignore = true;
+    };
+  }, [data]);
+
+  return content && data ? <Article content={content} data={data} /> : 'loading...';
 }

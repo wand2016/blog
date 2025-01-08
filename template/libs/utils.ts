@@ -10,7 +10,7 @@ export const formatDate = (date: string) => {
   return format(jstDate, 'd MMMM, yyyy');
 };
 
-export const formatRichText = (richText: string) => {
+export const formatRichText = async (richText: string) => {
   const $ = cheerio.load(richText);
   const highlight = (text: string, lang?: string) => {
     if (!lang) return hljs.highlightAuto(text);
@@ -25,5 +25,26 @@ export const formatRichText = (richText: string) => {
     const res = highlight($(elm).text(), lang);
     $(elm).html(res.value);
   });
+
+  const iframeAnchorElements = $(
+    'div.iframely-embed > div.iframely-responsive > a[data-iframely-url]',
+  )
+    .map((_, elm) => elm)
+    .get();
+  for (const elm of iframeAnchorElements) {
+    const iframelyUrl = $(elm).attr('data-iframely-url') ?? '';
+    const iframelyUrlQueryParams = iframelyUrl.slice(iframelyUrl.indexOf('?'));
+
+    const data = await fetch(
+      `https://cdn.iframe.ly/api/iframely${iframelyUrlQueryParams}&omit_script=1&iframe=1&title=1`,
+    );
+    const json = await data.json();
+    const html = json['html'];
+
+    $(elm).parent().parent().replaceWith(html);
+  }
+
+  $('script[src="//cdn.iframe.ly/embed.js"]').remove();
+
   return $.html();
 };

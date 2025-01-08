@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { getDetail, getAllBlogIds } from '@/libs/microcms';
 import Article from '@/components/Article';
+import { formatRichText } from '@/libs/utils';
 
 type Props = {
   params: {
@@ -45,5 +46,7 @@ export default async function Page({ params }: Props) {
   const baseUrlRaw = process.env.BASE_URL ?? '';
   const baseUrl = baseUrlRaw.endsWith('/') ? baseUrlRaw : `${baseUrlRaw}/`;
 
-  return <Article data={data} shareUrl={`${baseUrl}articles/${params.slug}`} />;
+  const content = await formatRichText(data.content);
+
+  return <Article data={data} content={content} shareUrl={`${baseUrl}articles/${params.slug}`} />;
 }

@@ -7,6 +7,7 @@ import './globals.css';
 import styles from './layout.module.css';
 import { Metadata } from 'next';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
@@ -37,6 +38,8 @@ export default async function RootLayout({ children }: Props) {
   return (
     <html lang="ja">
       <body>
+        {/*NOTE: 読み込まないと、 router で遷移してきたときに GitHub 等の埋め込みリンクが動作しない*/}
+        <Script src="https://cdn.iframe.ly/embed.js" />
         <Header />
         <Nav tags={tags.contents} />
         <main className={styles.main}>{children}</main>
