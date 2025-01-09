@@ -38,7 +38,7 @@ export default async function RootLayout({ children }: Props) {
   return (
     <html lang="ja">
       <body>
-        {/*NOTE: 読み込まないと、 router で遷移してきたときに GitHub 等の埋め込みリンクが動作しない*/}
+        {/*NOTE: iframely の responsive スタイリングで必要*/}
         <Script src="https://cdn.iframe.ly/embed.js" />
         <Header />
         <Nav tags={tags.contents} />
