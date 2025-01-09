@@ -68,5 +68,5 @@ export default function Page({}: Props) {
     };
   }, [data]);
 
-  return content && data ? <Article content={content} data={data} /> : 'loading...';
+  return content && data ? <Article formattedContent={content} data={data} /> : 'loading...';
 }

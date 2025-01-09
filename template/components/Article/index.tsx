@@ -4,15 +4,14 @@ import styles from './index.module.css';
 import TagList from '../TagList';
 import Profile from '../Profile';
 import Share from '@/components/Share';
-import Script from 'next/script';
 
 type Props = {
-  data: Article;
-  content: string;
+  data: Omit<Article, 'content'>;
+  formattedContent: string;
   shareUrl?: string;
 };
 
-export default function Article({ data, content, shareUrl }: Props) {
+export default function Article({ data, formattedContent: content, shareUrl }: Props) {
   return (
     <main className={styles.main} data-pagefind-body>
       <h1 className={styles.title}>{data.title}</h1>

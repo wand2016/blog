@@ -48,5 +48,11 @@ export default async function Page({ params }: Props) {
 
   const content = await formatRichText(data.content);
 
-  return <Article data={data} content={content} shareUrl={`${baseUrl}articles/${params.slug}`} />;
+  return (
+    <Article
+      data={data}
+      formattedContent={content}
+      shareUrl={`${baseUrl}articles/${params.slug}`}
+    />
+  );
 }
