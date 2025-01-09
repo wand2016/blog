@@ -1,18 +1,17 @@
-import { formatRichText } from '@/libs/utils';
 import { type Article } from '@/libs/microcms';
 import PublishedDate from '../Date';
 import styles from './index.module.css';
 import TagList from '../TagList';
 import Profile from '../Profile';
 import Share from '@/components/Share';
-import Script from 'next/script';
 
 type Props = {
-  data: Article;
+  data: Omit<Article, 'content'>;
+  formattedContent: string;
   shareUrl?: string;
 };
 
-export default function Article({ data, shareUrl }: Props) {
+export default function Article({ data, formattedContent: content, shareUrl }: Props) {
   return (
     <main className={styles.main} data-pagefind-body>
       <h1 className={styles.title}>{data.title}</h1>
@@ -42,7 +41,7 @@ export default function Article({ data, shareUrl }: Props) {
       <div
         className={styles.content}
         dangerouslySetInnerHTML={{
-          __html: `${formatRichText(data.content)}`,
+          __html: content,
         }}
       />
       {/*TODO: タグは吟味する*/}
@@ -54,8 +53,6 @@ export default function Article({ data, shareUrl }: Props) {
         />
       )}
       <Profile writer={data.writer} />
-      {/*NOTE: 読み込まないと、 router で遷移してきたときに GitHub 等の埋め込みリンクが動作しない*/}
-      <Script src="https://cdn.iframe.ly/embed.js" />
     </main>
   );
 }
