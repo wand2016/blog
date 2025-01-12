@@ -1,7 +1,3 @@
-.list {
-  margin-bottom: 40px;
-}
-
 .link {
   display: flex;
   gap: 40px;
@@ -10,6 +6,7 @@
 .image {
   width: 240px;
   height: auto;
+  border: 1px solid #808080
 }
 
 .noImage {
@@ -18,6 +15,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid #808080
 }
 
 .title {
@@ -34,19 +32,17 @@
   .image {
     width: 100%;
     height: auto;
-    margin-bottom: 1rem;
   }
 
   .noImage {
     width: 100%;
     height: auto;
-    margin-bottom: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
   .title {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 }
