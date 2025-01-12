@@ -5,12 +5,4 @@
   align-items: center;
   gap: 8px;
   padding: 0 24px 24px;
-  margin-bottom: 40px;
-  border-bottom: 1px solid var(--color-border-light);
-}
-
-@media (max-width: 640px) {
-  .nav {
-    margin-bottom: 0;
-  }
 }

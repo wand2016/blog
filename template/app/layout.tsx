@@ -42,6 +42,7 @@ export default async function RootLayout({ children }: Props) {
         <Script src="https://cdn.iframe.ly/embed.js" />
         <Header />
         <Nav tags={tags.contents} />
+        <hr className={styles.hr} />
         <main className={styles.main}>{children}</main>
         <Footer />
         <GoogleAnalytics gaId={process.env.GA_ID ?? ''} />

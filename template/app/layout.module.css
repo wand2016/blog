@@ -3,9 +3,19 @@
   margin: 0 auto;
 }
 
+.hr {
+  border-top: none;
+  border-bottom: 1px solid var(--color-border-light);
+  margin-bottom: 40px;
+}
+
 @media (max-width: 640px) {
   .main {
     width: auto;
     padding: 24px;
+  }
+
+  .nav {
+    margin-bottom: 0;
   }
 }
