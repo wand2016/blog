@@ -28,6 +28,7 @@
   width: 960px;
   height: auto;
   margin-bottom: 64px;
+  border: 1px solid #808080;
 }
 
 .content {
@@ -132,11 +133,13 @@
 
 .content > figure {
   margin: 2rem 0;
+  text-align: center;
 }
 
 .content > figure img {
   max-width: 100%;
   height: auto;
+  border: 1px solid #808080;
 }
 
 .content > figure figcaption {
