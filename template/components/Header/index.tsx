@@ -25,11 +25,21 @@ export default function Header({ menuContent }: Props) {
           />
         </Link>
         {menuOpen ? (
-          <button className={styles.menuButton} type={'button'} onClick={() => setMenuOpen(false)}>
+          <button
+            className={styles.menuButton}
+            type="button"
+            aria-label="メニューを閉じるボタン"
+            onClick={() => setMenuOpen(false)}
+          >
             <XIcon />
           </button>
         ) : (
-          <button className={styles.menuButton} type={'button'} onClick={() => setMenuOpen(true)}>
+          <button
+            className={styles.menuButton}
+            type="button"
+            aria-label="メニューを開くボタン"
+            onClick={() => setMenuOpen(true)}
+          >
             <MenuIcon />
           </button>
         )}
