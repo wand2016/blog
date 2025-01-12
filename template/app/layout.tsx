@@ -12,14 +12,14 @@ import Script from 'next/script';
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
   applicationName: 'wandfuldays',
-  title: 'wandfuldays|「つくる」を通じて人生を豊かに',
+  title: 'wandfuldays|魔法のように素敵な日々をつくるブログ',
   description:
-    'ハンドメイド、家庭菜園、DIY、プログラミングなど、さまざまな「つくる」活動を記録し、新しいスキルや経験を積み重ねながら、日々の暮らしを豊かにしていきます。',
+    '「つくる」をテーマに、ハンドメイド、家庭菜園、DIY、プログラミングなど、様々な挑戦を記録します。魔法のように素敵な日々を一緒に作りませんか？',
   openGraph: {
     siteName: 'wandfuldays',
-    title: '「つくる」を通じて人生を豊かに',
+    title: '魔法のように素敵な日々をつくるブログ',
     description:
-      'ハンドメイド、家庭菜園、DIY、プログラミングなど、さまざまな「つくる」活動を記録し、新しいスキルや経験を積み重ねながら、日々の暮らしを豊かにしていきます。',
+      '「つくる」をテーマに、ハンドメイド、家庭菜園、DIY、プログラミングなど、様々な挑戦を記録します。魔法のように素敵な日々を一緒に作りませんか？',
     images: '/blog_ogp.png',
   },
   alternates: {

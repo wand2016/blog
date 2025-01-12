@@ -1,7 +1,7 @@
 {
-  "name": "wandfuldays|「つくる」を通じて人生を豊かに",
+  "name": "wandfuldays|魔法のように素敵な日々をつくるブログ",
   "short_name": "wandfuldays",
-  "description": "ハンドメイド、家庭菜園、DIY、プログラミングなど、さまざまな「つくる」活動を記録し、新しいスキルや経験を積み重ねながら、日々の暮らしを豊かにしていきます。",
+  "description": "「つくる」をテーマに、ハンドメイド、家庭菜園、DIY、プログラミングなど、様々な挑戦を記録します。魔法のように素敵な日々を一緒に作りませんか？",
   "start_url": "/",
   "icons": [
     { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },

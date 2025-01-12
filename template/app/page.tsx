@@ -16,7 +16,7 @@ export default async function Page() {
       <Share
         className={styles.share}
         url={process.env.BASE_URL ?? ''}
-        title={'wandfuldays|「つくる」を通じて人生を豊かに'}
+        title="wandfuldays|魔法のように素敵な日々をつくるブログ"
         hashtags={['wandfuldays']}
       />
     </>
