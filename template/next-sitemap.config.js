@@ -8,7 +8,11 @@ module.exports = {
     {
       userAgent: '*',
       allow: '/',
-      disallow: ['/draft/'],
+      disallow: [
+        '/draft/', // 下書きプレビューページ。そもそも本番では何も表示しない
+        '/p/', // 絞り込みなしページネーション
+        '/tags/', // タグ絞り込みページネーション
+      ],
     },
   ],
 };
