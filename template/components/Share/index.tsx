@@ -16,11 +16,14 @@ type Props = {
   title: string;
   url: string;
   hashtags: string[];
+  className?: string;
 };
 
-export default function Share({ url, title, hashtags }: Props) {
+export default function Share({ url, title, hashtags, className }: Props) {
   return (
-    <ul className={styles.shareButtonList}>
+    <ul
+      className={className ? [className, styles.shareButtonList].join(' ') : styles.shareButtonList}
+    >
       <li className={styles.shareButtonWrapper}>
         <TwitterShareButton url={url} title={title} hashtags={hashtags} aria-label="X share button">
           <XIcon size={'64px'} />
