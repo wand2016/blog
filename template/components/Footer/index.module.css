@@ -4,3 +4,7 @@
   color: var(--color-text-main);
   font-size: 0.8rem;
 }
+
+.footer a {
+  text-decoration: underline;
+}
