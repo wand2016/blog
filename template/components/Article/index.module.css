@@ -78,11 +78,18 @@
   overflow-x: auto;
 }
 
-.content pre > code {
+.content code {
   background-color: var(--color-bg-code);
+  padding: .2em .4em;
+  border-radius: 6px;
+}
+
+.content pre > code {
+  background-color: var(--color-bg-code-block);
   display: block;
   overflow-x: auto;
-  padding: 16px;
+  padding: 1rem;
+  border-radius: 6px;
 }
 
 .content div[data-filename]::before {
