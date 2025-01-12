@@ -44,6 +44,7 @@ export default function Header({ menuContent }: Props) {
           </button>
         )}
       </header>
+      {/* todo: animation, modal */}
       {menuOpen && <div className={styles.menu}>{menuContent}</div>}
     </>
   );
