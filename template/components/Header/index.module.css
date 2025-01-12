@@ -1,8 +1,27 @@
 .header {
   padding: 4px 8px 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
   height: 48px;
   width: auto;
+}
+
+.menuButton {
+  border: none;
+  background: none;
+  margin-right: 1rem;
+}
+
+@media (min-width: 641px) {
+  .menuButton {
+    display: none;
+  }
+  .menu {
+    display: none;
+  }
 }

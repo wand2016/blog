@@ -9,6 +9,7 @@
   font-size: 2.4rem;
   margin-bottom: 24px;
   text-align: center;
+  line-height: 1.5;
 }
 
 .description {
@@ -28,6 +29,7 @@
   width: 960px;
   height: auto;
   margin-bottom: 64px;
+  border: 1px solid #808080;
 }
 
 .content {
@@ -132,11 +134,13 @@
 
 .content > figure {
   margin: 2rem 0;
+  text-align: center;
 }
 
 .content > figure img {
   max-width: 100%;
   height: auto;
+  border: 1px solid #808080;
 }
 
 .content > figure figcaption {
@@ -208,4 +212,8 @@
   .content {
     width: 100%;
   }
+}
+
+.share {
+  margin: 2rem 0;
 }

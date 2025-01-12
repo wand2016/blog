@@ -47,6 +47,7 @@ export default function Article({ data, formattedContent: content, shareUrl }: P
       {/*TODO: タグは吟味する*/}
       {shareUrl && (
         <Share
+          className={styles.share}
           url={shareUrl}
           title={data.title}
           hashtags={['wandfuldays', ...(data.tags?.map((tag) => tag.name) ?? [])]}

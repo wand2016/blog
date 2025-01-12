@@ -3,6 +3,7 @@ import { LIMIT } from '@/constants';
 import Pagination from '@/components/Pagination';
 import ArticleList from '@/components/ArticleList';
 import Share from '@/components/Share';
+import styles from './page.module.css';
 
 export default async function Page() {
   const data = await getList({
@@ -13,6 +14,7 @@ export default async function Page() {
       <ArticleList articles={data.contents} />
       <Pagination totalCount={data.totalCount} />
       <Share
+        className={styles.share}
         url={process.env.BASE_URL ?? ''}
         title={'wandfuldays|「つくる」を通じて人生を豊かに'}
         hashtags={['wandfuldays']}

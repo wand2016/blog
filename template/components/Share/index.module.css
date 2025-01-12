@@ -1,6 +1,4 @@
 .shareButtonList {
-  /*TODO: margin は呼び出し側で設定する*/
-  margin: 2rem 0;
   display: flex;
   flex-direction: row;
   gap: 16px;

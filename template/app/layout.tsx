@@ -40,8 +40,9 @@ export default async function RootLayout({ children }: Props) {
       <body>
         {/*NOTE: iframely の responsive スタイリングで必要*/}
         <Script src="https://cdn.iframe.ly/embed.js" />
-        <Header />
-        <Nav tags={tags.contents} />
+        <Header menuContent={<Nav tags={tags.contents} />} />
+        <Nav className={styles.nav} tags={tags.contents} />
+        <hr className={styles.hr} />
         <main className={styles.main}>{children}</main>
         <Footer />
         <GoogleAnalytics gaId={process.env.GA_ID ?? ''} />

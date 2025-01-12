@@ -4,12 +4,13 @@ import TagList from '@/components/TagList';
 import styles from './index.module.css';
 
 type Props = {
+  className?: string;
   tags: Tag[];
 };
 
-export default function Nav({ tags }: Props) {
+export default function Nav({ className, tags }: Props) {
   return (
-    <nav className={styles.nav}>
+    <nav className={className ? [className, styles.nav].join(' ') : styles.nav}>
       <SearchField />
       <TagList tags={tags} />
     </nav>

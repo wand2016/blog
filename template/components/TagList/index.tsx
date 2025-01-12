@@ -14,9 +14,7 @@ export default function TagList({ tags, hasLink = true }: Props) {
   return (
     <ul className={styles.tags}>
       {tags.map((tag) => (
-        <li key={tag.id}>
-          <TagListItem tag={tag} hasLink={hasLink} />
-        </li>
+        <TagListItem key={tag.id} tag={tag} hasLink={hasLink} />
       ))}
     </ul>
   );
