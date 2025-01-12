@@ -5,3 +5,9 @@
   border-radius: var(--border-radius);
   white-space: nowrap;
 }
+
+.tagInner {
+  display: flex;
+  gap: .25em;
+  align-items: center;
+}

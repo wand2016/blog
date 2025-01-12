@@ -1,6 +1,7 @@
 import { getAllTagIds, getTag } from '@/libs/microcms';
 import TagListItem from '@/components/TagListItem';
 import styles from './layout.module.css';
+import TagList from '@/components/TagList';
 
 type Props = {
   children: React.ReactNode;
@@ -21,7 +22,7 @@ export default async function TagsLayout({ children, params }: Props) {
   return (
     <div>
       <p className={styles.title}>
-        <TagListItem tag={tag} hasLink={false} />
+        <TagList tags={[tag]} hasLink={false} />
         の記事一覧
       </p>
       <div>{children}</div>
