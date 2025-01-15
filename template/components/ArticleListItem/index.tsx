@@ -4,6 +4,7 @@ import { Article } from '@/libs/microcms';
 import styles from './index.module.css';
 import TagList from '../TagList';
 import PublishedDate from '../Date';
+import { formatImageSrc } from '@/libs/utils';
 
 type Props = {
   article: Article;
@@ -18,14 +19,18 @@ export default function ArticleListItem({ article }: Props) {
             <source
               type="image/webp"
               media="(max-width: 640px)"
-              srcSet={`${article.thumbnail?.url}?fm=webp&w=414 1x, ${article.thumbnail?.url}?fm=webp&w=414&dpr=2 2x`}
+              srcSet={formatImageSrc(
+                `${article.thumbnail?.url}?fm=webp&w=414 1x, ${article.thumbnail?.url}?fm=webp&w=414&dpr=2 2x`,
+              )}
             />
             <source
               type="image/webp"
-              srcSet={`${article.thumbnail?.url}?fm=webp&fit=crop&w=240&h=126 1x, ${article.thumbnail?.url}?fm=webp&fit=crop&w=240&h=126&dpr=2 2x`}
+              srcSet={formatImageSrc(
+                `${article.thumbnail?.url}?fm=webp&fit=crop&w=240&h=126 1x, ${article.thumbnail?.url}?fm=webp&fit=crop&w=240&h=126&dpr=2 2x`,
+              )}
             />
             <img
-              src={article.thumbnail?.url || `/noimage.png`}
+              src={formatImageSrc(article.thumbnail?.url) || `/noimage.png`}
               alt=""
               className={styles.image}
               width={article.thumbnail?.width}

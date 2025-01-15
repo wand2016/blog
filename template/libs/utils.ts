@@ -10,6 +10,13 @@ export const formatDate = (date: string) => {
   return format(jstDate, 'd MMMM, yyyy');
 };
 
+export const formatImageSrc = <T extends string | undefined | null>(src: T): T | string => {
+  if (!src || !src.startsWith('https://images.microcms-assets.io/assets/')) return src;
+
+  const glue = src.includes('?') ? '&' : '?';
+  return `${src}${glue}auto=compress`;
+};
+
 export const formatRichText = async (richText: string) => {
   const $ = cheerio.load(richText);
   const highlight = (text: string, lang?: string) => {
@@ -28,16 +35,14 @@ export const formatRichText = async (richText: string) => {
 
   $('img').each((_, elm) => {
     const src = $(elm).attr('src');
-    if (src && src?.startsWith('https://images.microcms-assets.io/assets/')) {
-      const glue = src.includes('?') ? '&' : '?';
-      $(elm).attr('src', `${src}${glue}auto=compress`);
+    if (src) {
+      $(elm).attr('src', formatImageSrc(src));
     }
   });
   $('picture > source').each((_, elm) => {
     const srcset = $(elm).attr('srcset');
-    if (srcset && srcset?.startsWith('https://images.microcms-assets.io/assets/')) {
-      const glue = srcset.includes('?') ? '&' : '?';
-      $(elm).attr('srcset', `${srcset}${glue}auto=compress`);
+    if (srcset) {
+      $(elm).attr('srcset', formatImageSrc(srcset));
     }
   });
 
