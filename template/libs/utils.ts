@@ -28,9 +28,7 @@ export const formatRichText = async (richText: string) => {
 
   const iframeAnchorElements = $(
     'div.iframely-embed > div.iframely-responsive > a[data-iframely-url]',
-  )
-    .map((_, elm) => elm)
-    .get();
+  ).get();
   for (const elm of iframeAnchorElements) {
     const iframelyUrl = $(elm).attr('data-iframely-url') ?? '';
     const iframelyUrlQueryParams = iframelyUrl.slice(iframelyUrl.indexOf('?'));
