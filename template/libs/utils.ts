@@ -26,6 +26,21 @@ export const formatRichText = async (richText: string) => {
     $(elm).html(res.value);
   });
 
+  $('img').each((_, elm) => {
+    const src = $(elm).attr('src');
+    if (src && src?.startsWith('https://images.microcms-assets.io/assets/')) {
+      const glue = src.includes('?') ? '&' : '?';
+      $(elm).attr('src', `${src}${glue}auto=compress`);
+    }
+  });
+  $('picture > source').each((_, elm) => {
+    const srcset = $(elm).attr('srcset');
+    if (srcset && srcset?.startsWith('https://images.microcms-assets.io/assets/')) {
+      const glue = srcset.includes('?') ? '&' : '?';
+      $(elm).attr('srcset', `${srcset}${glue}auto=compress`);
+    }
+  });
+
   const iframeAnchorElements = $(
     'div.iframely-embed > div.iframely-responsive > a[data-iframely-url]',
   ).get();
