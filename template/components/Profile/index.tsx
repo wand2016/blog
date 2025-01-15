@@ -1,5 +1,6 @@
 import styles from './index.module.css';
 import { Writer } from '@/libs/microcms';
+import { formatImageSrc } from '@/libs/utils';
 
 type Props = {
   writer?: Writer;
@@ -14,10 +15,12 @@ export default function Profile({ writer }: Props) {
       <picture>
         <source
           type="image/webp"
-          srcSet={`${writer?.image?.url}?fm=webp&fit=crop&96&h=96 1x, ${writer?.image?.url}?fm=webp&fit=crop&w=96&h=96&dpr=2 2x`}
+          srcSet={formatImageSrc(
+            `${writer?.image?.url}?fm=webp&fit=crop&96&h=96 1x, ${writer?.image?.url}?fm=webp&fit=crop&w=96&h=96&dpr=2 2x`,
+          )}
         />
         <img
-          src={writer?.image?.url}
+          src={formatImageSrc(writer?.image?.url)}
           alt=""
           className={styles.icon}
           width={writer?.image?.width}

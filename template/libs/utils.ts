@@ -10,6 +10,13 @@ export const formatDate = (date: string) => {
   return format(jstDate, 'd MMMM, yyyy');
 };
 
+export const formatImageSrc = <T extends string | undefined | null>(src: T): T | string => {
+  if (!src || !src.startsWith('https://images.microcms-assets.io/assets/')) return src;
+
+  const glue = src.includes('?') ? '&' : '?';
+  return `${src}${glue}auto=compress`;
+};
+
 export const formatRichText = async (richText: string) => {
   const $ = cheerio.load(richText);
   const highlight = (text: string, lang?: string) => {
@@ -26,11 +33,22 @@ export const formatRichText = async (richText: string) => {
     $(elm).html(res.value);
   });
 
+  $('img').each((_, elm) => {
+    const src = $(elm).attr('src');
+    if (src) {
+      $(elm).attr('src', formatImageSrc(src));
+    }
+  });
+  $('picture > source').each((_, elm) => {
+    const srcset = $(elm).attr('srcset');
+    if (srcset) {
+      $(elm).attr('srcset', formatImageSrc(srcset));
+    }
+  });
+
   const iframeAnchorElements = $(
     'div.iframely-embed > div.iframely-responsive > a[data-iframely-url]',
-  )
-    .map((_, elm) => elm)
-    .get();
+  ).get();
   for (const elm of iframeAnchorElements) {
     const iframelyUrl = $(elm).attr('data-iframely-url') ?? '';
     const iframelyUrlQueryParams = iframelyUrl.slice(iframelyUrl.indexOf('?'));
