@@ -70,7 +70,7 @@ export default function Page({}: Props) {
   }, [data]);
 
   const headings = useMemo(() => {
-    if (!content || !data || !!data.use_toc) return undefined;
+    if (!content || !data || !data.use_toc) return undefined;
 
     return extractHeadings(content);
   }, [content, data]);
