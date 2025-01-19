@@ -15,9 +15,10 @@ export default function Profile({ writer }: Props) {
       <picture>
         <source
           type="image/webp"
-          srcSet={formatImageSrc(
-            `${writer?.image?.url}?fm=webp&fit=crop&96&h=96 1x, ${writer?.image?.url}?fm=webp&fit=crop&w=96&h=96&dpr=2 2x`,
-          )}
+          srcSet={[
+            `${formatImageSrc(`${writer?.image?.url}?fm=webp&fit=crop&96&h=96`)} 1x`,
+            `${formatImageSrc(`${writer?.image?.url}?fm=webp&fit=crop&w=96&h=96&dpr=2`)} 2x`,
+          ].join(',')}
         />
         <img
           src={formatImageSrc(writer?.image?.url)}
