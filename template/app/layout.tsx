@@ -8,22 +8,18 @@ import styles from './layout.module.css';
 import { Metadata } from 'next';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Script from 'next/script';
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE } from '@/libs/siteMetadata';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
-  applicationName: 'wandfuldays',
-  title: 'wandfuldays|魔法のように素敵な日々をつくるブログ',
-  description:
-    '「つくる」をテーマに、ハンドメイド、家庭菜園、DIY、プログラミングなど、様々な挑戦を記録します。魔法のように素敵な日々を一緒に作りませんか？',
+  applicationName: SITE_NAME,
+  title: `${SITE_NAME}|${SITE_TITLE}`,
+  description: SITE_DESCRIPTION,
   openGraph: {
-    siteName: 'wandfuldays',
-    title: '魔法のように素敵な日々をつくるブログ',
-    description:
-      '「つくる」をテーマに、ハンドメイド、家庭菜園、DIY、プログラミングなど、様々な挑戦を記録します。魔法のように素敵な日々を一緒に作りませんか？',
+    siteName: SITE_NAME,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: '/blog_ogp.png',
-  },
-  alternates: {
-    canonical: '/',
   },
 };
 

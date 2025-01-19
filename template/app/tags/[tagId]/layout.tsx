@@ -20,12 +20,12 @@ export default async function TagsLayout({ children, params }: Props) {
   const { tagId } = params;
   const tag = await getTag(tagId);
   return (
-    <div>
-      <p className={styles.title}>
+    <>
+      <header className={styles.title}>
         <TagList tags={[tag]} hasLink={false} />
         の記事一覧
-      </p>
+      </header>
       <div>{children}</div>
-    </div>
+    </>
   );
 }

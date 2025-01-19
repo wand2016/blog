@@ -4,6 +4,13 @@ import Pagination from '@/components/Pagination';
 import ArticleList from '@/components/ArticleList';
 import Share from '@/components/Share';
 import styles from './page.module.css';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+};
 
 export default async function Page() {
   const data = await getList({

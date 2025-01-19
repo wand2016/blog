@@ -1,4 +1,11 @@
 import { Suspense } from 'react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+  },
+};
 
 type Props = {
   draft: React.ReactNode;

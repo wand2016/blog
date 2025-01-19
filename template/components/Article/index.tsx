@@ -5,6 +5,7 @@ import TagList from '../TagList';
 import Profile from '../Profile';
 import Share from '@/components/Share';
 import { formatImageSrc } from '@/libs/utils';
+import { getGlobalTags } from '@/libs/getGlobalTags';
 
 type Props = {
   data: Omit<Article, 'content'>;
@@ -54,11 +55,7 @@ export default function Article({ data, formattedContent: content, shareUrl }: P
           className={styles.share}
           url={shareUrl}
           title={data.title}
-          hashtags={[
-            'wandfuldays',
-            ...(data.tags?.map((tag) => tag.name) ?? []),
-            ...(data.hashtags?.split('\n') ?? []),
-          ]}
+          hashtags={['wandfuldays', ...getGlobalTags(data)]}
         />
       )}
       <Profile writer={data.writer} />

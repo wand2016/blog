@@ -1,19 +1,20 @@
 import styles from './page.module.css';
-import { Metadata } from 'next';
+import { Metadata, ResolvingMetadata } from 'next';
+import { SITE_NAME } from '@/libs/siteMetadata';
 
-export const metadata: Metadata = {
-  title: 'wandfuldays|プライバシーポリシー',
+export const generateMetadata = async (_: {}, parent: ResolvingMetadata): Promise<Metadata> => ({
+  title: 'プライバシーポリシー',
   description: 'プライバシーポリシー・免責事項です。',
+  // @ts-expect-error 型が合わない
   openGraph: {
-    siteName: 'wandfuldays',
+    ...(await parent).openGraph,
     title: 'プライバシーポリシー',
     description: 'プライバシーポリシー・免責事項です。',
-    images: '/blog_ogp.png',
   },
   alternates: {
     canonical: '/privacy-policy/',
   },
-};
+});
 
 // TODO: Article component を再利用する
 export default function Page() {
@@ -36,7 +37,7 @@ export default function Page() {
           をご確認ください。
         </p>
         <p>
-          また、 wandfuldays
+          また、 {SITE_NAME}
           は、Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。
         </p>
         <h2>アクセス解析ツールについて</h2>
