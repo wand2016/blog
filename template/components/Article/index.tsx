@@ -52,6 +52,7 @@ export default function Article({ data, formattedContent: content, headings, sha
           <ol className={styles.tocList}>
             {headings.map((heading) => (
               <li
+                // TODO: fix bad code
                 className={[
                   styles.tocListItem,
                   heading.headingNumber === 2
