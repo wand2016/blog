@@ -2,12 +2,30 @@ import { getAllBlogIds, getList } from '@/libs/microcms';
 import { LIMIT } from '@/constants';
 import Pagination from '@/components/Pagination';
 import ArticleList from '@/components/ArticleList';
+import { Metadata, ResolvingMetadata } from 'next';
+import { SITE_NAME } from '@/libs/siteMetadata';
 
 type Props = {
   params: {
     current: string;
   };
 };
+
+export const generateMetadata = async (
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> => ({
+  title: `記事一覧|${params.current}ページ目`,
+  // @ts-expect-error 型が合わない
+  openGraph: {
+    ...(await parent).openGraph,
+    title: `${params.current}ページ目`,
+  },
+  alternates: {
+    // 先頭ページはページネーションなしページと同一視する
+    canonical: params.current === '1' ? '/' : `/p/${params.current}/`,
+  },
+});
 
 export async function generateStaticParams() {
   const data = await getAllBlogIds();

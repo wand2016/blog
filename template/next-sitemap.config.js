@@ -13,17 +13,4 @@ module.exports = {
     '/manifest.webmanifest',
     '/icon.svg',
   ],
-  robotsTxtOptions: {
-    policies: [
-      {
-        userAgent: '*',
-        allow: '/',
-        disallow: [
-          // NOTE: ページネーションは sitemap.xml には載せるがクロールからは除外したい
-          '/p/', // 絞り込みなしページネーション
-          '/tags/', // タグ絞り込みページネーション
-        ],
-      },
-    ],
-  },
 };

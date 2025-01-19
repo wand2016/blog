@@ -1,7 +1,8 @@
-import { Metadata } from 'next';
+import { Metadata, ResolvingMetadata } from 'next';
 import { getDetail, getAllBlogIds } from '@/libs/microcms';
 import Article from '@/components/Article';
 import { formatImageSrc, formatRichText } from '@/libs/utils';
+import { getGlobalTags } from '@/libs/getGlobalTags';
 
 type Props = {
   params: {
@@ -9,23 +10,22 @@ type Props = {
   };
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
   const data = await getDetail(params.slug);
 
   return {
-    applicationName: 'wandfuldays',
     title: data.title,
-    description:
-      data.description ||
-      'ハンドメイド、家庭菜園、DIY、プログラミングなど、さまざまな「つくる」活動を記録し、新しいスキルや経験を積み重ねながら、日々の暮らしを豊かにしていきます。',
-    keywords: data.tags?.map((tag) => tag.name),
+    description: data.description,
+    keywords: getGlobalTags(data),
+    // @ts-expect-error 型が合わない
     openGraph: {
-      siteName: 'wandfuldays',
+      ...(await parent).openGraph,
       title: data.title,
-      description:
-        data.description ||
-        'ハンドメイド、家庭菜園、DIY、プログラミングなど、さまざまな「つくる」活動を記録し、新しいスキルや経験を積み重ねながら、日々の暮らしを豊かにしていきます。',
-      images: [formatImageSrc(data?.thumbnail?.url) ?? '/blog_ogp.png'],
+      description: data.description,
+      images: formatImageSrc(data?.thumbnail?.url),
     },
     alternates: {
       canonical: `/articles/${params.slug}/`,

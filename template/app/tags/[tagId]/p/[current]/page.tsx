@@ -1,7 +1,8 @@
-import { getAllBlogIds, getList } from '@/libs/microcms';
+import { getAllBlogIds, getList, getTag } from '@/libs/microcms';
 import { LIMIT } from '@/constants';
 import Pagination from '@/components/Pagination';
 import ArticleList from '@/components/ArticleList';
+import { Metadata, ResolvingMetadata } from 'next';
 
 type Props = {
   params: {
@@ -13,6 +14,29 @@ type Props = {
 type ParentParams = {
   params: {
     tagId: string;
+  };
+};
+
+export const generateMetadata = async (
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> => {
+  const tag = await getTag(params.tagId);
+
+  return {
+    title: `「${tag.name}」の記事一覧|${params.current}ページ目`,
+    // @ts-expect-error 型が合わない
+    openGraph: {
+      ...(await parent).openGraph,
+      title: `「${tag.name}」の記事一覧|${params.current}ページ目`,
+    },
+    alternates: {
+      // 先頭ページはページネーションなしページと同一視する
+      canonical:
+        params.current === '1'
+          ? `/tags/${params.tagId}/`
+          : `/tags/${params.tagId}/p/${params.current}/`,
+    },
   };
 };
 
