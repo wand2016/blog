@@ -3,6 +3,7 @@ import { getDetail, getAllBlogIds } from '@/libs/microcms';
 import Article from '@/components/Article';
 import { formatImageSrc, formatRichText } from '@/libs/utils';
 import { getGlobalTags } from '@/libs/getGlobalTags';
+import { extractHeadings } from '@/libs/extractHeadings';
 
 type Props = {
   params: {
@@ -47,11 +48,13 @@ export default async function Page({ params }: Props) {
   const baseUrl = baseUrlRaw.endsWith('/') ? baseUrlRaw : `${baseUrlRaw}/`;
 
   const content = await formatRichText(data.content);
+  const headings = extractHeadings(content);
 
   return (
     <Article
       data={data}
       formattedContent={content}
+      headings={!!data.use_toc ? headings : undefined}
       shareUrl={`${baseUrl}articles/${params.slug}`}
     />
   );

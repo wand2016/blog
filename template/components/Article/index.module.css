@@ -33,6 +33,31 @@
   box-shadow: rgba(0, 0, 0, 0.06) 0 1px 3px;
 }
 
+.toc {
+  background-color: rgb(240,240,240);
+  border-radius: 1em;
+  padding: 1em;
+  margin-bottom: 64px;
+}
+.tocHeader {
+  text-align: center;
+}
+.tocList {
+}
+.tocListItem {
+}
+.tocListItem2 {
+}
+.tocListItem3 {
+  text-indent: 1em;
+}
+.tocListItem4 {
+  text-indent: 2em;
+}
+.tocListItem a {
+  text-decoration: underline;
+}
+
 .content {
   width: 720px;
 }
