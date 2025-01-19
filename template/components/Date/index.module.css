@@ -1,3 +1,8 @@
+.dates {
+  display: flex;
+  gap: 16px;
+}
+
 .date {
   display: flex;
   align-items: center;

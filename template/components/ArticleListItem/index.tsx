@@ -48,7 +48,10 @@ export default function ArticleListItem({ article }: Props) {
             <TagList tags={article.tags} hasLink={false} />
           </dd>
           <dd className={styles.date}>
-            <PublishedDate date={article.publishedAt || article.createdAt} />
+            <PublishedDate
+              date={article.publishedAt || article.createdAt}
+              updatedDate={article.updatedAt}
+            />
           </dd>
         </dl>
       </Link>
