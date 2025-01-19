@@ -6,7 +6,8 @@
 .image {
   width: 240px;
   height: auto;
-  border: 1px solid #808080
+  border: 1px solid rgb(222,222,222);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 1px 3px;
 }
 
 .noImage {
