@@ -27,8 +27,15 @@ export type Blog = {
   description: string;
   content: string;
   thumbnail?: MicroCMSImage;
+  /**
+   * サイト内巡回用タグ
+   */
   tags?: Tag[];
   writer?: Writer;
+  /**
+   * SNSシェア用ハッシュタグ = 全世界用タグ
+   */
+  hashtags?: string;
 };
 
 export type Article = Blog & MicroCMSContentId & MicroCMSDate;

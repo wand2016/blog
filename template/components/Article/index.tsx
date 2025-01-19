@@ -49,13 +49,16 @@ export default function Article({ data, formattedContent: content, shareUrl }: P
           __html: content,
         }}
       />
-      {/*TODO: タグは吟味する*/}
       {shareUrl && (
         <Share
           className={styles.share}
           url={shareUrl}
           title={data.title}
-          hashtags={['wandfuldays', ...(data.tags?.map((tag) => tag.name) ?? [])]}
+          hashtags={[
+            'wandfuldays',
+            ...(data.tags?.map((tag) => tag.name) ?? []),
+            ...(data.hashtags?.split('\n') ?? []),
+          ]}
         />
       )}
       <Profile writer={data.writer} />

@@ -63,6 +63,12 @@
           "name": "ライター",
           "kind": "relation",
           "referenceKey": "API#abcc75ab-d330-4d1d-b617-115086aa1472"
+        },
+        {
+          "idValue": "cEYZlfcx0b",
+          "fieldId": "hashtags",
+          "name": "ハッシュタグ",
+          "kind": "textArea"
         }
       ],
       "customFields": []
