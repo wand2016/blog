@@ -19,15 +19,17 @@ export default function ArticleListItem({ article }: Props) {
             <source
               type="image/webp"
               media="(max-width: 640px)"
-              srcSet={formatImageSrc(
-                `${article.thumbnail?.url}?fm=webp&w=414 1x, ${article.thumbnail?.url}?fm=webp&w=414&dpr=2 2x`,
-              )}
+              srcSet={[
+                `${formatImageSrc(`${article.thumbnail?.url}?fm=webp&w=414`)} 1x`,
+                `${formatImageSrc(`${article.thumbnail?.url}?fm=webp&w=414&dpr=2`)} 2x`,
+              ].join(',')}
             />
             <source
               type="image/webp"
-              srcSet={formatImageSrc(
-                `${article.thumbnail?.url}?fm=webp&fit=crop&w=240&h=126 1x, ${article.thumbnail?.url}?fm=webp&fit=crop&w=240&h=126&dpr=2 2x`,
-              )}
+              srcSet={[
+                `${formatImageSrc(`${article.thumbnail?.url}?fm=webp&fit=crop&w=240&h=126`)} 1x`,
+                `${formatImageSrc(`${article.thumbnail?.url}?fm=webp&fit=crop&w=240&h=126&dpr=2`)} 2x`,
+              ].join(',')}
             />
             <img
               src={formatImageSrc(article.thumbnail?.url) || `/noimage.png`}

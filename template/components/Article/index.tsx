@@ -28,15 +28,17 @@ export default function Article({ data, formattedContent: content, headings, sha
         <source
           type="image/webp"
           media="(max-width: 640px)"
-          srcSet={formatImageSrc(
-            `${data.thumbnail?.url}?fm=webp&w=414 1x, ${data.thumbnail?.url}?fm=webp&w=414&dpr=2 2x`,
-          )}
+          srcSet={[
+            `${formatImageSrc(`${data.thumbnail?.url}?fm=webp&w=414`)} 1x`,
+            `${formatImageSrc(`${data.thumbnail?.url}?fm=webp&w=414&dpr=2`)} 2x`,
+          ].join(',')}
         />
         <source
           type="image/webp"
-          srcSet={formatImageSrc(
-            `${data.thumbnail?.url}?fm=webp&fit=crop&w=960&h=504 1x, ${data.thumbnail?.url}?fm=webp&fit=crop&w=960&h=504&dpr=2 2x`,
-          )}
+          srcSet={[
+            `${formatImageSrc(`${data.thumbnail?.url}?fm=webp&fit=crop&w=960&h=504`)} 1x`,
+            `${formatImageSrc(`${data.thumbnail?.url}?fm=webp&fit=crop&w=960&h=504&dpr=2`)} 2x`,
+          ].join(',')}
         />
         <img
           src={formatImageSrc(data.thumbnail?.url)}
