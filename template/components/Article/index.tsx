@@ -6,14 +6,16 @@ import Profile from '../Profile';
 import Share from '@/components/Share';
 import { formatImageSrc } from '@/libs/utils';
 import { getGlobalTags } from '@/libs/getGlobalTags';
+import { HeadingTuple } from '@/libs/extractHeadings';
 
 type Props = {
   data: Omit<Article, 'content'>;
   formattedContent: string;
+  headings?: ReadonlyArray<HeadingTuple>;
   shareUrl?: string;
 };
 
-export default function Article({ data, formattedContent: content, shareUrl }: Props) {
+export default function Article({ data, formattedContent: content, headings, shareUrl }: Props) {
   return (
     <main className={styles.main} data-pagefind-body>
       <h1 className={styles.title}>{data.title}</h1>
@@ -44,6 +46,35 @@ export default function Article({ data, formattedContent: content, shareUrl }: P
           height={data.thumbnail?.height}
         />
       </picture>
+      {headings && (
+        <section className={styles.toc}>
+          <header className={styles.tocHeader}>目次</header>
+          <ol className={styles.tocList}>
+            {headings.map((heading) => (
+              <li
+                className={[
+                  styles.tocListItem,
+                  heading.headingNumber === 2
+                    ? styles.tocListItem2
+                    : heading.headingNumber === 3
+                      ? styles.tocListItem3
+                      : heading.headingNumber === 4
+                        ? styles.tocListItem4
+                        : '',
+                ].join(' ')}
+                key={heading.id}
+              >
+                <a
+                  href={`#${heading.id}`}
+                  dangerouslySetInnerHTML={{
+                    __html: heading.innerHTML,
+                  }}
+                />
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
       <div
         className={styles.content}
         dangerouslySetInnerHTML={{

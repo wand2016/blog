@@ -36,6 +36,11 @@ export type Blog = {
    * SNSシェア用ハッシュタグ = 全世界用タグ
    */
   hashtags?: string;
+  /**
+   * 目次を使用するかどうか
+   * @default false
+   */
+  use_toc?: boolean;
 };
 
 export type Article = Blog & MicroCMSContentId & MicroCMSDate;

@@ -4,8 +4,9 @@ import { Blog } from '@/libs/microcms';
 import Article from '@/components/Article';
 import { notFound, useSearchParams } from 'next/navigation';
 import { createClient, MicroCMSContentId, MicroCMSDate } from 'microcms-js-sdk';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { formatRichText } from '@/libs/utils';
+import { extractHeadings } from '@/libs/extractHeadings';
 
 type Props = {};
 
@@ -68,5 +69,15 @@ export default function Page({}: Props) {
     };
   }, [data]);
 
-  return content && data ? <Article formattedContent={content} data={data} /> : 'loading...';
+  const headings = useMemo(() => {
+    if (!content || !data || !!data.use_toc) return undefined;
+
+    return extractHeadings(content);
+  }, [content, data]);
+
+  return content && data ? (
+    <Article formattedContent={content} data={data} headings={headings} />
+  ) : (
+    'loading...'
+  );
 }
