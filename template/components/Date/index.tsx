@@ -1,16 +1,28 @@
 import { formatDate } from '@/libs/utils';
 import styles from './index.module.css';
-import { Clock } from 'lucide-react';
+import { Calendar, RefreshCw } from 'lucide-react';
 
 type Props = {
   date: string;
+  updatedDate: string;
 };
 
-export default function PublishedDate({ date }: Props) {
+export default function PublishedDate({ date, updatedDate }: Props) {
+  const formattedDate = formatDate(date);
+  const formattedUpdatedDate = !!updatedDate ? formatDate(updatedDate) : null;
+
   return (
-    <span className={styles.date}>
-      <Clock width={16} height={16} />
-      {formatDate(date)}
+    <span className={styles.dates}>
+      <span className={styles.date}>
+        <Calendar width={16} height={16} />
+        {formattedDate}
+      </span>
+      {!!formattedUpdatedDate && formattedDate !== formattedUpdatedDate && (
+        <span className={styles.date}>
+          <RefreshCw width={16} height={16} />
+          {formattedUpdatedDate}
+        </span>
+      )}
     </span>
   );
 }

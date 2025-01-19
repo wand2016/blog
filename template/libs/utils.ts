@@ -7,7 +7,7 @@ import 'highlight.js/styles/github.css';
 export const formatDate = (date: string) => {
   const utcDate = new Date(date);
   const jstDate = utcToZonedTime(utcDate, 'Asia/Tokyo');
-  return format(jstDate, 'd MMMM, yyyy');
+  return format(jstDate, 'yyyy-MM-dd');
 };
 
 export const formatImageSrc = <T extends string | undefined | null>(src: T): T | string => {

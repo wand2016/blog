@@ -19,7 +19,7 @@ export default function Article({ data, formattedContent: content, shareUrl }: P
       <TagList tags={data.tags} />
       {data.description && <p className={styles.description}>{data.description}</p>}
       <div className={styles.meta}>
-        <PublishedDate date={data.publishedAt || data.createdAt} />
+        <PublishedDate date={data.publishedAt || data.createdAt} updatedDate={data.updatedAt} />
       </div>
       <picture>
         <source
