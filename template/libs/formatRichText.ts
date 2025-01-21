@@ -44,15 +44,14 @@ export const formatRichText = async (richText: string) => {
     );
     const json = await data.json();
     const html = json['html'];
-
     const $replacement = cheerio.load(html);
 
     // NOTE: iframely の iframe は静的にはリンクに見えないので、 a[hidden] を併記する
     const params = parse(iframelyUrlQueryParams, { ignoreQueryPrefix: true });
     const url = decodeURI(params.url as string);
-    const title = cheerio.load(html)('iframe').attr('title');
-    $replacement('iframe').before('<a hidden="hidden"></a>');
-    $replacement('a[hidden]')
+    const title = $replacement('iframe').attr('title');
+    $replacement.root().append('<a target="_blank"></a>');
+    $replacement('a')
       .attr('href', url)
       .text(title ?? '');
 
