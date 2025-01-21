@@ -1,21 +1,7 @@
-import { format } from 'date-fns';
-import { utcToZonedTime } from 'date-fns-tz';
+import 'highlight.js/styles/github.css';
 import cheerio from 'cheerio';
 import hljs from 'highlight.js';
-import 'highlight.js/styles/github.css';
-
-export const formatDate = (date: string) => {
-  const utcDate = new Date(date);
-  const jstDate = utcToZonedTime(utcDate, 'Asia/Tokyo');
-  return format(jstDate, 'yyyy-MM-dd');
-};
-
-export const formatImageSrc = <T extends string | undefined | null>(src: T): T | string => {
-  if (!src || !src.startsWith('https://images.microcms-assets.io/assets/')) return src;
-
-  const glue = src.includes('?') ? '&' : '?';
-  return `${src}${glue}auto=compress`;
-};
+import { formatImageSrc } from '@/libs/formatImageSrc';
 
 export const formatRichText = async (richText: string) => {
   const $ = cheerio.load(richText);

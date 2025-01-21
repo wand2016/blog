@@ -4,9 +4,9 @@ import styles from './index.module.css';
 import TagList from '../TagList';
 import Profile from '../Profile';
 import Share from '@/components/Share';
-import { formatImageSrc } from '@/libs/utils';
 import { getGlobalTags } from '@/libs/getGlobalTags';
 import { HeadingTuple } from '@/libs/extractHeadings';
+import { formatImageSrc } from '@/libs/formatImageSrc';
 
 type Props = {
   data: Omit<Article, 'content'>;

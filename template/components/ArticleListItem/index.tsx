@@ -4,7 +4,8 @@ import { Article } from '@/libs/microcms';
 import styles from './index.module.css';
 import TagList from '../TagList';
 import PublishedDate from '../Date';
-import { formatImageSrc } from '@/libs/utils';
+
+import { formatImageSrc } from '@/libs/formatImageSrc';
 
 type Props = {
   article: Article;

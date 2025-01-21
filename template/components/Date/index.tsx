@@ -1,6 +1,6 @@
-import { formatDate } from '@/libs/utils';
 import styles from './index.module.css';
 import { Calendar, RefreshCw } from 'lucide-react';
+import { formatDate } from '@/libs/formatDate';
 
 type Props = {
   date: string;

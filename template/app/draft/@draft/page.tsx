@@ -5,8 +5,8 @@ import Article from '@/components/Article';
 import { notFound, useSearchParams } from 'next/navigation';
 import { createClient, MicroCMSContentId, MicroCMSDate } from 'microcms-js-sdk';
 import { useEffect, useMemo, useState } from 'react';
-import { formatRichText } from '@/libs/utils';
 import { extractHeadings } from '@/libs/extractHeadings';
+import { formatRichText } from '@/libs/formatRichText';
 
 type Props = {};
 
