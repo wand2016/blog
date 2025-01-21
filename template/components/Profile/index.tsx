@@ -1,6 +1,7 @@
 import styles from './index.module.css';
 import { Writer } from '@/libs/microcms';
-import { formatImageSrc } from '@/libs/utils';
+
+import { formatImageSrc } from '@/libs/formatImageSrc';
 
 type Props = {
   writer?: Writer;
