@@ -13,4 +13,5 @@ module.exports = {
     '/manifest.webmanifest',
     '/icon.svg',
   ],
+  autoLastmod: false,
 };
