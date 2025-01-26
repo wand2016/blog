@@ -87,7 +87,13 @@ Resources:
         Name: !Sub ${AWS::StackName}-oac
 
   # ============================================================================
-  # CloudFront distribution + WAF + Certificate + A Record
+  # CloudFront distribution + Certificate + A Record
+  #
+  # 下記理由につき WAFv2 WebACL は外した。
+  # * 月に 5 USD (prd/stg 2 環境で 10 USD) もかかる
+  # * CF + S3 の静的サイトなので攻撃する価値がそもそも薄い
+  # * WAF で DDoS は防げるが、結局 Route 53 破産狙いの EDoS は防げない
+  # * STG 環境のアクセス制限は cognito-at-edge で実現しているため、 IP 制限なども必要ない
   # ============================================================================
   ACMCertificate:
     Type: AWS::CertificateManager::Certificate
@@ -103,31 +109,6 @@ Resources:
           - !Sub ${Environment}.${Domain}
           HostedZoneId: !Ref HostedZoneId
       ValidationMethod: DNS
-  WebACL:
-    Type: AWS::WAFv2::WebACL
-    Properties:
-      DefaultAction:
-        Allow: {}
-      Name: !Sub ${AWS::StackName}-cf-webacl
-      Scope: CLOUDFRONT
-      Rules:
-        -
-          Name: AWS-AWSManagedRulesCommonRuleSet
-          Priority: 1
-          Statement:
-            ManagedRuleGroupStatement:
-              VendorName: AWS
-              Name: AWSManagedRulesCommonRuleSet
-          OverrideAction:
-            None: {}
-          VisibilityConfig:
-            CloudWatchMetricsEnabled: true
-            SampledRequestsEnabled: false
-            MetricName: AWS-AWSManagedRulesCommonRuleSet
-      VisibilityConfig:
-        CloudWatchMetricsEnabled: true
-        MetricName: !Sub ${AWS::StackName}-cf-waf-metric
-        SampledRequestsEnabled: true
   Distribution:
     Type: AWS::CloudFront::Distribution
     Properties:
@@ -153,7 +134,6 @@ Resources:
             - LambdaFunctionARN: !Sub ${IndexSupplierFunction.Version}
               EventType: origin-request
         PriceClass: PriceClass_200
-        WebACLId: !GetAtt WebACL.Arn
         DefaultRootObject: index.html
         Enabled: true
         HttpVersion: http2and3
