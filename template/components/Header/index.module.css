@@ -1,5 +1,6 @@
 .header {
   padding: 4px 8px 8px;
+  height: 60px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -7,9 +8,9 @@
 }
 
 .logo {
+  width: 208px;
   height: 48px;
-  width: auto;
-  vertical-align: bottom;
+  vertical-align: top;
 }
 
 .menuButton {
