@@ -21,15 +21,15 @@ export default function ArticleListItem({ article }: Props) {
               type="image/webp"
               media="(max-width: 640px)"
               srcSet={[
-                `${formatImageSrc(`${article.thumbnail.url}?fm=webp&fit=fill&w=414&h=217`)} 1x`,
-                `${formatImageSrc(`${article.thumbnail.url}?fm=webp&fit=fill&w=414&h=217&dpr=2`)} 2x`,
+                `${formatImageSrc(`${article.thumbnail.url}?fm=webp&fit=fill&fill=blur&w=414&h=217`)} 1x`,
+                `${formatImageSrc(`${article.thumbnail.url}?fm=webp&fit=fill&fill=blur&w=414&h=217&dpr=2`)} 2x`,
               ].join(',')}
             />
             <source
               type="image/webp"
               srcSet={[
-                `${formatImageSrc(`${article.thumbnail.url}?fm=webp&fit=fill&w=240&h=126`)} 1x`,
-                `${formatImageSrc(`${article.thumbnail.url}?fm=webp&fit=fill&w=240&h=126&dpr=2`)} 2x`,
+                `${formatImageSrc(`${article.thumbnail.url}?fm=webp&fit=fill&fill=blur&w=240&h=126`)} 1x`,
+                `${formatImageSrc(`${article.thumbnail.url}?fm=webp&fit=fill&fill=blur&w=240&h=126&dpr=2`)} 2x`,
               ].join(',')}
             />
             <img
