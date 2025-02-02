@@ -6,7 +6,6 @@ import TagList from '../TagList';
 import PublishedDate from '../Date';
 
 import { formatImageSrc } from '@/libs/formatImageSrc';
-import Image from 'next/image';
 
 type Props = {
   article: Article;
@@ -33,12 +32,14 @@ export default function ArticleListItem({ article }: Props) {
                 `${formatImageSrc(`${article.thumbnail.url}?fm=webp&fit=fill&w=240&h=126&dpr=2`)} 2x`,
               ].join(',')}
             />
-            <Image
+            <img
               src={formatImageSrc(article.thumbnail.url)}
               alt=""
               className={styles.image}
               width={1200}
               height={630}
+              fetchPriority={'high'}
+              decoding={'async'}
             />
           </picture>
         ) : (

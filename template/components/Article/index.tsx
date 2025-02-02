@@ -7,7 +7,6 @@ import Share from '@/components/Share';
 import { getGlobalTags } from '@/libs/getGlobalTags';
 import { HeadingTuple } from '@/libs/extractHeadings';
 import { formatImageSrc } from '@/libs/formatImageSrc';
-import Image from 'next/image';
 
 type Props = {
   data: Omit<Article, 'content'>;
@@ -42,13 +41,14 @@ export default function Article({ data, formattedContent: content, headings, sha
               `${formatImageSrc(`${data.thumbnail.url}?fm=webp&fit=fill&w=960&h=504&dpr=2`)} 2x`,
             ].join(',')}
           />
-          <Image
+          <img
             src={formatImageSrc(data.thumbnail.url)}
             alt=""
             className={styles.thumbnail}
             width={1200}
             height={630}
-            priority
+            fetchPriority={'high'}
+            decoding={'async'}
           />
         </picture>
       )}
