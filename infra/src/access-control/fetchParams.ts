@@ -48,5 +48,5 @@ export const fetchParams = async (prefix: string) => {
     ),
   ]);
 
-  return { userPoolId, userPoolAppId, userPoolDomain };
+  return memo = { userPoolId, userPoolAppId, userPoolDomain };
 };
