@@ -31,23 +31,23 @@ export default function Article({ data, formattedContent: content, headings, sha
             type="image/webp"
             media="(max-width: 640px)"
             srcSet={[
-              `${formatImageSrc(`${data.thumbnail.url}?fm=webp&w=414`)} 1x`,
-              `${formatImageSrc(`${data.thumbnail.url}?fm=webp&w=414&dpr=2`)} 2x`,
+              `${formatImageSrc(`${data.thumbnail.url}?fm=webp&fit=fill&w=414&h=217`)} 1x`,
+              `${formatImageSrc(`${data.thumbnail.url}?fm=webp&fit=fill&w=414&h=217&dpr=2`)} 2x`,
             ].join(',')}
           />
           <source
             type="image/webp"
             srcSet={[
-              `${formatImageSrc(`${data.thumbnail.url}?fm=webp&fit=crop&w=960&h=504`)} 1x`,
-              `${formatImageSrc(`${data.thumbnail.url}?fm=webp&fit=crop&w=960&h=504&dpr=2`)} 2x`,
+              `${formatImageSrc(`${data.thumbnail.url}?fm=webp&fit=fill&w=960&h=504`)} 1x`,
+              `${formatImageSrc(`${data.thumbnail.url}?fm=webp&fit=fill&w=960&h=504&dpr=2`)} 2x`,
             ].join(',')}
           />
           <Image
             src={formatImageSrc(data.thumbnail.url)}
             alt=""
             className={styles.thumbnail}
-            width={data.thumbnail.width}
-            height={data.thumbnail.height}
+            width={1200}
+            height={630}
             priority
           />
         </picture>
