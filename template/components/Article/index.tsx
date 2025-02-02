@@ -46,6 +46,8 @@ export default function Article({ data, formattedContent: content, headings, sha
           className={styles.thumbnail}
           width={data.thumbnail?.width}
           height={data.thumbnail?.height}
+          loading="lazy"
+          decoding="async"
         />
       </picture>
       {headings && (

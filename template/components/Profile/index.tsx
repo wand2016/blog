@@ -27,6 +27,8 @@ export default function Profile({ writer }: Props) {
           className={styles.icon}
           width={writer?.image?.width}
           height={writer?.image?.height}
+          loading="lazy"
+          decoding="async"
         />
       </picture>
       <div className={styles.content}>

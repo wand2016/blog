@@ -21,7 +21,9 @@ export default function Header({ menuContent }: Props) {
             className={styles.logo}
             width={520}
             height={120}
-            priority
+            // priority
+            loading="lazy"
+            decoding="async"
           />
         </Link>
         {menuOpen ? (

@@ -38,6 +38,8 @@ export default function ArticleListItem({ article }: Props) {
               className={styles.image}
               width={article.thumbnail?.width}
               height={article.thumbnail?.height}
+              loading="lazy"
+              decoding="async"
             />
           </picture>
         ) : (
