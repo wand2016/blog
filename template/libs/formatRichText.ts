@@ -26,8 +26,8 @@ export const formatRichText = async (richText: string) => {
       $(elm).attr('src', formatImageSrc(src));
     }
 
-    // perf
-    $(elm).attr('loading', 'lazy').attr('decoding', 'async');
+    // perf: Largest Contentful Paint スコア改善のため、初期表示時に見えない位置にある記事本文中の画像は読み込みを遅らせる。
+    $(elm).attr('loading', 'lazy').attr('decoding', 'async').attr('fetchPriority', 'low');
   });
   $('picture > source').each((_, elm) => {
     const srcset = $(elm).attr('srcset');
