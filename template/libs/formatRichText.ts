@@ -25,6 +25,9 @@ export const formatRichText = async (richText: string) => {
     if (src) {
       $(elm).attr('src', formatImageSrc(src));
     }
+
+    // perf
+    $(elm).attr('loading', 'lazy').attr('decoding', 'async');
   });
   $('picture > source').each((_, elm) => {
     const srcset = $(elm).attr('srcset');
@@ -45,8 +48,8 @@ export const formatRichText = async (richText: string) => {
     const json = await data.json();
     const html = json['html'];
     const $replacement = cheerio.load(html);
+    $replacement('iframe').attr('loading', 'lazy');
 
-    // NOTE: iframely の iframe は静的にはリンクに見えないので、 a[hidden] を併記する
     const params = parse(iframelyUrlQueryParams, { ignoreQueryPrefix: true });
     const url = decodeURI(params.url as string);
     const title = $replacement('iframe').attr('title');
