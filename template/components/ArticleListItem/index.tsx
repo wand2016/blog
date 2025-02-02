@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { ImageOff } from 'lucide-react';
 import { Article } from '@/libs/microcms';
 import styles from './index.module.css';
 import TagList from '../TagList';
 import PublishedDate from '../Date';
+
 import { formatImageSrc } from '@/libs/formatImageSrc';
 
 type Props = {
@@ -32,7 +32,7 @@ export default function ArticleListItem({ article }: Props) {
                 `${formatImageSrc(`${article.thumbnail?.url}?fm=webp&fit=crop&w=240&h=126&dpr=2`)} 2x`,
               ].join(',')}
             />
-            <Image
+            <img
               src={formatImageSrc(article.thumbnail?.url) || `/noimage.png`}
               alt=""
               className={styles.image}

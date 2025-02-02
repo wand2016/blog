@@ -7,7 +7,6 @@ import Share from '@/components/Share';
 import { getGlobalTags } from '@/libs/getGlobalTags';
 import { HeadingTuple } from '@/libs/extractHeadings';
 import { formatImageSrc } from '@/libs/formatImageSrc';
-import Image from 'next/image';
 
 type Props = {
   data: Omit<Article, 'content'>;
@@ -25,34 +24,32 @@ export default function Article({ data, formattedContent: content, headings, sha
       <div className={styles.meta}>
         <PublishedDate date={data.publishedAt || data.createdAt} updatedDate={data.updatedAt} />
       </div>
-      {data.thumbnail && (
-        <picture>
-          <source
-            type="image/webp"
-            media="(max-width: 640px)"
-            srcSet={[
-              `${formatImageSrc(`${data.thumbnail.url}?fm=webp&w=414&h=217`)} 1x`,
-              `${formatImageSrc(`${data.thumbnail.url}?fm=webp&w=414&h=217&dpr=2`)} 2x`,
-            ].join(',')}
-          />
-          <source
-            type="image/webp"
-            srcSet={[
-              `${formatImageSrc(`${data.thumbnail.url}?fm=webp&fit=crop&w=960&h=504`)} 1x`,
-              `${formatImageSrc(`${data.thumbnail.url}?fm=webp&fit=crop&w=960&h=504&dpr=2`)} 2x`,
-            ].join(',')}
-          />
-          <Image
-            src={formatImageSrc(data.thumbnail.url)}
-            alt=""
-            className={styles.thumbnail}
-            width={data.thumbnail.width}
-            height={data.thumbnail.height}
-            loading="lazy"
-            decoding="async"
-          />
-        </picture>
-      )}
+      <picture>
+        <source
+          type="image/webp"
+          media="(max-width: 640px)"
+          srcSet={[
+            `${formatImageSrc(`${data.thumbnail?.url}?fm=webp&w=414`)} 1x`,
+            `${formatImageSrc(`${data.thumbnail?.url}?fm=webp&w=414&dpr=2`)} 2x`,
+          ].join(',')}
+        />
+        <source
+          type="image/webp"
+          srcSet={[
+            `${formatImageSrc(`${data.thumbnail?.url}?fm=webp&fit=crop&w=960&h=504`)} 1x`,
+            `${formatImageSrc(`${data.thumbnail?.url}?fm=webp&fit=crop&w=960&h=504&dpr=2`)} 2x`,
+          ].join(',')}
+        />
+        <img
+          src={formatImageSrc(data.thumbnail?.url)}
+          alt=""
+          className={styles.thumbnail}
+          width={data.thumbnail?.width}
+          height={data.thumbnail?.height}
+          loading="lazy"
+          decoding="async"
+        />
+      </picture>
       {headings && (
         <section className={styles.toc}>
           <header className={styles.tocHeader}>目次</header>
