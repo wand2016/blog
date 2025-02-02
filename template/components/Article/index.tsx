@@ -7,7 +7,6 @@ import Share from '@/components/Share';
 import { getGlobalTags } from '@/libs/getGlobalTags';
 import { HeadingTuple } from '@/libs/extractHeadings';
 import { formatImageSrc } from '@/libs/formatImageSrc';
-import Image from 'next/image';
 
 type Props = {
   data: Omit<Article, 'content'>;
@@ -31,25 +30,25 @@ export default function Article({ data, formattedContent: content, headings, sha
             type="image/webp"
             media="(max-width: 640px)"
             srcSet={[
-              `${formatImageSrc(`${data.thumbnail.url}?fm=webp&w=414&h=217`)} 1x`,
-              `${formatImageSrc(`${data.thumbnail.url}?fm=webp&w=414&h=217&dpr=2`)} 2x`,
+              `${formatImageSrc(`${data.thumbnail.url}?fm=webp&fit=fill&fill=blur&w=414&h=217`)} 1x`,
+              `${formatImageSrc(`${data.thumbnail.url}?fm=webp&fit=fill&fill=blur&w=414&h=217&dpr=2`)} 2x`,
             ].join(',')}
           />
           <source
             type="image/webp"
             srcSet={[
-              `${formatImageSrc(`${data.thumbnail.url}?fm=webp&fit=crop&w=960&h=504`)} 1x`,
-              `${formatImageSrc(`${data.thumbnail.url}?fm=webp&fit=crop&w=960&h=504&dpr=2`)} 2x`,
+              `${formatImageSrc(`${data.thumbnail.url}?fm=webp&fit=fill&fill=blur&w=960&h=504`)} 1x`,
+              `${formatImageSrc(`${data.thumbnail.url}?fm=webp&fit=fill&fill=blur&w=960&h=504&dpr=2`)} 2x`,
             ].join(',')}
           />
-          <Image
+          <img
             src={formatImageSrc(data.thumbnail.url)}
             alt=""
             className={styles.thumbnail}
-            width={data.thumbnail.width}
-            height={data.thumbnail.height}
-            loading="lazy"
-            decoding="async"
+            width={1200}
+            height={630}
+            fetchPriority={'high'}
+            decoding={'async'}
           />
         </picture>
       )}

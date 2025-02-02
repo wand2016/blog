@@ -19,11 +19,8 @@ export default function Header({ menuContent }: Props) {
             src="/blog_logo.svg"
             alt="wandfuldays"
             className={styles.logo}
-            width={520}
-            height={120}
-            // priority
-            loading="lazy"
-            decoding="async"
+            width={208}
+            height={48}
           />
         </Link>
         {menuOpen ? (

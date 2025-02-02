@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { ImageOff } from 'lucide-react';
 import { Article } from '@/libs/microcms';
 import styles from './index.module.css';
 import TagList from '../TagList';
 import PublishedDate from '../Date';
+
 import { formatImageSrc } from '@/libs/formatImageSrc';
 
 type Props = {
@@ -21,25 +21,25 @@ export default function ArticleListItem({ article }: Props) {
               type="image/webp"
               media="(max-width: 640px)"
               srcSet={[
-                `${formatImageSrc(`${article.thumbnail?.url}?fm=webp&w=414`)} 1x`,
-                `${formatImageSrc(`${article.thumbnail?.url}?fm=webp&w=414&dpr=2`)} 2x`,
+                `${formatImageSrc(`${article.thumbnail.url}?fm=webp&fit=fill&fill=blur&w=414&h=217`)} 1x`,
+                `${formatImageSrc(`${article.thumbnail.url}?fm=webp&fit=fill&fill=blur&w=414&h=217&dpr=2`)} 2x`,
               ].join(',')}
             />
             <source
               type="image/webp"
               srcSet={[
-                `${formatImageSrc(`${article.thumbnail?.url}?fm=webp&fit=crop&w=240&h=126`)} 1x`,
-                `${formatImageSrc(`${article.thumbnail?.url}?fm=webp&fit=crop&w=240&h=126&dpr=2`)} 2x`,
+                `${formatImageSrc(`${article.thumbnail.url}?fm=webp&fit=fill&fill=blur&w=240&h=126`)} 1x`,
+                `${formatImageSrc(`${article.thumbnail.url}?fm=webp&fit=fill&fill=blur&w=240&h=126&dpr=2`)} 2x`,
               ].join(',')}
             />
-            <Image
-              src={formatImageSrc(article.thumbnail?.url) || `/noimage.png`}
+            <img
+              src={formatImageSrc(article.thumbnail.url)}
               alt=""
               className={styles.image}
-              width={article.thumbnail?.width}
-              height={article.thumbnail?.height}
-              loading="lazy"
-              decoding="async"
+              width={1200}
+              height={630}
+              fetchPriority={'high'}
+              decoding={'async'}
             />
           </picture>
         ) : (
