@@ -27,7 +27,7 @@
 
 .thumbnail {
   width: 960px;
-  height: auto;
+  height: 504px;
   margin-bottom: 64px;
   border: 1px solid rgb(222,222,222);
   box-shadow: rgba(0, 0, 0, 0.06) 0 1px 3px;
@@ -231,8 +231,8 @@
   }
 
   .thumbnail {
-    width: 100%;
-    height: auto;
+    width: calc(100dvw - 24px * 2);
+    height: calc((100dvw - 24px * 2) * 630 / 1200);
     margin-bottom: 40px;
   }
 
