@@ -30,6 +30,7 @@ jobs:
           BASE_URL: https://${{ secrets.DOMAIN }}/
           USE_DRAFT: 'false'
           GA_ID: ${{ secrets.GA_ID_PRD }}
+          GOOGLE_ADSENSE_ID: ${{ secrets.GOOGLE_ADSENSE_ID }}
       - name: Copy index.html to s3
         run: |
           aws s3 sync --delete --exclude '*.html' --exclude '*.txt' --exclude '*.xml' --exclude 'pagefind/*' ./out/ s3://${{ secrets.BUCKET_NAME_PRD }}/ --cache-control max-age=31536000,public
