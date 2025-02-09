@@ -33,6 +33,9 @@ export default async function RootLayout({ children }: Props) {
   });
   return (
     <html lang="ja">
+      <head>
+        <meta name="google-adsense-account" content={process.env.GOOGLE_ADSENSE_ID} />
+      </head>
       <body>
         {/*NOTE: iframely の responsive スタイリングで必要*/}
         <Script src="https://cdn.iframe.ly/embed.js" />
