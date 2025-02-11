@@ -4,7 +4,6 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Nav from '@/components/Nav';
 import './globals.css';
-import styles from './layout.module.css';
 import { Metadata } from 'next';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Script from 'next/script';
@@ -52,9 +51,9 @@ export default async function RootLayout({ children }: Props) {
         {/*NOTE: iframely の responsive スタイリングで必要*/}
         <Script async src="https://cdn.iframe.ly/embed.js" strategy={'afterInteractive'} />
         <Header menuContent={<Nav tags={tags.contents} />} />
-        <Nav className={styles.nav} tags={tags.contents} />
-        <hr className={styles.hr} />
-        <main className={styles.main}>{children}</main>
+        <Nav className="hidden sm:flex" tags={tags.contents} />
+        <hr className="border-solid sm:border-bottom border-gray-100 sm:mb-[40px]" />
+        <main className="w-full max-w-[720px] p-[24px] mx-auto">{children}</main>
         <Footer />
         <GoogleAnalytics gaId={process.env.GA_ID ?? ''} />
       </body>
