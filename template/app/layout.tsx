@@ -39,6 +39,11 @@ export default async function RootLayout({ children }: Props) {
             name="google-adsense-account"
             content={`ca-${process.env.GOOGLE_ADSENSE_PUBLISHER_ID}`}
           />
+          <Script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-${process.env.GOOGLE_ADSENSE_PUBLISHER_ID}`}
+            crossOrigin="anonymous"
+          />
         </head>
       )}
       <body>
