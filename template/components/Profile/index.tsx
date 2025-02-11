@@ -1,4 +1,3 @@
-import styles from './index.module.css';
 import { Writer } from '@/libs/microcms';
 
 import { formatImageSrc } from '@/libs/formatImageSrc';
@@ -6,14 +5,15 @@ import Image from 'next/image';
 
 type Props = {
   writer?: Writer;
+  className?: string;
 };
 
-export default function Profile({ writer }: Props) {
+export default function Profile({ writer, className = '' }: Props) {
   if (!writer) {
     return null;
   }
   return (
-    <div className={styles.wrapper}>
+    <div className={`mx-2 flex gap-[24px] ${className}`}>
       {writer.image && (
         <picture>
           <source
@@ -26,7 +26,7 @@ export default function Profile({ writer }: Props) {
           <Image
             src={formatImageSrc(writer.image.url)}
             alt=""
-            className={styles.icon}
+            className="size-[48px] rounded-full sm:size-[96px]"
             width={writer.image.width}
             height={writer.image.height}
             loading="lazy"
@@ -34,9 +34,9 @@ export default function Profile({ writer }: Props) {
           />
         </picture>
       )}
-      <div className={styles.content}>
-        <p className={styles.name}>{writer.name}</p>
-        <p className={styles.profile}>{writer.profile}</p>
+      <div className="flex-1">
+        <p className="font-bold pb-0.5">{writer.name}</p>
+        <p className="text-sm">{writer.profile}</p>
       </div>
     </div>
   );

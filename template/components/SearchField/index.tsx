@@ -2,7 +2,6 @@
 
 import { pagefind, loadPagefind } from './pagefind';
 import type { PagefindSearchResult, PagefindSearchFragment } from './types';
-import styles from './index.module.css';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Search } from 'lucide-react';
@@ -25,10 +24,16 @@ export default function SearchField() {
 
   return (
     <>
-      <div className={styles.searchWrapper}>
-        <Search width="24px" height="24px" className={styles.searchIcon} />
+      <div className="w-full mx-[24px] h-[40px] sm:w-[600px] sm:mx-auto">
+        <Search
+          width="24px"
+          height="24px"
+          className="absolute translate-x-[16px] translate-y-[8px]"
+        />
         <input
-          className={styles.search}
+          className={
+            'py-0 pr-[24px] pl-[48px] w-full h-full border-dark border-solid border rounded-full'
+          }
           type="search"
           placeholder="Search..."
           defaultValue=""
@@ -58,12 +63,14 @@ const ResultItem = ({ result }: { result: PagefindSearchResult }) => {
   }, [data, result]);
 
   return data ? (
-    <li className={styles.resultItem}>
-      <p className={styles.resultItem__title}>
-        <Link href={data.url}>{data.meta.title}</Link>
+    <li>
+      <p>
+        <Link className="underline font-bold" href={data.url}>
+          {data.meta.title}
+        </Link>
       </p>
       <p
-        className={styles.resultItem__excerpt}
+        className="indent-4"
         dangerouslySetInnerHTML={{
           __html: data.excerpt,
         }}

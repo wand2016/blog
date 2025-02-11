@@ -1,4 +1,3 @@
-import styles from './index.module.css';
 import { Calendar, RefreshCw } from 'lucide-react';
 import { formatDate } from '@/libs/formatDate';
 
@@ -12,13 +11,13 @@ export default function PublishedDate({ date, updatedDate }: Props) {
   const formattedUpdatedDate = !!updatedDate ? formatDate(updatedDate) : null;
 
   return (
-    <span className={styles.dates}>
-      <span className={styles.date}>
+    <span className="flex gap-4">
+      <span className="flex items-center gap-2">
         <Calendar width={16} height={16} />
         {formattedDate}
       </span>
       {!!formattedUpdatedDate && formattedDate !== formattedUpdatedDate && (
-        <span className={styles.date}>
+        <span className="flex items-center gap-2">
           <RefreshCw width={16} height={16} />
           {formattedUpdatedDate}
         </span>

@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from './index.module.css';
 import { MenuIcon, XIcon } from 'lucide-react';
 import { ReactElement, useState } from 'react';
 
@@ -13,19 +12,19 @@ export default function Header({ menuContent }: Props) {
 
   return (
     <>
-      <header className={styles.header}>
+      <header className="pt-[4px] px-[8px] pb-[8px] h-[60px] flex justify-between items-center">
         <Link href="/">
           <Image
             src="/blog_logo.svg"
             alt="wandfuldays"
-            className={styles.logo}
+            className="w-[208px] h-[48px] align-top"
             width={208}
             height={48}
           />
         </Link>
         {menuOpen ? (
           <button
-            className={styles.menuButton}
+            className="border-none background-transparent mr-4 sm:hidden"
             type="button"
             aria-label="メニューを閉じるボタン"
             onClick={() => setMenuOpen(false)}
@@ -34,7 +33,7 @@ export default function Header({ menuContent }: Props) {
           </button>
         ) : (
           <button
-            className={styles.menuButton}
+            className="border-none background-transparent mr-4 sm:hidden"
             type="button"
             aria-label="メニューを開くボタン"
             onClick={() => setMenuOpen(true)}
@@ -44,7 +43,7 @@ export default function Header({ menuContent }: Props) {
         )}
       </header>
       {/* todo: animation, modal */}
-      {menuOpen && <div className={styles.menu}>{menuContent}</div>}
+      {menuOpen && <div className="sm:hidden">{menuContent}</div>}
     </>
   );
 }

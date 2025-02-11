@@ -1,6 +1,5 @@
 import { Article } from '@/libs/microcms';
 import ArticleListItem from '../ArticleListItem';
-import styles from './index.module.css';
 
 type Props = {
   articles?: Article[];
@@ -14,7 +13,7 @@ export default function ArticleList({ articles }: Props) {
     return <p>記事がありません。</p>;
   }
   return (
-    <ul className={styles.ul}>
+    <ul className="flex flex-col gap-[40px]">
       {articles.map((article) => (
         <ArticleListItem key={article.id} article={article} />
       ))}

@@ -17,15 +17,17 @@ type Props = {
 
 export default function Article({ data, formattedContent: content, headings, shareUrl }: Props) {
   return (
-    <main className={styles.main} data-pagefind-body>
-      <h1 className={styles.title}>{data.title}</h1>
+    <main className="flex flex-col justify-between items-center" data-pagefind-body>
+      <h1 className="text-2xl mb-[20px] text-center">{data.title}</h1>
       <TagList tags={data.tags} />
-      {data.description && <p className={styles.description}>{data.description}</p>}
-      <div className={styles.meta}>
+      {data.description && (
+        <p className="text-sm text-gray-500 mt-[24px] mb-[40px] text-center">{data.description}</p>
+      )}
+      <div className="flex items-center mb-[40px] text-sm ">
         <PublishedDate date={data.publishedAt || data.createdAt} updatedDate={data.updatedAt} />
       </div>
       {data.thumbnail && (
-        <picture>
+        <picture className="w-full">
           <source
             type="image/webp"
             media="(max-width: 640px)"
@@ -44,7 +46,7 @@ export default function Article({ data, formattedContent: content, headings, sha
           <img
             src={formatImageSrc(data.thumbnail.url)}
             alt=""
-            className={styles.thumbnail}
+            className="w-full h-auto mb-[40px] border border-solid border-gray-200 shadow-md"
             width={1200}
             height={630}
             fetchPriority={'high'}
@@ -83,20 +85,21 @@ export default function Article({ data, formattedContent: content, headings, sha
         </section>
       )}
       <div
-        className={styles.content}
+        className={`w-full max-w-[640px] ${styles.content}`}
         dangerouslySetInnerHTML={{
           __html: content,
         }}
       />
       {shareUrl && (
         <Share
-          className={styles.share}
+          className="my-8"
           url={shareUrl}
           title={data.title}
           hashtags={['wandfuldays', ...getGlobalTags(data)]}
         />
       )}
-      <Profile writer={data.writer} />
+      <hr className="w-full border-solid border-top border-dark my-8" />
+      <Profile writer={data.writer} className="mb-8" />
     </main>
   );
 }

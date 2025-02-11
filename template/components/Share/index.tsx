@@ -10,7 +10,6 @@ import {
   XIcon,
   TwitterShareButton,
 } from 'react-share';
-import styles from './index.module.css';
 
 type Props = {
   title: string;
@@ -19,17 +18,15 @@ type Props = {
   className?: string;
 };
 
-export default function Share({ url, title, hashtags, className }: Props) {
+export default function Share({ url, title, hashtags, className = '' }: Props) {
   return (
-    <ul
-      className={className ? [className, styles.shareButtonList].join(' ') : styles.shareButtonList}
-    >
-      <li className={styles.shareButtonWrapper}>
+    <ul className={`flex gap-4 justify-center ${className}`}>
+      <li className="w-64px h-64px">
         <TwitterShareButton url={url} title={title} hashtags={hashtags} aria-label="X share button">
           <XIcon size={'64px'} />
         </TwitterShareButton>
       </li>
-      <li className={styles.shareButtonWrapper}>
+      <li className="w-64px h-64px">
         <FacebookShareButton
           url={url}
           hashtag={hashtags[0] ?? undefined}
@@ -38,12 +35,12 @@ export default function Share({ url, title, hashtags, className }: Props) {
           <FacebookIcon size={'64px'} />
         </FacebookShareButton>
       </li>
-      <li className={styles.shareButtonWrapper}>
+      <li className="w-64px h-64px">
         <LineShareButton url={url} title={title} aria-label="LINE share button">
           <LineIcon size={'64px'} />
         </LineShareButton>
       </li>
-      <li className={styles.shareButtonWrapper}>
+      <li className="w-64px h-64px">
         <HatenaShareButton url={url} title={title} aria-label="Hatena share button">
           <HatenaIcon size={'64px'} />
         </HatenaShareButton>
