@@ -21,6 +21,13 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: '/blog_ogp.png',
   },
+  ...(process.env.GOOGLE_ADSENSE_PUBLISHER_ID
+    ? {
+        other: {
+          'google-adsense-account': `ca-${process.env.GOOGLE_ADSENSE_PUBLISHER_ID}`,
+        },
+      }
+    : {}),
 };
 
 type Props = {
@@ -33,20 +40,15 @@ export default async function RootLayout({ children }: Props) {
   });
   return (
     <html lang="ja">
-      {!!process.env.GOOGLE_ADSENSE_PUBLISHER_ID && (
-        <head>
-          <meta
-            name="google-adsense-account"
-            content={`ca-${process.env.GOOGLE_ADSENSE_PUBLISHER_ID}`}
-          />
+      <body>
+        {!!process.env.GOOGLE_ADSENSE_PUBLISHER_ID && (
           <Script
             async
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-${process.env.GOOGLE_ADSENSE_PUBLISHER_ID}`}
             crossOrigin="anonymous"
+            strategy="beforeInteractive"
           />
-        </head>
-      )}
-      <body>
+        )}
         {/*NOTE: iframely の responsive スタイリングで必要*/}
         <Script src="https://cdn.iframe.ly/embed.js" />
         <Header menuContent={<Nav tags={tags.contents} />} />
