@@ -50,7 +50,7 @@ export default async function RootLayout({ children }: Props) {
           />
         )}
         {/*NOTE: iframely の responsive スタイリングで必要*/}
-        <Script src="https://cdn.iframe.ly/embed.js" />
+        <Script async src="https://cdn.iframe.ly/embed.js" strategy={'afterInteractive'} />
         <Header menuContent={<Nav tags={tags.contents} />} />
         <Nav className={styles.nav} tags={tags.contents} />
         <hr className={styles.hr} />
