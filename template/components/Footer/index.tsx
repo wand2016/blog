@@ -1,8 +1,12 @@
 import Link from 'next/link';
 
-export default function Footer() {
+type Props = {
+  className?: string;
+};
+
+export default function Footer({ className = '' }: Props) {
   return (
-    <footer className="text-center">
+    <footer className={`text-center ${className}`}>
       <p>
         <Link className="underline text-sm" href={'/privacy-policy'}>
           プライバシーポリシー

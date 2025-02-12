@@ -53,8 +53,8 @@ export default async function RootLayout({ children }: Props) {
         <Header menuContent={<Nav tags={tags.contents} />} />
         <Nav className="hidden sm:flex" tags={tags.contents} />
         <hr className="border-solid sm:border-bottom border-gray-100 sm:mb-4" />
-        <main className="w-full max-w-[720px] p-6 mx-auto">{children}</main>
-        <Footer />
+        <main className="w-full max-w-[720px] p-6 mx-auto flex flex-col gap-8">{children}</main>
+        <Footer className="mt-8" />
         <GoogleAnalytics gaId={process.env.GA_ID ?? ''} />
       </body>
     </html>

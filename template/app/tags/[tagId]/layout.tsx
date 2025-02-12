@@ -19,11 +19,11 @@ export default async function TagsLayout({ children, params }: Props) {
   const tag = await getTag(tagId);
   return (
     <>
-      <header className="mb-8">
+      <header>
         <TagList tags={[tag]} hasLink={false} />
         の記事一覧
       </header>
-      <div>{children}</div>
+      {children}
     </>
   );
 }
