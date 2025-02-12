@@ -1,11 +1,9 @@
-import styles from './not-found.module.css';
-
 export default function NotFound() {
   return (
-    <div className={styles.container}>
+    <div className="flex h-[75vh] items-center justify-center">
       <dl>
-        <dt className={styles.title}>404</dt>
-        <dd className={styles.text}>ページが見つかりませんでした</dd>
+        <dt className="text-lg text-center bold">404</dt>
+        <dd className="text-sm text-center">ページが見つかりませんでした</dd>
       </dl>
     </div>
   );

@@ -98,7 +98,7 @@ export default function Article({ data, formattedContent: content, headings, sha
           hashtags={['wandfuldays', ...getGlobalTags(data)]}
         />
       )}
-      <hr className="w-full border-solid border-top border-dark my-8" />
+      <hr className="w-full border-solid border-top my-8" />
       <Profile writer={data.writer} className="mb-8" />
     </main>
   );

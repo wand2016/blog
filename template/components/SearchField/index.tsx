@@ -32,7 +32,7 @@ export default function SearchField() {
         />
         <input
           className={
-            'py-0 pr-[24px] pl-[48px] w-full h-full border-dark border-solid border rounded-full'
+            'py-0 pr-[24px] pl-[48px] w-full h-full border-gray-500 border-solid border rounded-full'
           }
           type="search"
           placeholder="Search..."
