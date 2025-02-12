@@ -38,7 +38,7 @@ export default async function RootLayout({ children }: Props) {
     limit: LIMIT,
   });
   return (
-    <html lang="ja">
+    <html lang="ja" className="pt-12 scroll-smooth scroll-pt-12">
       <body>
         {!!process.env.GOOGLE_ADSENSE_PUBLISHER_ID && (
           <Script
@@ -51,8 +51,6 @@ export default async function RootLayout({ children }: Props) {
         {/*NOTE: iframely の responsive スタイリングで必要*/}
         <Script async src="https://cdn.iframe.ly/embed.js" strategy={'afterInteractive'} />
         <Header menuContent={<Nav tags={tags.contents} />} />
-        <Nav className="hidden sm:flex" tags={tags.contents} />
-        <hr className="border-solid sm:border-bottom border-gray-100 sm:mb-4" />
         <main className="w-full max-w-[720px] p-6 mx-auto flex flex-col gap-8">{children}</main>
         <Footer className="mt-8" />
         <GoogleAnalytics gaId={process.env.GA_ID ?? ''} />

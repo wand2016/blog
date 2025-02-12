@@ -46,7 +46,7 @@ export default function ArticleListItem({ article }: Props) {
             <ImageOff color="#666666" />
           </div>
         )}
-        <dl className="flex flex-col gap-2">
+        <dl className="flex flex-col gap-2 mt-2 sm:mt-0">
           <dt className="text-xl font-bold">{article.title}</dt>
           {article.tags && article.tags.length > 0 && (
             <dd>

@@ -12,38 +12,40 @@ export default function Header({ menuContent }: Props) {
 
   return (
     <>
-      <header className="pt-[4px] px-[8px] pb-[8px] h-[60px] flex justify-between items-center">
-        <Link href="/">
-          <Image
-            src="/blog_logo.svg"
-            alt="wandfuldays"
-            className="w-[208px] h-[48px] align-top"
-            width={208}
-            height={48}
-          />
-        </Link>
-        {menuOpen ? (
-          <button
-            className="border-none background-transparent mr-4 sm:hidden"
-            type="button"
-            aria-label="メニューを閉じるボタン"
-            onClick={() => setMenuOpen(false)}
-          >
-            <XIcon />
-          </button>
-        ) : (
-          <button
-            className="border-none background-transparent mr-4 sm:hidden"
-            type="button"
-            aria-label="メニューを開くボタン"
-            onClick={() => setMenuOpen(true)}
-          >
-            <MenuIcon />
-          </button>
-        )}
+      <header className="w-full bg-white shadow-md z-20 top-0 fixed">
+        <div className="flex justify-between items-center h-12">
+          <Link href="/">
+            <Image
+              src="/blog_logo.svg"
+              alt="wandfuldays"
+              className="w-[200px] h-auto align-top ml-2 mb-1"
+              width={208}
+              height={48}
+            />
+          </Link>
+          {menuOpen ? (
+            <button
+              className="border-none background-transparent mr-4 focus:outline-none"
+              type="button"
+              aria-label="メニューを閉じるボタン"
+              onClick={() => setMenuOpen(false)}
+            >
+              <XIcon />
+            </button>
+          ) : (
+            <button
+              className="border-none background-transparent mr-4 focus:outline-none"
+              type="button"
+              aria-label="メニューを開くボタン"
+              onClick={() => setMenuOpen(true)}
+            >
+              <MenuIcon />
+            </button>
+          )}
+        </div>
+        {/* todo: animation, modal */}
+        {menuOpen && <div className="mt-4">{menuContent}</div>}
       </header>
-      {/* todo: animation, modal */}
-      {menuOpen && <div className="sm:hidden">{menuContent}</div>}
     </>
   );
 }
