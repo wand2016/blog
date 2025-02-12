@@ -1,12 +1,14 @@
 import { type Article } from '@/libs/microcms';
 import PublishedDate from '../Date';
-import styles from './index.module.css';
 import TagList from '../TagList';
 import Profile from '../Profile';
 import Share from '@/components/Share';
 import { getGlobalTags } from '@/libs/getGlobalTags';
 import { HeadingTuple } from '@/libs/extractHeadings';
 import { formatImageSrc } from '@/libs/formatImageSrc';
+import Toc from '@/components/Toc';
+import ArticleTitle from '@/components/ArticleTitle';
+import ArticleContent from '@/components/ArticleContent';
 
 type Props = {
   data: Omit<Article, 'content'>;
@@ -18,7 +20,7 @@ type Props = {
 export default function Article({ data, formattedContent: content, headings, shareUrl }: Props) {
   return (
     <main className="flex flex-col justify-between items-center" data-pagefind-body>
-      <h1 className="text-2xl mb-[20px] text-center">{data.title}</h1>
+      <ArticleTitle className="mb-[20px]">{data.title}</ArticleTitle>
       <TagList tags={data.tags} />
       {data.description && (
         <p className="text-sm text-gray-500 mt-[24px] mb-[40px] text-center">{data.description}</p>
@@ -54,42 +56,8 @@ export default function Article({ data, formattedContent: content, headings, sha
           />
         </picture>
       )}
-      {headings && (
-        <section className={styles.toc}>
-          <header className={styles.tocHeader}>目次</header>
-          <ol className={styles.tocList}>
-            {headings.map((heading) => (
-              <li
-                // TODO: fix bad code
-                className={[
-                  styles.tocListItem,
-                  heading.headingNumber === 2
-                    ? styles.tocListItem2
-                    : heading.headingNumber === 3
-                      ? styles.tocListItem3
-                      : heading.headingNumber === 4
-                        ? styles.tocListItem4
-                        : '',
-                ].join(' ')}
-                key={heading.id}
-              >
-                <a
-                  href={`#${heading.id}`}
-                  dangerouslySetInnerHTML={{
-                    __html: heading.innerHTML,
-                  }}
-                />
-              </li>
-            ))}
-          </ol>
-        </section>
-      )}
-      <div
-        className={`w-full max-w-[640px] ${styles.content}`}
-        dangerouslySetInnerHTML={{
-          __html: content,
-        }}
-      />
+      {headings && <Toc headings={headings} className="mb-16" />}
+      <ArticleContent dangerouslySetInnerHTML={{ __html: content }} />
       {shareUrl && (
         <Share
           className="my-8"

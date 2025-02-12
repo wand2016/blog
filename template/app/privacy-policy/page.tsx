@@ -1,6 +1,7 @@
-import styles from './page.module.css';
 import { Metadata, ResolvingMetadata } from 'next';
 import { SITE_NAME } from '@/libs/siteMetadata';
+import ArticleTitle from '@/components/ArticleTitle';
+import ArticleContent from '@/components/ArticleContent';
 
 export const generateMetadata = async (_: {}, parent: ResolvingMetadata): Promise<Metadata> => ({
   title: 'プライバシーポリシー',
@@ -16,12 +17,11 @@ export const generateMetadata = async (_: {}, parent: ResolvingMetadata): Promis
   },
 });
 
-// TODO: Article component を再利用する
 export default function Page() {
   return (
-    <main className={styles.main}>
-      <h1 className={styles.title}>プライバシーポリシー</h1>
-      <div className={styles.content}>
+    <main className="flex flex-col justify-between items-center">
+      <ArticleTitle className="mb-[20px]">プライバシーポリシー</ArticleTitle>
+      <ArticleContent>
         {/*TODO: お問い合わせやコメントを実装したらコメントアウトを外す*/}
         {/*<h2>個人情報の利用目的</h2>*/}
         {/*当ブログでは、お問い合わせや記事へのコメントの際、名前やメールアドレス等の個人情報を入力いただく場合がございます。*/}
@@ -31,7 +31,7 @@ export default function Page() {
           当ブログでは、第三者配信の広告サービス（Googleアドセンス）を利用しており、ユーザーの興味に応じた商品やサービスの広告を表示するため、クッキー（Cookie）を使用しております。
           クッキーを使用することで当サイトはお客様のコンピュータを識別できるようになりますが、お客様個人を特定できるものではありません。
           Cookieを無効にする方法やGoogleアドセンスに関する詳細は
-          <a href="https://policies.google.com/technologies/ads?gl=jp" target={'_blank'}>
+          <a href="https://policies.google.com/technologies/ads?gl=jp" target="_blank">
             「広告 – ポリシーと規約 – Google」
           </a>
           をご確認ください。
@@ -51,7 +51,7 @@ export default function Page() {
         <h2>リンクについて</h2>
         当ブログは基本的にリンクフリーです。リンクを行う場合の許可や連絡は不要です。
         ただし、インラインフレームの使用や画像の直リンクはご遠慮ください。
-      </div>
+      </ArticleContent>
     </main>
   );
 }

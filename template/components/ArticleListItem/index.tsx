@@ -13,7 +13,7 @@ type Props = {
 export default function ArticleListItem({ article }: Props) {
   return (
     <li>
-      <Link href={`/articles/${article.id}`} className="block sm:flex sm:gap-[40px]">
+      <Link href={`/articles/${article.id}`} className="block sm:flex sm:gap-4">
         {article.thumbnail ? (
           <picture>
             <source

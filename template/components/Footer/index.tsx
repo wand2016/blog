@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="text-center mb-4">
+    <footer className="text-center">
       <p>
         <Link className="underline text-sm" href={'/privacy-policy'}>
           プライバシーポリシー

@@ -13,7 +13,7 @@ export default function ArticleList({ articles }: Props) {
     return <p>記事がありません。</p>;
   }
   return (
-    <ul className="flex flex-col gap-[40px]">
+    <ul className="flex flex-col gap-8">
       {articles.map((article) => (
         <ArticleListItem key={article.id} article={article} />
       ))}

@@ -24,7 +24,7 @@ export default function SearchField() {
 
   return (
     <>
-      <div className="w-full mx-[24px] h-[40px] sm:w-[600px] sm:mx-auto">
+      <div className={`w-full mx-[24px] h-[40px] sm:w-[600px] sm:mx-auto`}>
         <Search
           width="24px"
           height="24px"
