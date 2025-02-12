@@ -48,9 +48,11 @@ export default function ArticleListItem({ article }: Props) {
         )}
         <dl className="flex flex-col gap-2">
           <dt className="text-xl font-bold">{article.title}</dt>
-          <dd>
-            <TagList tags={article.tags} hasLink={false} />
-          </dd>
+          {article.tags && article.tags.length > 0 && (
+            <dd>
+              <TagList tags={article.tags} hasLink={false} />
+            </dd>
+          )}
           <dd>
             <PublishedDate
               date={article.publishedAt || article.createdAt}

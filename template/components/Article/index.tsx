@@ -19,14 +19,16 @@ type Props = {
 
 export default function Article({ data, formattedContent: content, headings, shareUrl }: Props) {
   return (
-    <main className="flex flex-col justify-between items-center" data-pagefind-body>
-      <ArticleTitle className="mb-[20px]">{data.title}</ArticleTitle>
-      <TagList tags={data.tags} />
-      {data.description && (
-        <p className="text-sm text-gray-500 mt-[24px] mb-[40px] text-center">{data.description}</p>
-      )}
-      <div className="flex items-center mb-[40px] text-sm ">
-        <PublishedDate date={data.publishedAt || data.createdAt} updatedDate={data.updatedAt} />
+    <main className="flex flex-col gap-8 justify-between items-center" data-pagefind-body>
+      <ArticleTitle className="mt-8">{data.title}</ArticleTitle>
+      {data.description && <p className="text-sm text-gray-500 text-center">{data.description}</p>}
+      <div className="flex flex-col gap-2 items-center">
+        {data.tags && data.tags.length > 0 && <TagList tags={data.tags} />}
+        <PublishedDate
+          date={data.publishedAt || data.createdAt}
+          updatedDate={data.updatedAt}
+          className="text-sm"
+        />
       </div>
       {data.thumbnail && (
         <picture className="w-full">
@@ -48,7 +50,7 @@ export default function Article({ data, formattedContent: content, headings, sha
           <img
             src={formatImageSrc(data.thumbnail.url)}
             alt=""
-            className="w-full h-auto mb-[40px] border border-solid border-gray-200 shadow-md"
+            className="w-full h-auto border border-solid border-gray-200 shadow-md"
             width={1200}
             height={630}
             fetchPriority={'high'}
@@ -56,18 +58,17 @@ export default function Article({ data, formattedContent: content, headings, sha
           />
         </picture>
       )}
-      {headings && <Toc headings={headings} className="mb-16" />}
+      {headings && <Toc headings={headings} />}
       <ArticleContent dangerouslySetInnerHTML={{ __html: content }} />
       {shareUrl && (
         <Share
-          className="my-8"
           url={shareUrl}
           title={data.title}
           hashtags={['wandfuldays', ...getGlobalTags(data)]}
         />
       )}
-      <hr className="w-full border-solid border-top my-8" />
-      <Profile writer={data.writer} className="mb-8" />
+      <hr className="w-full border-solid border-top" />
+      <Profile writer={data.writer} />
     </main>
   );
 }

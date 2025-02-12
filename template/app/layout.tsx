@@ -52,8 +52,8 @@ export default async function RootLayout({ children }: Props) {
         <Script async src="https://cdn.iframe.ly/embed.js" strategy={'afterInteractive'} />
         <Header menuContent={<Nav tags={tags.contents} />} />
         <Nav className="hidden sm:flex" tags={tags.contents} />
-        <hr className="border-solid sm:border-bottom border-gray-100 sm:mb-[40px]" />
-        <main className="w-full max-w-[720px] p-[24px] mx-auto">{children}</main>
+        <hr className="border-solid sm:border-bottom border-gray-100 sm:mb-4" />
+        <main className="w-full max-w-[720px] p-6 mx-auto">{children}</main>
         <Footer />
         <GoogleAnalytics gaId={process.env.GA_ID ?? ''} />
       </body>

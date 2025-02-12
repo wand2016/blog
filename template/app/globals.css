@@ -50,13 +50,3 @@ body {
 code {
   font-family: menlo, inconsolata, monospace;
 }
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-ol,
-ul {
-  list-style: none;
-}

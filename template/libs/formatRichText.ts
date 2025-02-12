@@ -53,7 +53,7 @@ export const formatRichText = async (richText: string) => {
     const params = parse(iframelyUrlQueryParams, { ignoreQueryPrefix: true });
     const url = decodeURI(params.url as string);
     const title = $replacement('iframe').attr('title');
-    $replacement.root().append('<a target="_blank"></a>');
+    $replacement.root().append('<a class="text-sm" target="_blank"></a>');
     $replacement('a')
       .attr('href', url)
       .text(title ?? '');

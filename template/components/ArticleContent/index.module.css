@@ -95,12 +95,13 @@
 }
 
 .content > figure {
-  margin: 2rem 0;
+  margin: 2rem;
   text-align: center;
 }
 
 .content > figure img {
   max-width: 100%;
+  margin: 0 auto;
   height: auto;
   border: 1px solid rgb(222,222,222);
   box-shadow: rgba(0, 0, 0, 0.06) 0 1px 3px;
