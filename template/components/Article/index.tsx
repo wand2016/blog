@@ -1,12 +1,14 @@
 import { type Article } from '@/libs/microcms';
 import PublishedDate from '../Date';
-import styles from './index.module.css';
 import TagList from '../TagList';
 import Profile from '../Profile';
 import Share from '@/components/Share';
 import { getGlobalTags } from '@/libs/getGlobalTags';
 import { HeadingTuple } from '@/libs/extractHeadings';
 import { formatImageSrc } from '@/libs/formatImageSrc';
+import Toc from '@/components/Toc';
+import ArticleTitle from '@/components/ArticleTitle';
+import ArticleContent from '@/components/ArticleContent';
 
 type Props = {
   data: Omit<Article, 'content'>;
@@ -17,15 +19,19 @@ type Props = {
 
 export default function Article({ data, formattedContent: content, headings, shareUrl }: Props) {
   return (
-    <main className={styles.main} data-pagefind-body>
-      <h1 className={styles.title}>{data.title}</h1>
-      <TagList tags={data.tags} />
-      {data.description && <p className={styles.description}>{data.description}</p>}
-      <div className={styles.meta}>
-        <PublishedDate date={data.publishedAt || data.createdAt} updatedDate={data.updatedAt} />
+    <main className="flex flex-col gap-8 justify-between items-center" data-pagefind-body>
+      <ArticleTitle className="mt-8">{data.title}</ArticleTitle>
+      {data.description && <p className="text-sm text-gray-500 text-center">{data.description}</p>}
+      <div className="flex flex-col gap-2 items-center">
+        {data.tags && data.tags.length > 0 && <TagList tags={data.tags} />}
+        <PublishedDate
+          date={data.publishedAt || data.createdAt}
+          updatedDate={data.updatedAt}
+          className="text-sm"
+        />
       </div>
       {data.thumbnail && (
-        <picture>
+        <picture className="w-full">
           <source
             type="image/webp"
             media="(max-width: 640px)"
@@ -44,7 +50,7 @@ export default function Article({ data, formattedContent: content, headings, sha
           <img
             src={formatImageSrc(data.thumbnail.url)}
             alt=""
-            className={styles.thumbnail}
+            className="w-full h-auto border border-solid border-gray-200 shadow-md"
             width={1200}
             height={630}
             fetchPriority={'high'}
@@ -52,50 +58,16 @@ export default function Article({ data, formattedContent: content, headings, sha
           />
         </picture>
       )}
-      {headings && (
-        <section className={styles.toc}>
-          <header className={styles.tocHeader}>目次</header>
-          <ol className={styles.tocList}>
-            {headings.map((heading) => (
-              <li
-                // TODO: fix bad code
-                className={[
-                  styles.tocListItem,
-                  heading.headingNumber === 2
-                    ? styles.tocListItem2
-                    : heading.headingNumber === 3
-                      ? styles.tocListItem3
-                      : heading.headingNumber === 4
-                        ? styles.tocListItem4
-                        : '',
-                ].join(' ')}
-                key={heading.id}
-              >
-                <a
-                  href={`#${heading.id}`}
-                  dangerouslySetInnerHTML={{
-                    __html: heading.innerHTML,
-                  }}
-                />
-              </li>
-            ))}
-          </ol>
-        </section>
-      )}
-      <div
-        className={styles.content}
-        dangerouslySetInnerHTML={{
-          __html: content,
-        }}
-      />
+      {headings && <Toc headings={headings} />}
+      <ArticleContent dangerouslySetInnerHTML={{ __html: content }} />
       {shareUrl && (
         <Share
-          className={styles.share}
           url={shareUrl}
           title={data.title}
           hashtags={['wandfuldays', ...getGlobalTags(data)]}
         />
       )}
+      <hr className="w-full border-solid border-top" />
       <Profile writer={data.writer} />
     </main>
   );

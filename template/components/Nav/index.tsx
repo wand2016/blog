@@ -1,16 +1,15 @@
 import { Tag } from '@/libs/microcms';
 import SearchField from '@/components/SearchField';
 import TagList from '@/components/TagList';
-import styles from './index.module.css';
 
 type Props = {
   className?: string;
   tags: Tag[];
 };
 
-export default function Nav({ className, tags }: Props) {
+export default function Nav({ className = '', tags }: Props) {
   return (
-    <nav className={className ? [className, styles.nav].join(' ') : styles.nav}>
+    <nav className={`flex flex-col items-center gap-2 px-[24px] pb-[24px] ${className}`}>
       <SearchField />
       <TagList tags={tags} />
     </nav>

@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { ImageOff } from 'lucide-react';
 import { Article } from '@/libs/microcms';
-import styles from './index.module.css';
 import TagList from '../TagList';
 import PublishedDate from '../Date';
 
@@ -13,8 +12,8 @@ type Props = {
 
 export default function ArticleListItem({ article }: Props) {
   return (
-    <li className={styles.list}>
-      <Link href={`/articles/${article.id}`} className={styles.link}>
+    <li>
+      <Link href={`/articles/${article.id}`} className="block sm:flex sm:gap-4">
         {article.thumbnail ? (
           <picture>
             <source
@@ -35,24 +34,26 @@ export default function ArticleListItem({ article }: Props) {
             <img
               src={formatImageSrc(article.thumbnail.url)}
               alt=""
-              className={styles.image}
+              className="w-full sm:max-w-none h-auto border-solid border border-gray-200 shadow-sm sm:w-[240px]"
               width={1200}
               height={630}
-              fetchPriority={'high'}
-              decoding={'async'}
+              fetchPriority="high"
+              decoding="async"
             />
           </picture>
         ) : (
-          <div className={styles.noImage}>
+          <div className="w-full sm:max-w-none h-auto border-solid border border-gray-200 shadow-sm flex justify-center items-center sm:w-[240px] sm:block">
             <ImageOff color="#666666" />
           </div>
         )}
-        <dl className={styles.content}>
-          <dt className={styles.title}>{article.title}</dt>
+        <dl className="flex flex-col gap-2 mt-2 sm:mt-0">
+          <dt className="text-xl font-bold">{article.title}</dt>
+          {article.tags && article.tags.length > 0 && (
+            <dd>
+              <TagList tags={article.tags} hasLink={false} />
+            </dd>
+          )}
           <dd>
-            <TagList tags={article.tags} hasLink={false} />
-          </dd>
-          <dd className={styles.date}>
             <PublishedDate
               date={article.publishedAt || article.createdAt}
               updatedDate={article.updatedAt}

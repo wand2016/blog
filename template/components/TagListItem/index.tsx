@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { Tag } from '@/libs/microcms';
-import styles from './index.module.css';
 import { TagIcon } from 'lucide-react';
 
 type Props = {
@@ -11,9 +10,9 @@ type Props = {
 export default function TagListItem({ tag, hasLink = true }: Props) {
   if (hasLink) {
     return (
-      <li className={styles.tag}>
+      <li className="bg-gray-100 rounded px-2 py-1 text-sm whitespace-nowrap">
         <Link href={`/tags/${tag.id}`}>
-          <div className={styles.tagInner}>
+          <div className="flex gap-1 items-center">
             <TagIcon size={'1em'} alignmentBaseline={'middle'} />
             {tag.name}
           </div>
@@ -22,8 +21,8 @@ export default function TagListItem({ tag, hasLink = true }: Props) {
     );
   }
   return (
-    <li className={styles.tag}>
-      <div className={styles.tagInner}>
+    <li className="bg-gray-100 rounded px-2 py-1 text-sm whitespace-nowrap">
+      <div className="flex gap-1 items-center">
         <TagIcon size={'1em'} />
         {tag.name}
       </div>
