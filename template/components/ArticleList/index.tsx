@@ -2,6 +2,7 @@ import { Article } from '@/libs/microcms';
 import ArticleListItem from '../ArticleListItem';
 import { Fragment } from 'react';
 import DisplayHorizontal from '@/components/adsense/DisplayHorizontal';
+import { LIMIT } from '@/constants';
 
 type Props = {
   articles?: Article[];
@@ -28,4 +29,5 @@ export default function ArticleList({ articles }: Props) {
   );
 }
 
-const adInterval = 3;
+// 一覧に2箇所広告を出す
+const adInterval = LIMIT / 2;
