@@ -15,7 +15,7 @@ export default function MultiplexHorizontal(props: Props) {
 
 function MultiplexHorizontalImpl({ googleAdsensePublisherId }: Props) {
   useEffect(() => {
-    (adsbygoogle = window.adsbygoogle || []).push({});
+    (window.adsbygoogle = window.adsbygoogle ?? []).push({});
   }, []);
 
   return (

@@ -15,7 +15,7 @@ export default function InArticle(props: Props) {
 
 function InArticleImpl({ googleAdsensePublisherId }: Props) {
   useEffect(() => {
-    (adsbygoogle = window.adsbygoogle || []).push({});
+    (window.adsbygoogle = window.adsbygoogle ?? []).push({});
   }, []);
 
   return (

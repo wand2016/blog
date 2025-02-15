@@ -15,7 +15,7 @@ export default function DisplayHorizontal(props: Props) {
 
 function DisplayHorizontalImpl({ googleAdsensePublisherId }: Props) {
   useEffect(() => {
-    (adsbygoogle = window.adsbygoogle || []).push({});
+    (window.adsbygoogle = window.adsbygoogle ?? []).push({});
   }, []);
 
   return (
