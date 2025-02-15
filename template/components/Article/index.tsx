@@ -9,6 +9,7 @@ import { formatImageSrc } from '@/libs/formatImageSrc';
 import Toc from '@/components/Toc';
 import ArticleTitle from '@/components/ArticleTitle';
 import ArticleContent from '@/components/ArticleContent';
+import InArticleAdsPortal from '@/components/adsense/InArticleAdsPortal';
 
 type Props = {
   data: Omit<Article, 'content'>;
@@ -69,6 +70,7 @@ export default function Article({ data, formattedContent: content, headings, sha
       )}
       <hr className="w-full border-solid border-top" />
       <Profile writer={data.writer} />
+      <InArticleAdsPortal googleAdsensePublisherId={'dummy'} />
     </main>
   );
 }
