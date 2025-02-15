@@ -70,7 +70,9 @@ export default function Article({ data, formattedContent: content, headings, sha
       )}
       <hr className="w-full border-solid border-top" />
       <Profile writer={data.writer} />
-      <InArticleAdsPortal googleAdsensePublisherId={'dummy'} />
+      {!!process.env.GOOGLE_ADSENSE_PUBLISHER_ID && (
+        <InArticleAdsPortal googleAdsensePublisherId={process.env.GOOGLE_ADSENSE_PUBLISHER_ID} />
+      )}
     </main>
   );
 }
