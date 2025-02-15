@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { createPortal } from 'react-dom';
-import InArticle from '@/components/adsense/InArticle';
+import DisplayHorizontal from '@/components/adsense/DisplayHorizontal';
 
 type Props = {
   googleAdsensePublisherId: string;
@@ -21,7 +21,7 @@ export default function InArticleAdsPortal(props: Props) {
 function InArticleAdsPortalImpl({ googleAdsensePublisherId }: Props) {
   const [adPortals, setAdPortals] = useState<Element[]>([]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setAdPortals(Array.from(document.querySelectorAll('.ad-portal')));
   }, []);
 
@@ -29,7 +29,7 @@ function InArticleAdsPortalImpl({ googleAdsensePublisherId }: Props) {
     <>
       {adPortals.map((adPortal, index) =>
         createPortal(
-          <InArticle googleAdsensePublisherId={googleAdsensePublisherId} />,
+          <DisplayHorizontal googleAdsensePublisherId={googleAdsensePublisherId} />,
           adPortal,
           `ad-portal-${index}`,
         ),

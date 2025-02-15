@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
 type Props = {
@@ -14,7 +14,7 @@ export default function InArticle(props: Props) {
 }
 
 function InArticleImpl({ googleAdsensePublisherId }: Props) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     (window.adsbygoogle = window.adsbygoogle ?? []).push({});
   }, []);
 

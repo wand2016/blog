@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
 type Props = {
@@ -14,7 +14,7 @@ export default function DisplayHorizontal(props: Props) {
 }
 
 function DisplayHorizontalImpl({ googleAdsensePublisherId }: Props) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     (window.adsbygoogle = window.adsbygoogle ?? []).push({});
   }, []);
 
@@ -26,6 +26,6 @@ function DisplayHorizontalImpl({ googleAdsensePublisherId }: Props) {
       data-ad-slot="4194252684"
       data-ad-format="auto"
       data-full-width-responsive="true"
-    ></ins>
+    />
   );
 }
