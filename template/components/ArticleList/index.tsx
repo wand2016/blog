@@ -1,5 +1,8 @@
 import { Article } from '@/libs/microcms';
 import ArticleListItem from '../ArticleListItem';
+import { Fragment } from 'react';
+import DisplayHorizontal from '@/components/adsense/DisplayHorizontal';
+import { LIMIT } from '@/constants';
 
 type Props = {
   articles?: Article[];
@@ -14,9 +17,17 @@ export default function ArticleList({ articles }: Props) {
   }
   return (
     <ul className="flex flex-col gap-8">
-      {articles.map((article) => (
-        <ArticleListItem key={article.id} article={article} />
+      {articles.map((article, index) => (
+        <Fragment key={article.id}>
+          <ArticleListItem article={article} />
+          {!!process.env.GOOGLE_ADSENSE_PUBLISHER_ID && index % adInterval === adInterval - 1 && (
+            <DisplayHorizontal googleAdsensePublisherId={process.env.GOOGLE_ADSENSE_PUBLISHER_ID} />
+          )}
+        </Fragment>
       ))}
     </ul>
   );
 }
+
+// 一覧に2箇所広告を出す
+const adInterval = LIMIT / 2;
