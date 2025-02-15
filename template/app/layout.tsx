@@ -8,6 +8,7 @@ import { Metadata } from 'next';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Script from 'next/script';
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE } from '@/libs/siteMetadata';
+import MultiplexHorizontal from '@/components/adsense/MultiplexHorizontal';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
@@ -52,6 +53,9 @@ export default async function RootLayout({ children }: Props) {
         <Script async src="https://cdn.iframe.ly/embed.js" strategy={'afterInteractive'} />
         <Header menuContent={<Nav tags={tags.contents} />} />
         <main className="w-full max-w-[720px] p-6 mx-auto flex flex-col gap-8">{children}</main>
+        {process.env.GOOGLE_ADSENSE_PUBLISHER_ID && (
+          <MultiplexHorizontal googleAdsensePublisherId={process.env.GOOGLE_ADSENSE_PUBLISHER_ID} />
+        )}
         <Footer className="mt-8" />
         <GoogleAnalytics gaId={process.env.GA_ID ?? ''} />
       </body>
