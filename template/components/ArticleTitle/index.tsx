@@ -1,9 +1,17 @@
-import { PropsWithChildren } from 'react';
+import { hash } from '@/libs/hash';
 
-type Props = PropsWithChildren<{
+type Props = {
   className?: string;
-}>;
+  children: string;
+};
 
 export default function ArticleTitle({ children, className = '' }: Props) {
-  return <h1 className={`text-3xl font-bold text-center ${className}`}>{children}</h1>;
+  return (
+    <h1
+      className={`text-3xl font-bold text-center ${className}`}
+      style={{ viewTransitionName: `title-${hash(children)}` }}
+    >
+      {children}
+    </h1>
+  );
 }

@@ -10,6 +10,7 @@ import Toc from '@/components/Toc';
 import ArticleTitle from '@/components/ArticleTitle';
 import ArticleContent from '@/components/ArticleContent';
 import InArticleAdsPortal from '@/components/adsense/InArticleAdsPortal';
+import { hash } from '@/libs/hash';
 
 type Props = {
   data: Omit<Article, 'content'>;
@@ -56,6 +57,7 @@ export default function Article({ data, formattedContent: content, headings, sha
             height={630}
             fetchPriority={'high'}
             decoding={'async'}
+            style={{ viewTransitionName: `img-${hash(data.thumbnail.url)}` }}
           />
         </picture>
       )}

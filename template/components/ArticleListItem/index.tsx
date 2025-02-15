@@ -1,10 +1,11 @@
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import { ImageOff } from 'lucide-react';
 import { Article } from '@/libs/microcms';
 import TagList from '../TagList';
 import PublishedDate from '../Date';
 
 import { formatImageSrc } from '@/libs/formatImageSrc';
+import { hash } from '@/libs/hash';
 
 type Props = {
   article: Article;
@@ -39,6 +40,7 @@ export default function ArticleListItem({ article }: Props) {
               height={630}
               fetchPriority="high"
               decoding="async"
+              style={{ color: 'black', viewTransitionName: `img-${hash(article.thumbnail.url)}` }}
             />
           </picture>
         ) : (
@@ -47,7 +49,12 @@ export default function ArticleListItem({ article }: Props) {
           </div>
         )}
         <dl className="flex flex-col gap-2 mt-2 sm:mt-0">
-          <dt className="text-xl font-bold">{article.title}</dt>
+          <dt
+            className="text-xl font-bold"
+            style={{ viewTransitionName: `title-${hash(article.title)}` }}
+          >
+            {article.title}
+          </dt>
           {article.tags && article.tags.length > 0 && (
             <dd>
               <TagList tags={article.tags} hasLink={false} />

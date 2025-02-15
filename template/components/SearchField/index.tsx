@@ -3,8 +3,9 @@
 import { pagefind, loadPagefind } from './pagefind';
 import type { PagefindSearchResult, PagefindSearchFragment } from './types';
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import { Search } from 'lucide-react';
+import { hash } from '@/libs/hash';
 
 export default function SearchField() {
   const [results, setResults] = useState<PagefindSearchResult[]>([]);
@@ -65,7 +66,13 @@ const ResultItem = ({ result }: { result: PagefindSearchResult }) => {
   return data ? (
     <li>
       <p>
-        <Link className="underline font-bold" href={data.url}>
+        <Link
+          className="underline font-bold"
+          href={data.url}
+          style={{
+            viewTransitionName: hash(data.meta.title),
+          }}
+        >
           {data.meta.title}
         </Link>
       </p>
