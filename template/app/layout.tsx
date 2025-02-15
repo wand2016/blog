@@ -46,7 +46,9 @@ export default async function RootLayout({ children }: Props) {
             async
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-${process.env.GOOGLE_ADSENSE_PUBLISHER_ID}`}
             crossOrigin="anonymous"
-            strategy="beforeInteractive"
+            // NOTE: 公式は head 内にいれることを推奨している。
+            // beforeInteractive とすることで実現できるが、そうすると Google PageSpeed Insights のスコアが著しく悪くなる
+            strategy="afterInteractive"
           />
         )}
         {/*NOTE: iframely の responsive スタイリングで必要*/}
