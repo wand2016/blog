@@ -21,7 +21,11 @@ export default function ArticleList({ articles }: Props) {
         <Fragment key={article.id}>
           <ArticleListItem article={article} />
           {!!process.env.GOOGLE_ADSENSE_PUBLISHER_ID && index % adInterval === adInterval - 1 && (
-            <DisplayHorizontal googleAdsensePublisherId={process.env.GOOGLE_ADSENSE_PUBLISHER_ID} />
+            <li>
+              <DisplayHorizontal
+                googleAdsensePublisherId={process.env.GOOGLE_ADSENSE_PUBLISHER_ID}
+              />
+            </li>
           )}
         </Fragment>
       ))}
