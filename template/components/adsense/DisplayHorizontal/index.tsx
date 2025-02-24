@@ -5,9 +5,10 @@ import AdSenseIns from '@/components/adsense/AdSenseIns';
 
 type Props = {
   googleAdsensePublisherId: string;
+  adSlot: string;
 };
 
-export default function DisplayHorizontal({ googleAdsensePublisherId }: Props) {
+export default function DisplayHorizontal({ googleAdsensePublisherId, adSlot }: Props) {
   const pathname = usePathname();
 
   return (
@@ -15,8 +16,7 @@ export default function DisplayHorizontal({ googleAdsensePublisherId }: Props) {
       key={pathname}
       className="block"
       googleAdsensePublisherId={googleAdsensePublisherId}
-      // TODO: avoid hard-code
-      adSlot="4194252684"
+      adSlot={adSlot}
       adFormat="auto"
       fullWidthResponsive={true}
     />

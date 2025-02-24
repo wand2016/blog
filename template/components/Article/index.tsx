@@ -16,9 +16,18 @@ type Props = {
   formattedContent: string;
   headings?: ReadonlyArray<HeadingTuple>;
   shareUrl?: string;
+  googleAdsensePublisherId?: string;
+  adSlotDisplayHorizontal?: string;
 };
 
-export default function Article({ data, formattedContent: content, headings, shareUrl }: Props) {
+export default function Article({
+  data,
+  formattedContent: content,
+  headings,
+  shareUrl,
+  googleAdsensePublisherId,
+  adSlotDisplayHorizontal,
+}: Props) {
   return (
     <main data-pagefind-body>
       <div className="flex flex-col gap-4 mb-8">
@@ -75,8 +84,11 @@ export default function Article({ data, formattedContent: content, headings, sha
       )}
       <hr className="w-full border-solid border-top my-8" />
       <Profile writer={data.writer} />
-      {!!process.env.GOOGLE_ADSENSE_PUBLISHER_ID && (
-        <InArticleAdsPortal googleAdsensePublisherId={process.env.GOOGLE_ADSENSE_PUBLISHER_ID} />
+      {!!googleAdsensePublisherId && !!adSlotDisplayHorizontal && (
+        <InArticleAdsPortal
+          googleAdsensePublisherId={googleAdsensePublisherId}
+          adSlot={adSlotDisplayHorizontal}
+        />
       )}
     </main>
   );

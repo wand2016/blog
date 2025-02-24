@@ -20,13 +20,16 @@ export default function ArticleList({ articles }: Props) {
       {articles.map((article, index) => (
         <Fragment key={article.id}>
           <ArticleListItem article={article} />
-          {!!process.env.GOOGLE_ADSENSE_PUBLISHER_ID && index % adInterval === adInterval - 1 && (
-            <li>
-              <DisplayHorizontal
-                googleAdsensePublisherId={process.env.GOOGLE_ADSENSE_PUBLISHER_ID}
-              />
-            </li>
-          )}
+          {!!process.env.GOOGLE_ADSENSE_PUBLISHER_ID &&
+            !!process.env.GOOGLE_ADSENSE_SLOT_DISPLAY_HORIZONTAL &&
+            index % adInterval === adInterval - 1 && (
+              <li>
+                <DisplayHorizontal
+                  googleAdsensePublisherId={process.env.GOOGLE_ADSENSE_PUBLISHER_ID}
+                  adSlot={process.env.GOOGLE_ADSENSE_SLOT_DISPLAY_HORIZONTAL}
+                />
+              </li>
+            )}
         </Fragment>
       ))}
     </ul>

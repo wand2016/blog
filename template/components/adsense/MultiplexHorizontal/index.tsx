@@ -5,9 +5,10 @@ import AdSenseIns from '@/components/adsense/AdSenseIns';
 
 type Props = {
   googleAdsensePublisherId: string;
+  adSlot: string;
 };
 
-export default function MultiplexHorizontal({ googleAdsensePublisherId }: Props) {
+export default function MultiplexHorizontal({ googleAdsensePublisherId, adSlot }: Props) {
   const pathname = usePathname();
 
   return (
@@ -15,8 +16,7 @@ export default function MultiplexHorizontal({ googleAdsensePublisherId }: Props)
       key={pathname}
       className="block"
       googleAdsensePublisherId={googleAdsensePublisherId}
-      // TODO: avoid hard-code
-      adSlot="8578891267"
+      adSlot={adSlot}
       adFormat="autorelaxed"
     />
   );
