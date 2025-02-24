@@ -1,31 +1,23 @@
 'use client';
 
-import { useLayoutEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import AdSenseIns from '@/components/adsense/AdSenseIns';
 
 type Props = {
   googleAdsensePublisherId: string;
 };
 
-export default function MultiplexHorizontal(props: Props) {
+export default function MultiplexHorizontal({ googleAdsensePublisherId }: Props) {
   const pathname = usePathname();
 
-  return <MultiplexHorizontalImpl key={pathname} {...props} />;
-}
-
-function MultiplexHorizontalImpl({ googleAdsensePublisherId }: Props) {
-  useLayoutEffect(() => {
-    (window.adsbygoogle = window.adsbygoogle ?? []).push({});
-  }, []);
-
   return (
-    <ins
-      className="adsbygoogle block text-center"
-      data-ad-layout="in-article"
-      data-ad-format="fluid"
-      data-ad-client={`ca-${googleAdsensePublisherId}`}
+    <AdSenseIns
+      key={pathname}
+      className="block"
+      googleAdsensePublisherId={googleAdsensePublisherId}
       // TODO: avoid hard-code
-      data-ad-slot="2973504509"
+      adSlot="8578891267"
+      adFormat="autorelaxed"
     />
   );
 }
