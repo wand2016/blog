@@ -19,8 +19,8 @@ export const generateMetadata = async (_: {}, parent: ResolvingMetadata): Promis
 
 export default function Page() {
   return (
-    <main className="flex flex-col gap-8 justify-between items-center" data-pagefind-body>
-      <ArticleTitle className="mt-8">プライバシーポリシー</ArticleTitle>
+    <main data-pagefind-body>
+      <ArticleTitle className="mb-4">プライバシーポリシー</ArticleTitle>
       <ArticleContent>
         {/*TODO: お問い合わせやコメントを実装したらコメントアウトを外す*/}
         {/*<h2>個人情報の利用目的</h2>*/}

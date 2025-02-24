@@ -7,6 +7,7 @@ import DisplayHorizontal from '@/components/adsense/DisplayHorizontal';
 
 type Props = {
   googleAdsensePublisherId: string;
+  adSlot: string;
 };
 
 /**
@@ -18,7 +19,7 @@ export default function InArticleAdsPortal(props: Props) {
   return <InArticleAdsPortalImpl key={pathname} {...props} />;
 }
 
-function InArticleAdsPortalImpl({ googleAdsensePublisherId }: Props) {
+function InArticleAdsPortalImpl({ googleAdsensePublisherId, adSlot }: Props) {
   const [adPortals, setAdPortals] = useState<Element[]>([]);
 
   useLayoutEffect(() => {
@@ -29,7 +30,7 @@ function InArticleAdsPortalImpl({ googleAdsensePublisherId }: Props) {
     <>
       {adPortals.map((adPortal, index) =>
         createPortal(
-          <DisplayHorizontal googleAdsensePublisherId={googleAdsensePublisherId} />,
+          <DisplayHorizontal googleAdsensePublisherId={googleAdsensePublisherId} adSlot={adSlot} />,
           adPortal,
           `ad-portal-${index}`,
         ),

@@ -8,8 +8,8 @@ type Props = {
 
 export default function Toc({ headings, className = '' }: Props) {
   return (
-    <section className={`bg-gray-100 rounded-lg p-4 ${className}`}>
-      <header className="text-center">目次</header>
+    <section className={`bg-gray-100 rounded-lg p-4 text-md  ${className}`}>
+      <header className="mb-2 font-bold">目次</header>
       <ol>
         {headings.map((heading) => (
           <li

@@ -5,5 +5,5 @@ type Props = PropsWithChildren<{
 }>;
 
 export default function ArticleTitle({ children, className = '' }: Props) {
-  return <h1 className={`text-3xl font-bold text-center ${className}`}>{children}</h1>;
+  return <h1 className={`text-2xl font-bold ${className}`}>{children}</h1>;
 }
