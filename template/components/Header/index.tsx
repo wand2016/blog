@@ -12,7 +12,12 @@ export default function Header({ menuContent }: Props) {
 
   return (
     <>
-      <header className="w-full bg-white shadow-md z-20 top-0 fixed">
+      <header
+        className="w-full bg-white shadow-md z-50 top-0 fixed"
+        // NOTE: View Transition よりも前面に出すためには view-transition-name を設定する必要がある
+        // @ts-expect-error nosuchkey
+        style={{ viewTransitionName: 'fixed-header' }}
+      >
         <div className="flex justify-between items-center h-12">
           <Link href="/">
             <Image
