@@ -21,16 +21,6 @@ type Props = {
 export default function Article({ data, formattedContent: content, headings, shareUrl }: Props) {
   return (
     <main className="flex flex-col gap-8 justify-between items-center" data-pagefind-body>
-      <ArticleTitle className="mt-8">{data.title}</ArticleTitle>
-      {data.description && <p className="text-sm text-gray-500 text-center">{data.description}</p>}
-      <div className="flex flex-col gap-2 items-center">
-        {data.tags && data.tags.length > 0 && <TagList tags={data.tags} />}
-        <PublishedDate
-          date={data.publishedAt || data.createdAt}
-          updatedDate={data.updatedAt}
-          className="text-sm"
-        />
-      </div>
       {data.thumbnail && (
         <picture className="w-full">
           <source
@@ -59,6 +49,14 @@ export default function Article({ data, formattedContent: content, headings, sha
           />
         </picture>
       )}
+      <ArticleTitle className="mt-8">{data.title}</ArticleTitle>
+      <PublishedDate
+        date={data.publishedAt || data.createdAt}
+        updatedDate={data.updatedAt}
+        className="text-sm"
+      />
+      {data.description && <p className="text-sm text-gray-500 text-center">{data.description}</p>}
+      {data.tags && data.tags.length > 0 && <TagList tags={data.tags} />}
       {headings && <Toc headings={headings} />}
       <ArticleContent dangerouslySetInnerHTML={{ __html: content }} />
       {shareUrl && (
