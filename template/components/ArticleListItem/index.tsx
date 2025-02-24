@@ -1,10 +1,9 @@
-import { ImageOff } from 'lucide-react';
 import { Article } from '@/libs/microcms';
 import TagList from '../TagList';
 import PublishedDate from '../Date';
 
-import { formatImageSrc } from '@/libs/formatImageSrc';
 import { Link } from 'next-view-transitions';
+import ArticleThumbnail from '@/components/ArticleThumbnail';
 
 type Props = {
   article: Article;
@@ -14,39 +13,23 @@ export default function ArticleListItem({ article }: Props) {
   return (
     <li>
       <Link href={`/articles/${article.id}`} className="block sm:flex sm:gap-4">
-        {article.thumbnail ? (
-          <picture>
-            <source
-              type="image/webp"
-              media="(max-width: 640px)"
-              srcSet={[
-                `${formatImageSrc(`${article.thumbnail.url}?fm=webp&fit=fill&fill=blur&w=414&h=217`)} 1x`,
-                `${formatImageSrc(`${article.thumbnail.url}?fm=webp&fit=fill&fill=blur&w=414&h=217&dpr=2`)} 2x`,
-              ].join(',')}
-            />
-            <source
-              type="image/webp"
-              srcSet={[
-                `${formatImageSrc(`${article.thumbnail.url}?fm=webp&fit=fill&fill=blur&w=240&h=126`)} 1x`,
-                `${formatImageSrc(`${article.thumbnail.url}?fm=webp&fit=fill&fill=blur&w=240&h=126&dpr=2`)} 2x`,
-              ].join(',')}
-            />
-            <img
-              src={formatImageSrc(article.thumbnail.url)}
-              alt=""
-              className="w-full sm:max-w-none h-auto border-solid border border-gray-200 shadow-sm sm:w-[240px]"
-              width={1200}
-              height={630}
-              fetchPriority="high"
-              decoding="async"
-              // @ts-expect-error nosuchkey
-              style={{ viewTransitionName: `thumbnail-${article.id}` }}
-            />
-          </picture>
-        ) : (
-          <div className="w-full sm:max-w-none h-auto border-solid border border-gray-200 shadow-sm flex justify-center items-center sm:w-[240px] sm:block">
-            <ImageOff color="#666666" />
-          </div>
+        {article.thumbnail && (
+          <ArticleThumbnail
+            thumbnail={article.thumbnail}
+            sizes={{
+              default: {
+                w: 414,
+                h: 217,
+              },
+              sm: {
+                w: 240,
+                h: 126,
+              },
+            }}
+            className="w-full sm:max-w-none h-auto border-solid border border-gray-200 shadow-sm sm:w-[240px] rounded-2xl sm:rounded-xl"
+            // @ts-expect-error nosuchkey
+            style={{ viewTransitionName: `thumbnail-${article.id}` }}
+          />
         )}
         <dl className="flex flex-col gap-2 mt-2 sm:mt-0">
           <dt

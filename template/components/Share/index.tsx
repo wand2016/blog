@@ -29,7 +29,7 @@ export default function Share({ url, title, hashtags, className = '' }: Props) {
           hashtags={hashtags}
           aria-label="X share button"
         >
-          <XIcon size={'64px'} />
+          <XIcon size="64px" className="rounded-xl" />
         </TwitterShareButton>
       </li>
       <li className="w-64px h-64px">
@@ -39,7 +39,7 @@ export default function Share({ url, title, hashtags, className = '' }: Props) {
           hashtag={hashtags[0] ?? undefined}
           aria-label="Facebook share button"
         >
-          <FacebookIcon size={'64px'} />
+          <FacebookIcon size="64px" className="rounded-xl" />
         </FacebookShareButton>
       </li>
       <li className="w-64px h-64px">
@@ -49,7 +49,7 @@ export default function Share({ url, title, hashtags, className = '' }: Props) {
           title={title}
           aria-label="LINE share button"
         >
-          <LineIcon size={'64px'} />
+          <LineIcon size="64px" className="rounded-xl" />
         </LineShareButton>
       </li>
       <li className="w-64px h-64px">
@@ -59,7 +59,7 @@ export default function Share({ url, title, hashtags, className = '' }: Props) {
           title={title}
           aria-label="Hatena share button"
         >
-          <HatenaIcon size={'64px'} />
+          <HatenaIcon size="64px" className="rounded-xl" />
         </HatenaShareButton>
       </li>
     </ul>
