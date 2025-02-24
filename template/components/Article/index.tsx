@@ -56,17 +56,40 @@ export default function Article({
               height={630}
               fetchPriority={'high'}
               decoding={'async'}
+              // @ts-expect-error nosuchkey
+              style={{ viewTransitionName: `thumbnail-${data.id}` }}
             />
           </picture>
         )}
-        <ArticleTitle>{data.title}</ArticleTitle>
+        <ArticleTitle
+          // @ts-expect-error nosuchkey
+          style={{ viewTransitionName: `title-${data.id}` }}
+        >
+          {data.title}
+        </ArticleTitle>
         <PublishedDate
           date={data.publishedAt || data.createdAt}
           updatedDate={data.updatedAt}
           className="text-sm"
+          // @ts-expect-error nosuchkey
+          style={{ viewTransitionName: `date-${data.id}` }}
         />
-        {data.description && <p className="text-sm text-gray-500">{data.description}</p>}
-        {data.tags && data.tags.length > 0 && <TagList tags={data.tags} />}
+        {data.description && (
+          <p
+            className="text-sm text-gray-500"
+            // @ts-expect-error nosuchkey
+            style={{ viewTransitionName: `description-${data.id}` }}
+          >
+            {data.description}
+          </p>
+        )}
+        {data.tags && data.tags.length > 0 && (
+          <TagList
+            tags={data.tags}
+            // @ts-expect-error nosuchkey
+            style={{ viewTransitionName: `tags-${data.id}` }}
+          />
+        )}
       </div>
       {headings && (
         <div className="flex flex-col justify-content items-center">
