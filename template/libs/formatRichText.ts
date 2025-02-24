@@ -43,7 +43,7 @@ export const formatRichText = async (richText: string) => {
     const iframelyUrl = $(iframelyAnchorElement).attr('data-iframely-url') ?? '';
     const iframelyUrlQueryParams = iframelyUrl.slice(iframelyUrl.indexOf('?'));
     const data = await fetch(
-      `https://cdn.iframe.ly/api/iframely${iframelyUrlQueryParams}&omit_script=1&iframe=1&title=1`,
+      `https://cdn.iframe.ly/api/iframely${iframelyUrlQueryParams}&omit_script=1&iframe=1&title=1&theme=light`,
     );
     const json = await data.json();
     const html = json['html'];
