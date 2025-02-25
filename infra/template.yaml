@@ -265,7 +265,7 @@ Resources:
         - profile
       AllowedOAuthFlowsUserPoolClient: true
       SupportedIdentityProviders:
-        - COGNITO
+        - !Ref CognitoUserPoolIdentityProvider
       CallbackURLs:
         - !If
           - IsProd
@@ -279,6 +279,25 @@ Resources:
       UserPoolId: !Ref CognitoUserPool
       Domain: !Sub ${AWS::StackName}
       ManagedLoginVersion: 1
+  CognitoUserPoolIdentityProvider:
+    Type: AWS::Cognito::UserPoolIdentityProvider
+    Condition: UseAccessControl
+    Properties:
+      AttributeMapping:
+        email: email
+        username: sub
+      IdpIdentifiers: []
+      ProviderDetails:
+        authorize_scopes: !Join
+          - " "
+          - - profile
+            - email
+            - openid
+        client_id: !Sub "{{resolve:ssm:/${AWS::StackName}-oauth2/client-id}}"
+        client_secret: !Sub "{{resolve:ssm:/${AWS::StackName}-oauth2/client-secret}}"
+      ProviderName: Google
+      ProviderType: Google
+      UserPoolId: !Ref CognitoUserPool
   CognitoUserPoolIdParameter:
     Type: AWS::SSM::Parameter
     Condition: UseAccessControl
