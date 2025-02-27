@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .alert-warn {
+    @apply bg-orange-100 border-orange-500 text-orange-700 p-4 rounded-md flex items-center;
+  }
+  .alert-warn::before {
+    @apply content-[""] inline-block w-5 h-5 bg-orange-700 mr-2;
+    mask-image: url(~lucide-static/icons/triangle-alert.svg);
+    mask-size: 1.25rem;
+    mask-repeat: no-repeat;
+  }
+  .alert-info {
+    @apply bg-teal-100 border-teal-500 text-teal-900 p-4 rounded-md flex items-center
+  }
+  .alert-info::before {
+    @apply content-[""] inline-block w-5 h-5 bg-teal-900 mr-2;
+    mask-image: url(~lucide-static/icons/info.svg);
+    mask-size: 1.25rem;
+    mask-repeat: no-repeat;
+  }
+}
+
 :root {
   --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono',
     'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono', 'Droid Sans Mono',
