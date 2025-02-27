@@ -2,8 +2,8 @@ import { Article } from '@/libs/microcms';
 import TagList from '../TagList';
 import PublishedDate from '../Date';
 
-import { Link } from 'next-view-transitions';
 import ArticleThumbnail from '@/components/ArticleThumbnail';
+import Link from 'next/link';
 
 type Props = {
   article: Article;
