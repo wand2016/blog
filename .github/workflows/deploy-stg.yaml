@@ -32,6 +32,7 @@ jobs:
           NEXT_PUBLIC_MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
           NEXT_PUBLIC_MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
           GA_ID: ${{ secrets.GA_ID_STG }}
+          INQUIRY_GOOGLE_FORM_URL: ${{ secrets.INQUIRY_GOOGLE_FORM_URL_STG }}
       - name: Copy index.html to s3
         run: |
           aws s3 sync --delete --exclude '*.html' --exclude '*.txt' --exclude '*.xml' --exclude 'pagefind/*' ./out/ s3://${{ secrets.BUCKET_NAME_STG }}/ --cache-control max-age=600,public
