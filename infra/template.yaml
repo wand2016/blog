@@ -437,3 +437,6 @@ Outputs:
       - IsProd
       - !Sub "https://${Domain}/"
       - !Sub "https://${Environment}.${Domain}/"
+  CognitoLoginPageUrl:
+    Description: "Cognito Login Page URL"
+    Value: !Sub https://${CognitoUserPoolDomain}.auth.${AWS::Region}.amazoncognito.com
