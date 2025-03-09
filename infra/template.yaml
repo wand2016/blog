@@ -293,7 +293,12 @@ Resources:
           - - profile
             - email
             - openid
+            # NOTE: profile, email openid 以外の何か「認可」にまつわるスコープを含めないとアクセス制御が効かない！
+            #       テストユーザー以外にも、 Google アカウントを持つ人全員に公開されてしまう
+            # see: https://support.google.com/cloud/answer/15549945?hl=en#zippy=%2Ctesting
+            - https://www.googleapis.com/auth/tagmanager.readonly
         client_id: !Sub "{{resolve:ssm:/${AWS::StackName}-oauth2/client-id}}"
+        # NOTE: SecureString 非対応
         client_secret: !Sub "{{resolve:ssm:/${AWS::StackName}-oauth2/client-secret}}"
       ProviderName: Google
       ProviderType: Google
