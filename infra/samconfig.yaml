@@ -8,3 +8,4 @@ default:
       resolve_s3: true
       manifest: ./package.json
       tags: Service=blog
+      fail_on_empty_changeset: false
