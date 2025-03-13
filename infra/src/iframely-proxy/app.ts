@@ -5,7 +5,6 @@ export const handler: CloudFrontRequestHandler = async (event) => {
 
   if (request.method.toLowerCase() !== "get")
     throw new Error(`not supported method ${request.method}`);
-  console.log(request);
 
   const path = request.uri.replace(/^\/iframely\//, "/");
   const host = request.origin.custom.domainName;
@@ -13,11 +12,13 @@ export const handler: CloudFrontRequestHandler = async (event) => {
   const query = request.querystring;
 
   const uri = `${proto}://${host}${path}?${query}`;
+
   const response = await fetch(uri);
 
   const body = await response.text();
   const headers: CloudFrontHeaders = {};
   response.headers.forEach((value, key) => {
+    if (!["content-type", "cache-control"].includes(key.toLowerCase())) return;
     headers[key] = [{ key, value }];
   });
 
@@ -26,13 +27,6 @@ export const handler: CloudFrontRequestHandler = async (event) => {
     '"css":":root {',
     '"css":":root { --fbr: 0.5rem;',
   );
-
-  console.log({
-    status: String(response.status),
-    statusDescription: response.statusText,
-    headers,
-    body: modifiedBody,
-  });
 
   return {
     status: String(response.status),
