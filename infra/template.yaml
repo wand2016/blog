@@ -133,6 +133,27 @@ Resources:
               - !Ref AWS::NoValue
             - LambdaFunctionARN: !Sub ${IndexSupplierFunction.Version}
               EventType: origin-request
+        CacheBehaviors:
+          - PathPattern: '/iframely/*'
+            TargetOriginId: Iframely
+            Compress: true
+            ViewerProtocolPolicy: redirect-to-https
+            AllowedMethods:
+              - GET
+              - HEAD
+            CachedMethods:
+              - GET
+              - HEAD
+            CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad # CachingDisabled
+            OriginRequestPolicyId: 216adef6-5c7f-47e4-b989-5492eafa07d3 # AllViewer
+            LambdaFunctionAssociations:
+              - !If
+                - UseAccessControl
+                - LambdaFunctionARN: !Sub ${AccessControlFunction.Version}
+                  EventType: viewer-request
+                - !Ref AWS::NoValue
+              - LambdaFunctionARN: !Sub ${IframelyProxyFunction.Version}
+                EventType: origin-request
         PriceClass: PriceClass_200
         DefaultRootObject: index.html
         Enabled: true
@@ -143,6 +164,11 @@ Resources:
             OriginAccessControlId: !GetAtt WebBucketOriginAccessControl.Id
             S3OriginConfig:
               OriginAccessIdentity: ''
+          - DomainName: cdn.iframe.ly
+            Id: Iframely
+            CustomOriginConfig:
+              HTTPSPort: 443
+              OriginProtocolPolicy: https-only
         Aliases:
           - !If
             - IsProd
@@ -194,6 +220,49 @@ Resources:
       MemorySize: 128
       Timeout: 5
       Role: !GetAtt IndexSupplierFunctionRole.Arn
+      AutoPublishAlias: !Ref Environment
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: esm
+        Minify: false
+        OutExtension:
+          - .js=.mjs
+        Target: "es2020"
+        Sourcemap: false
+        EntryPoints:
+          - app.ts
+        External:
+          - aws-lambda
+  IframelyProxyFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub ${AWS::StackName}-lambdaedge-iframely-proxy-role
+      Path: /
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - edgelambda.amazonaws.com
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+  IframelyProxyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-lambdaedge-iframely-proxy
+      CodeUri: ./src/iframely-proxy/
+      Handler: app.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      MemorySize: 128
+      Timeout: 5
+      Role: !GetAtt IframelyProxyFunctionRole.Arn
       AutoPublishAlias: !Ref Environment
     Metadata:
       BuildMethod: esbuild
