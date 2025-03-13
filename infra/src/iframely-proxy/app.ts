@@ -3,12 +3,25 @@ import type { CloudFrontRequestHandler, CloudFrontHeaders } from "aws-lambda";
 export const handler: CloudFrontRequestHandler = async (event) => {
   const request = event.Records[0].cf.request;
 
-  if (request.method.toLowerCase() === "get")
+  if (request.method.toLowerCase() !== "get")
     throw new Error(`not supported method ${request.method}`);
+  console.log(request);
 
-  const uri = request.uri.replace("/iframely/", "/");
+  const path = request.uri.replace(/^\/iframely\//, "/");
+  const host = request.origin.custom.domainName;
+  const proto = request.origin.custom.protocol;
+  const query = request.querystring;
 
-  const response = await fetch(uri);
+  const requestHeaders: HeadersInit = {};
+  for (const [key, [{ value }]] of Object.entries(request.headers)) {
+    if (key.toLowerCase() === "host") continue;
+    requestHeaders[key] = value;
+  }
+  const uri = `${proto}://${host}${path}?${query}`;
+  console.log({ uri, requestHeaders });
+  const response = await fetch(uri, {
+    headers: requestHeaders,
+  });
 
   const body = await response.text();
   const headers: CloudFrontHeaders = {};
@@ -21,6 +34,13 @@ export const handler: CloudFrontRequestHandler = async (event) => {
     '"css":":root {',
     '"css":":root { --fbr: 0.5rem;',
   );
+
+  console.log({
+    status: String(response.status),
+    statusDescription: response.statusText,
+    headers,
+    body: modifiedBody,
+  });
 
   return {
     status: String(response.status),
