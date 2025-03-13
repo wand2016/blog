@@ -12,16 +12,8 @@ export const handler: CloudFrontRequestHandler = async (event) => {
   const proto = request.origin.custom.protocol;
   const query = request.querystring;
 
-  const requestHeaders: HeadersInit = {};
-  for (const [key, [{ value }]] of Object.entries(request.headers)) {
-    if (key.toLowerCase() === "host") continue;
-    requestHeaders[key] = value;
-  }
   const uri = `${proto}://${host}${path}?${query}`;
-  console.log({ uri, requestHeaders });
-  const response = await fetch(uri, {
-    headers: requestHeaders,
-  });
+  const response = await fetch(uri);
 
   const body = await response.text();
   const headers: CloudFrontHeaders = {};
