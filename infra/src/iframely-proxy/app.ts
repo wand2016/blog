@@ -6,7 +6,7 @@ export const handler: CloudFrontRequestHandler = async (event) => {
   if (request.method.toLowerCase() !== "get")
     throw new Error(`not supported method ${request.method}`);
 
-  const path = request.uri.replace(/^\/iframely\//, "/");
+  const path = request.uri;
   const host = request.origin.custom.domainName;
   const proto = request.origin.custom.protocol;
   const query = request.querystring;

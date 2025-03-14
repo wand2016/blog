@@ -128,32 +128,11 @@ Resources:
           LambdaFunctionAssociations:
             - !If
               - UseAccessControl
-              - LambdaFunctionARN: !Sub ${AccessControlFunction.Version}
+              - LambdaFunctionARN: !Ref AccessControlFunction.Version
                 EventType: viewer-request
               - !Ref AWS::NoValue
-            - LambdaFunctionARN: !Sub ${IndexSupplierFunction.Version}
+            - LambdaFunctionARN: !Ref IndexSupplierFunction.Version
               EventType: origin-request
-        CacheBehaviors:
-          - PathPattern: '/iframely/*'
-            TargetOriginId: Iframely
-            Compress: true
-            ViewerProtocolPolicy: redirect-to-https
-            AllowedMethods:
-              - GET
-              - HEAD
-            CachedMethods:
-              - GET
-              - HEAD
-            CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad # CachingDisabled
-            OriginRequestPolicyId: 216adef6-5c7f-47e4-b989-5492eafa07d3 # AllViewer
-            LambdaFunctionAssociations:
-              - !If
-                - UseAccessControl
-                - LambdaFunctionARN: !Sub ${AccessControlFunction.Version}
-                  EventType: viewer-request
-                - !Ref AWS::NoValue
-              - LambdaFunctionARN: !Sub ${IframelyProxyFunction.Version}
-                EventType: origin-request
         PriceClass: PriceClass_200
         DefaultRootObject: index.html
         Enabled: true
@@ -164,11 +143,6 @@ Resources:
             OriginAccessControlId: !GetAtt WebBucketOriginAccessControl.Id
             S3OriginConfig:
               OriginAccessIdentity: ''
-          - DomainName: cdn.iframe.ly
-            Id: Iframely
-            CustomOriginConfig:
-              HTTPSPort: 443
-              OriginProtocolPolicy: https-only
         Aliases:
           - !If
             - IsProd
@@ -234,6 +208,78 @@ Resources:
           - app.ts
         External:
           - aws-lambda
+  # ============================================================================
+  # Iframely CloudFront distribution + Certificate + A Record
+  #
+  # Iframely をラップする CDN 。
+  #
+  # 自分で管理していない SaaS を同じ origin (proto + domain + port) で動かすのは非常に危険なので domain を分けている。
+  # ============================================================================
+  IframelyACMCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: !If
+        - IsProd
+        - !Sub iframely-${Domain}
+        - !Sub ${Environment}-iframely.${Domain}
+      DomainValidationOptions:
+        - DomainName: !If
+            - IsProd
+            - !Sub iframely-${Domain}
+            - !Sub ${Environment}-iframely.${Domain}
+          HostedZoneId: !Ref HostedZoneId
+      ValidationMethod: DNS
+  IframelyDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        DefaultCacheBehavior:
+          TargetOriginId: Iframely
+          Compress: true
+          ViewerProtocolPolicy: redirect-to-https
+          AllowedMethods:
+            - GET
+            - HEAD
+          CachedMethods:
+            - GET
+            - HEAD
+          CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad # CachingDisabled
+          OriginRequestPolicyId: 216adef6-5c7f-47e4-b989-5492eafa07d3 # AllViewer
+          LambdaFunctionAssociations:
+            - LambdaFunctionARN: !Ref IframelyProxyFunction.Version
+              EventType: origin-request
+        PriceClass: PriceClass_200
+        DefaultRootObject: index.html
+        Enabled: true
+        HttpVersion: http2and3
+        Origins:
+          - DomainName: cdn.iframe.ly
+            Id: Iframely
+            CustomOriginConfig:
+              HTTPSPort: 443
+              OriginProtocolPolicy: https-only
+        Aliases:
+          - !If
+            - IsProd
+            - !Sub iframely.${Domain}
+            - !Sub ${Environment}-iframely.${Domain}
+        ViewerCertificate:
+          AcmCertificateArn: !Ref IframelyACMCertificate
+          MinimumProtocolVersion: "TLSv1.2_2021"
+          SslSupportMethod: "sni-only"
+  IframelyDistributionAliasARecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      AliasTarget:
+        DNSName: !GetAtt IframelyDistribution.DomainName
+        # see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-aliastarget.html
+        HostedZoneId: Z2FDTNDATAQYW2
+      HostedZoneId: !Ref HostedZoneId
+      Name: !If
+        - IsProd
+        - !Sub iframely.${Domain}
+        - !Sub ${Environment}-iframely.${Domain}
+      Type: A
   IframelyProxyFunctionRole:
     Type: AWS::IAM::Role
     Properties:
