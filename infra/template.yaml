@@ -21,7 +21,7 @@ Parameters:
     Type: String
     Description: "デプロイ先ドメイン。ゾーン頂点を想定。ステージング環境はこのドメインの stg サブドメインにデプロイされる。"
   HostedZoneId:
-    Type: String
+    Type: AWS::Route53::HostedZone::Id
     Description: "デプロイ先ドメインの Route53 Hosted Zone ID。 ACM Certificate を自動で認証するために必須。"
 
 Conditions:
@@ -66,7 +66,7 @@ Resources:
             Condition:
               StringEquals:
                 AWS:SourceArn:
-                  - !Sub arn:aws:cloudfront::${AWS::AccountId}:distribution/${Distribution}
+                  - !Sub arn:${AWS::Partition}:cloudfront::${AWS::AccountId}:distribution/${Distribution}
           - Principal:
               AWS: !GetAtt DeploymentRole.Arn
             Action:
@@ -181,7 +181,7 @@ Resources:
             Action:
               - sts:AssumeRole
       ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
   IndexSupplierFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -260,7 +260,7 @@ Resources:
             Action:
               - sts:AssumeRole
       ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
   IframelyProxyFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -423,7 +423,7 @@ Resources:
             Action:
               - sts:AssumeRole
       ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
       Policies:
         - PolicyName: !Sub ${AWS::StackName}-lambdaedge-access-control-role-policy
           PolicyDocument:
@@ -434,7 +434,7 @@ Resources:
                   # NOTE: GetParameters は順序が保証されないので使用しない
                   - ssm:GetParameter
                 Resource:
-                  - !Sub 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${AWS::StackName}-lambdaedge-access-control/*'
+                  - !Sub 'arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${AWS::StackName}-lambdaedge-access-control/*'
   AccessControlFunction:
     Type: AWS::Serverless::Function
     Condition: UseAccessControl
@@ -481,7 +481,7 @@ Resources:
           - Effect: Allow
             Principal:
               Federated:
-                - !Sub "arn:aws:iam::${AWS::AccountId}:oidc-provider/token.actions.githubusercontent.com"
+                - !Sub "arn:${AWS::Partition}:iam::${AWS::AccountId}:oidc-provider/token.actions.githubusercontent.com"
             Action:
               - sts:AssumeRoleWithWebIdentity
             Condition:
@@ -516,6 +516,9 @@ Outputs:
       - IsProd
       - !Sub "https://${Domain}/"
       - !Sub "https://${Environment}.${Domain}/"
+  IframelyDistributionUrl:
+    Description: "URL of the Iframely proxy"
+    Value: !Sub "https://${IframelyDistribution.DomainName}/"
   CognitoLoginPageUrl:
     Description: "Cognito Login Page URL"
     Value: !Sub https://${CognitoUserPoolDomain}.auth.${AWS::Region}.amazoncognito.com
