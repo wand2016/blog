@@ -215,6 +215,38 @@ Resources:
   #
   # 自分で管理していない SaaS を同じ origin (proto + domain + port) で動かすのは非常に危険なので domain を分けている。
   # ============================================================================
+  IframelyResponseHeaderPolicy:
+    Type: AWS::CloudFront::ResponseHeadersPolicy
+    Properties:
+      ResponseHeadersPolicyConfig:
+        Comment: "Iframely Response Header Policy"
+        Name: !Sub ${AWS::StackName}-IframelyResponseHeaderPolicy
+        SecurityHeadersConfig:
+          ContentSecurityPolicy: !If
+            - IsProd
+            - ContentSecurityPolicy: !Sub "frame-ancestors https://${Domain}"
+              Override: true
+            - !Ref AWS::NoValue
+          ContentTypeOptions:
+            Override: true
+          FrameOptions: !If
+            - IsProd
+            - FrameOption: !Sub "ALLOW-FROM https://${Domain}"
+              Override: true
+            - !Ref AWS::NoValue
+          ReferrerPolicy:
+            Override: true
+            ReferrerPolicy: no-referrer
+          StrictTransportSecurity:
+            AccessControlMaxAgeSec: 63072000 # 2yrs
+            IncludeSubdomains: true
+            Override: true
+            Preload: true
+          XSSProtection:
+            ModeBlock: true
+            Override: true
+            Protection: true
+            #ReportUri: String
   IframelyDistribution:
     Type: AWS::CloudFront::Distribution
     Properties:
@@ -231,6 +263,7 @@ Resources:
             - HEAD
           CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad # CachingDisabled
           OriginRequestPolicyId: 216adef6-5c7f-47e4-b989-5492eafa07d3 # AllViewer
+          ResponseHeadersPolicyId: !Ref IframelyResponseHeaderPolicy
           LambdaFunctionAssociations:
             - LambdaFunctionARN: !Ref IframelyProxyFunction.Version
               EventType: origin-request
