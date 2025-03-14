@@ -51,6 +51,14 @@ export const formatRichText = async (richText: string) => {
     const $replacement = cheerio.load(html);
     $replacement('iframe').attr('loading', 'lazy');
 
+    if (process.env.IFRAMELY_PROXY_URL) {
+      const rawSrc = $replacement('iframe').attr('src') ?? '';
+      $replacement('iframe').attr(
+        'src',
+        rawSrc.replace(/^(?:https?:)?\/\/cdn.iframe.ly/, process.env.IFRAMELY_PROXY_URL),
+      );
+    }
+
     const params = parse(iframelyUrlQueryParams, { ignoreQueryPrefix: true });
     const url = decodeURI(params.url as string);
     const title = $replacement('iframe').attr('title');
