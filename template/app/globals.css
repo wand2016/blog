@@ -46,7 +46,7 @@
   --color-border: #ddd;
   --color-border-light: #f3f3f3;
   --color-current: #eee;
-  --border-radius: 4px;
+  --border-radius: 0.5rem;
 }
 
 * {
@@ -82,5 +82,5 @@ code {
 }
 
 iframe {
-  border-radius: 0.5rem;
+  border-radius: var(--border-radius);
 }
