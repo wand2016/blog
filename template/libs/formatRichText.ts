@@ -3,6 +3,7 @@ import cheerio from 'cheerio';
 import hljs from 'highlight.js';
 import { formatImageSrc } from '@/libs/formatImageSrc';
 import { parse } from 'qs';
+import { IframelyResponse } from '@/libs/iframely/types';
 
 export const formatRichText = async (richText: string) => {
   const $ = cheerio.load(richText);
@@ -45,10 +46,18 @@ export const formatRichText = async (richText: string) => {
     const data = await fetch(
       `https://cdn.iframe.ly/api/iframely${iframelyUrlQueryParams}&omit_script=1&iframe=1&title=1&theme=light`,
     );
-    const json = await data.json();
+    const json: IframelyResponse = await data.json();
     const html = json['html'];
     const $replacement = cheerio.load(html);
     $replacement('iframe').attr('loading', 'lazy');
+
+    if (process.env.IFRAMELY_PROXY_URL) {
+      const rawSrc = $replacement('iframe').attr('src') ?? '';
+      $replacement('iframe').attr(
+        'src',
+        rawSrc.replace(/^(?:https?:)?\/\/cdn.iframe.ly/, process.env.IFRAMELY_PROXY_URL),
+      );
+    }
 
     const params = parse(iframelyUrlQueryParams, { ignoreQueryPrefix: true });
     const url = decodeURI(params.url as string);

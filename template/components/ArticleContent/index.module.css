@@ -45,7 +45,7 @@
 .content code {
   background-color: var(--color-bg-code);
   padding: .2em .4em;
-  border-radius: 6px;
+  border-radius: 0.25rem;
 }
 
 .content pre > code {
@@ -53,7 +53,11 @@
   display: block;
   overflow-x: auto;
   padding: 1rem;
-  border-radius: 6px;
+  border-radius: var(--border-radius);
+}
+
+.content [data-filename] code {
+  border-top-left-radius: unset;
 }
 
 .content div[data-filename]::before {

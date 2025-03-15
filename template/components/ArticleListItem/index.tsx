@@ -26,7 +26,7 @@ export default function ArticleListItem({ article }: Props) {
                 h: 126,
               },
             }}
-            className="w-full sm:max-w-none h-auto border-solid border border-gray-200 shadow-sm sm:w-[240px] rounded-2xl sm:rounded-xl"
+            className="w-full sm:max-w-none h-auto border-solid border border-gray-200 shadow-sm sm:w-[240px] rounded-2xl sm:rounded-lg"
             // @ts-expect-error nosuchkey
             style={{ viewTransitionName: `thumbnail-${article.id}` }}
           />

@@ -21,7 +21,7 @@ Parameters:
     Type: String
     Description: "デプロイ先ドメイン。ゾーン頂点を想定。ステージング環境はこのドメインの stg サブドメインにデプロイされる。"
   HostedZoneId:
-    Type: String
+    Type: AWS::Route53::HostedZone::Id
     Description: "デプロイ先ドメインの Route53 Hosted Zone ID。 ACM Certificate を自動で認証するために必須。"
 
 Conditions:
@@ -66,7 +66,7 @@ Resources:
             Condition:
               StringEquals:
                 AWS:SourceArn:
-                  - !Sub arn:aws:cloudfront::${AWS::AccountId}:distribution/${Distribution}
+                  - !Sub arn:${AWS::Partition}:cloudfront::${AWS::AccountId}:distribution/${Distribution}
           - Principal:
               AWS: !GetAtt DeploymentRole.Arn
             Action:
@@ -109,10 +109,43 @@ Resources:
           - !Sub ${Environment}.${Domain}
           HostedZoneId: !Ref HostedZoneId
       ValidationMethod: DNS
+  ResponseHeaderPolicy:
+    Type: AWS::CloudFront::ResponseHeadersPolicy
+    Properties:
+      ResponseHeadersPolicyConfig:
+        Comment: "Web Response Header Policy"
+        Name: !Sub ${AWS::StackName}-ResponseHeaderPolicy
+        SecurityHeadersConfig:
+          ContentSecurityPolicy:
+            ContentSecurityPolicy: !Join
+              - "; "
+              - - "frame-ancestors 'none'"
+                - "object-src 'none'"
+                - "base-uri 'none'"
+            Override: true
+          ContentTypeOptions:
+            Override: true
+          FrameOptions:
+            FrameOption: DENY
+            Override: true
+          ReferrerPolicy:
+            Override: true
+            ReferrerPolicy: strict-origin-when-cross-origin
+          StrictTransportSecurity:
+            AccessControlMaxAgeSec: 63072000 # 2yrs
+            IncludeSubdomains: true
+            Override: true
+            Preload: true
+          XSSProtection:
+            ModeBlock: true
+            Override: true
+            Protection: true
+            #ReportUri: String
   Distribution:
     Type: AWS::CloudFront::Distribution
     Properties:
       DistributionConfig:
+        Comment: !Sub web ${Environment}
         DefaultCacheBehavior:
           TargetOriginId: WebBucketOrigin
           Compress: true
@@ -125,13 +158,14 @@ Resources:
             - HEAD
           CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6 # CachingOptimized
           OriginRequestPolicyId: acba4595-bd28-49b8-b9fe-13317c0390fa # UserAgentRefererHeaders
+          ResponseHeadersPolicyId: !Ref ResponseHeaderPolicy
           LambdaFunctionAssociations:
             - !If
               - UseAccessControl
-              - LambdaFunctionARN: !Sub ${AccessControlFunction.Version}
+              - LambdaFunctionARN: !Ref AccessControlFunction.Version
                 EventType: viewer-request
               - !Ref AWS::NoValue
-            - LambdaFunctionARN: !Sub ${IndexSupplierFunction.Version}
+            - LambdaFunctionARN: !Ref IndexSupplierFunction.Version
               EventType: origin-request
         PriceClass: PriceClass_200
         DefaultRootObject: index.html
@@ -181,7 +215,7 @@ Resources:
             Action:
               - sts:AssumeRole
       ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
   IndexSupplierFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -194,6 +228,120 @@ Resources:
       MemorySize: 128
       Timeout: 5
       Role: !GetAtt IndexSupplierFunctionRole.Arn
+      AutoPublishAlias: !Ref Environment
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: esm
+        Minify: false
+        OutExtension:
+          - .js=.mjs
+        Target: "es2020"
+        Sourcemap: false
+        EntryPoints:
+          - app.ts
+        External:
+          - aws-lambda
+  # ============================================================================
+  # Iframely CloudFront distribution
+  #
+  # Iframely をラップする CDN 。
+  #
+  # 自分で管理していない SaaS を同じ origin (proto + domain + port) で動かすのは非常に危険なので domain を分けている。
+  # ============================================================================
+  IframelyResponseHeaderPolicy:
+    Type: AWS::CloudFront::ResponseHeadersPolicy
+    Properties:
+      ResponseHeadersPolicyConfig:
+        Comment: "Iframely Response Header Policy"
+        Name: !Sub ${AWS::StackName}-IframelyResponseHeaderPolicy
+        SecurityHeadersConfig:
+          ContentSecurityPolicy:
+            ContentSecurityPolicy: !Join
+            - "; "
+            - - !If
+                - IsProd
+                - !Sub "frame-ancestors https://${Domain}"
+                - !Sub "frame-ancestors https://${Environment}.${Domain} http://localhost:3000"
+              - "object-src 'none'"
+              - "base-uri 'none'"
+              - "upgrade-insecure-requests"
+            Override: true
+          ContentTypeOptions:
+            Override: true
+          ReferrerPolicy:
+            Override: true
+            ReferrerPolicy: strict-origin-when-cross-origin
+          StrictTransportSecurity:
+            AccessControlMaxAgeSec: 63072000 # 2yrs
+            IncludeSubdomains: true
+            Override: true
+            Preload: true
+          XSSProtection:
+            ModeBlock: true
+            Override: true
+            Protection: true
+            #ReportUri: String
+  IframelyDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Comment: !Sub Iframely proxy ${Environment}
+        DefaultCacheBehavior:
+          TargetOriginId: Iframely
+          Compress: true
+          ViewerProtocolPolicy: redirect-to-https
+          AllowedMethods:
+            - GET
+            - HEAD
+          CachedMethods:
+            - GET
+            - HEAD
+          CachePolicyId: 4cc15a8a-d715-48a4-82b8-cc0b614638fe # UseOriginCacheControlHeaders-QueryStrings
+          OriginRequestPolicyId: 216adef6-5c7f-47e4-b989-5492eafa07d3 # AllViewer
+          ResponseHeadersPolicyId: !Ref IframelyResponseHeaderPolicy
+          LambdaFunctionAssociations:
+            - LambdaFunctionARN: !Ref IframelyProxyFunction.Version
+              EventType: origin-request
+        PriceClass: PriceClass_200
+        DefaultRootObject: index.html
+        Enabled: true
+        HttpVersion: http2and3
+        Origins:
+          - DomainName: cdn.iframe.ly
+            Id: Iframely
+            CustomOriginConfig:
+              HTTPSPort: 443
+              OriginProtocolPolicy: https-only
+  IframelyProxyFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub ${AWS::StackName}-lambdaedge-iframely-proxy-role
+      Path: /
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - edgelambda.amazonaws.com
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      ManagedPolicyArns:
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+  IframelyProxyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-lambdaedge-iframely-proxy
+      CodeUri: ./src/iframely-proxy/
+      Handler: app.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      MemorySize: 128
+      Timeout: 5
+      Role: !GetAtt IframelyProxyFunctionRole.Arn
       AutoPublishAlias: !Ref Environment
     Metadata:
       BuildMethod: esbuild
@@ -344,7 +492,7 @@ Resources:
             Action:
               - sts:AssumeRole
       ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
       Policies:
         - PolicyName: !Sub ${AWS::StackName}-lambdaedge-access-control-role-policy
           PolicyDocument:
@@ -355,7 +503,7 @@ Resources:
                   # NOTE: GetParameters は順序が保証されないので使用しない
                   - ssm:GetParameter
                 Resource:
-                  - !Sub 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${AWS::StackName}-lambdaedge-access-control/*'
+                  - !Sub 'arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${AWS::StackName}-lambdaedge-access-control/*'
   AccessControlFunction:
     Type: AWS::Serverless::Function
     Condition: UseAccessControl
@@ -402,7 +550,7 @@ Resources:
           - Effect: Allow
             Principal:
               Federated:
-                - !Sub "arn:aws:iam::${AWS::AccountId}:oidc-provider/token.actions.githubusercontent.com"
+                - !Sub "arn:${AWS::Partition}:iam::${AWS::AccountId}:oidc-provider/token.actions.githubusercontent.com"
             Action:
               - sts:AssumeRoleWithWebIdentity
             Condition:
@@ -437,6 +585,10 @@ Outputs:
       - IsProd
       - !Sub "https://${Domain}/"
       - !Sub "https://${Environment}.${Domain}/"
+  IframelyDistributionUrl:
+    Description: "URL of the Iframely proxy"
+    Value: !Sub "https://${IframelyDistribution.DomainName}/"
   CognitoLoginPageUrl:
+    Condition: UseAccessControl
     Description: "Cognito Login Page URL"
     Value: !Sub https://${CognitoUserPoolDomain}.auth.${AWS::Region}.amazoncognito.com
