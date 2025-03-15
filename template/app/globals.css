@@ -80,3 +80,7 @@ body {
 code {
   font-family: menlo, inconsolata, monospace;
 }
+
+iframe {
+  border-radius: 0.5rem;
+}
