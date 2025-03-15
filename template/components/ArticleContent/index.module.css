@@ -56,6 +56,10 @@
   border-radius: var(--border-radius);
 }
 
+.content [data-filename] code {
+  border-top-left-radius: unset;
+}
+
 .content div[data-filename]::before {
   display: inline-block;
   background-color: var(--color-bg-sub);
