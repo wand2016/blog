@@ -130,7 +130,7 @@ Resources:
             Override: true
           ReferrerPolicy:
             Override: true
-            ReferrerPolicy: no-referrer
+            ReferrerPolicy: strict-origin-when-cross-origin
           StrictTransportSecurity:
             AccessControlMaxAgeSec: 63072000 # 2yrs
             IncludeSubdomains: true
@@ -271,7 +271,7 @@ Resources:
             Override: true
           ReferrerPolicy:
             Override: true
-            ReferrerPolicy: no-referrer
+            ReferrerPolicy: strict-origin-when-cross-origin
           StrictTransportSecurity:
             AccessControlMaxAgeSec: 63072000 # 2yrs
             IncludeSubdomains: true
