@@ -229,11 +229,6 @@ Resources:
             - !Ref AWS::NoValue
           ContentTypeOptions:
             Override: true
-          FrameOptions: !If
-            - IsProd
-            - FrameOption: !Sub "ALLOW-FROM https://${Domain}"
-              Override: true
-            - !Ref AWS::NoValue
           ReferrerPolicy:
             Override: true
             ReferrerPolicy: no-referrer
@@ -261,7 +256,7 @@ Resources:
           CachedMethods:
             - GET
             - HEAD
-          CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6 # CachingOptimized
+          CachePolicyId: 4cc15a8a-d715-48a4-82b8-cc0b614638fe # UseOriginCacheControlHeaders-QueryStrings
           OriginRequestPolicyId: 216adef6-5c7f-47e4-b989-5492eafa07d3 # AllViewer
           ResponseHeadersPolicyId: !Ref IframelyResponseHeaderPolicy
           LambdaFunctionAssociations:
@@ -553,5 +548,6 @@ Outputs:
     Description: "URL of the Iframely proxy"
     Value: !Sub "https://${IframelyDistribution.DomainName}/"
   CognitoLoginPageUrl:
+    Condition: UseAccessControl
     Description: "Cognito Login Page URL"
     Value: !Sub https://${CognitoUserPoolDomain}.auth.${AWS::Region}.amazoncognito.com
