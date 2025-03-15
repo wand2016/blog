@@ -109,6 +109,38 @@ Resources:
           - !Sub ${Environment}.${Domain}
           HostedZoneId: !Ref HostedZoneId
       ValidationMethod: DNS
+  ResponseHeaderPolicy:
+    Type: AWS::CloudFront::ResponseHeadersPolicy
+    Properties:
+      ResponseHeadersPolicyConfig:
+        Comment: "Web Response Header Policy"
+        Name: !Sub ${AWS::StackName}-ResponseHeaderPolicy
+        SecurityHeadersConfig:
+          ContentSecurityPolicy:
+            ContentSecurityPolicy: !Join
+              - "; "
+              - - "frame-ancestors 'none'"
+                - "object-src 'none'"
+                - "base-uri 'none'"
+            Override: true
+          ContentTypeOptions:
+            Override: true
+          FrameOptions:
+            FrameOption: DENY
+            Override: true
+          ReferrerPolicy:
+            Override: true
+            ReferrerPolicy: no-referrer
+          StrictTransportSecurity:
+            AccessControlMaxAgeSec: 63072000 # 2yrs
+            IncludeSubdomains: true
+            Override: true
+            Preload: true
+          XSSProtection:
+            ModeBlock: true
+            Override: true
+            Protection: true
+            #ReportUri: String
   Distribution:
     Type: AWS::CloudFront::Distribution
     Properties:
@@ -126,6 +158,7 @@ Resources:
             - HEAD
           CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6 # CachingOptimized
           OriginRequestPolicyId: acba4595-bd28-49b8-b9fe-13317c0390fa # UserAgentRefererHeaders
+          ResponseHeadersPolicyId: !Ref ResponseHeaderPolicy
           LambdaFunctionAssociations:
             - !If
               - UseAccessControl
@@ -223,11 +256,17 @@ Resources:
         Comment: "Iframely Response Header Policy"
         Name: !Sub ${AWS::StackName}-IframelyResponseHeaderPolicy
         SecurityHeadersConfig:
-          ContentSecurityPolicy: !If
-            - IsProd
-            - ContentSecurityPolicy: !Sub "frame-ancestors https://${Domain}"
-              Override: true
-            - !Ref AWS::NoValue
+          ContentSecurityPolicy:
+            ContentSecurityPolicy: !Join
+            - "; "
+            - - !If
+                - IsProd
+                - !Sub "frame-ancestors https://${Domain}"
+                - !Sub "frame-ancestors https://${Environment}.${Domain} http://localhost:3000"
+              - "object-src 'none'"
+              - "base-uri 'none'"
+              - "upgrade-insecure-requests"
+            Override: true
           ContentTypeOptions:
             Override: true
           ReferrerPolicy:
