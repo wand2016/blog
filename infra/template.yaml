@@ -113,6 +113,7 @@ Resources:
     Type: AWS::CloudFront::Distribution
     Properties:
       DistributionConfig:
+        Comment: !Sub web ${Environment}
         DefaultCacheBehavior:
           TargetOriginId: WebBucketOrigin
           Compress: true
@@ -246,6 +247,7 @@ Resources:
     Type: AWS::CloudFront::Distribution
     Properties:
       DistributionConfig:
+        Comment: !Sub Iframely proxy ${Environment}
         DefaultCacheBehavior:
           TargetOriginId: Iframely
           Compress: true
