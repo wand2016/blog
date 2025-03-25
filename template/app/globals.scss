@@ -5,34 +5,50 @@
 @layer components {
   .alert-info {
     @apply bg-blue-100 border-blue-500 text-blue-700 py-4 pr-4 pl-12 rounded-lg flex items-center relative;
-  }
-  .alert-info::before {
-    @apply content-[""] inline-block w-5 h-5 bg-blue-700 absolute left-4;
-    mask-image: url(~lucide-static/icons/info.svg);
-    mask-size: 1.25rem;
-    mask-repeat: no-repeat;
+    &::before {
+      @apply content-[""] inline-block w-5 h-5 bg-blue-700 absolute left-4;
+      mask-image: url(~lucide-static/icons/info.svg);
+      mask-size: 1.25rem;
+      mask-repeat: no-repeat;
+    }
   }
   .alert-tip {
     @apply bg-teal-100 border-teal-500 text-teal-700 py-4 pr-4 pl-12 rounded-lg flex items-center relative;
-  }
-  .alert-tip::before {
-    @apply content-[""] inline-block w-5 h-5 bg-teal-700 absolute left-4;
-    mask-image: url(~lucide-static/icons/lightbulb.svg);
-    mask-size: 1.25rem;
-    mask-repeat: no-repeat;
+    &::before {
+      @apply content-[""] inline-block w-5 h-5 bg-teal-700 absolute left-4;
+      mask-image: url(~lucide-static/icons/lightbulb.svg);
+      mask-size: 1.25rem;
+      mask-repeat: no-repeat;
+    }
   }
   .alert-warn {
     @apply bg-orange-100 border-orange-500 text-orange-700 py-4 pr-4 pl-12 rounded-lg flex items-center relative;
-  }
-  .alert-warn::before {
-    @apply content-[""] inline-block w-5 h-5 bg-orange-700 absolute left-4;
-    mask-image: url(~lucide-static/icons/triangle-alert.svg);
-    mask-size: 1.25rem;
-    mask-repeat: no-repeat;
+    &::before {
+      @apply content-[""] inline-block w-5 h-5 bg-orange-700 absolute left-4;
+      mask-image: url(~lucide-static/icons/triangle-alert.svg);
+      mask-size: 1.25rem;
+      mask-repeat: no-repeat;
+    }
   }
 
   .marker {
     @apply bg-yellow-200;
+  }
+
+  .table-wrapper {
+    @apply relative overflow-x-auto shadow-sm rounded-xl;
+    table {
+      @apply w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400;
+      th,td {
+        @apply px-4 py-2;
+      }
+      tr:first-of-type {
+        @apply text-xs text-gray-700 uppercase bg-gray-50;
+      }
+      tr:not(:first-of-type) {
+        @apply bg-white border-b border-gray-200;
+      }
+    }
   }
 }
 
@@ -89,22 +105,4 @@ iframe {
   border-radius: var(--border-radius);
 }
 
-div.table-wrapper {
-  @apply relative overflow-x-auto shadow-sm rounded-xl
-}
-div.table-wrapper > table {
-  @apply w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400
-}
-div.table-wrapper > table th {
-  @apply px-4 py-2
-}
-div.table-wrapper > table td {
-  @apply px-4 py-2
-}
-div.table-wrapper > table tr:first-of-type {
-  @apply text-xs text-gray-700 uppercase bg-gray-50
-}
-div.table-wrapper > table tr:not(:first-of-type) {
-  @apply bg-white border-b border-gray-200
-}
 

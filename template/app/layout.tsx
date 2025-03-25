@@ -3,7 +3,7 @@ import { LIMIT } from '@/constants';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Nav from '@/components/Nav';
-import './globals.css';
+import './globals.scss';
 import { Metadata } from 'next';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Script from 'next/script';
