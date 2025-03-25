@@ -75,5 +75,8 @@ export const formatRichText = async (richText: string) => {
   // 広告掲載ポータルの中のダミー文字列を消し込む
   $('.ad-portal').text('');
 
+  // テーブルを角丸にするためのラッパー
+  $('table').wrap('<div class="table-wrapper"></div>');
+
   return $.html();
 };
