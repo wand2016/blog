@@ -30,6 +30,10 @@
     mask-size: 1.25rem;
     mask-repeat: no-repeat;
   }
+
+  .marker {
+    @apply bg-yellow-200;
+  }
 }
 
 :root {
@@ -103,3 +107,4 @@ div.table-wrapper > table tr:first-of-type {
 div.table-wrapper > table tr:not(:first-of-type) {
   @apply bg-white border-b border-gray-200
 }
+
