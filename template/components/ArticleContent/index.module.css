@@ -133,19 +133,3 @@
   background-color: var(--color-border);
   border: none;
 }
-
-.content > table {
-  width: 100%;
-  margin: 2rem 0;
-}
-
-.content > table th {
-  background-color: var(--color-bg-sub);
-  text-align: left;
-  padding: 1rem;
-}
-
-.content > table td {
-  text-align: left;
-  padding: 1rem;
-}
