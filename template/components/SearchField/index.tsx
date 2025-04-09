@@ -65,10 +65,7 @@ const ResultItem = ({ result }: { result: PagefindSearchResult }) => {
   return data ? (
     <li>
       <p>
-        <Link
-          className="underline font-bold focus:outline focus:outline-2 focus:outline-black"
-          href={data.url}
-        >
+        <Link className="font-bold link-text" href={data.url}>
           {data.meta.title}
         </Link>
       </p>
