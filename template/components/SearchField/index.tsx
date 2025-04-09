@@ -32,7 +32,7 @@ export default function SearchField() {
         />
         <input
           className={
-            'py-0 pr-[24px] pl-[48px] w-full h-full border-gray-500 border-solid border rounded-full outline-none'
+            'py-0 pr-[24px] pl-[48px] w-full h-full border-gray-500 border-solid border rounded-full outline-none focus:outline focus:outline-2 focus:outline-black'
           }
           type="search"
           placeholder="Search..."
@@ -65,7 +65,10 @@ const ResultItem = ({ result }: { result: PagefindSearchResult }) => {
   return data ? (
     <li>
       <p>
-        <Link className="underline font-bold" href={data.url}>
+        <Link
+          className="underline font-bold focus:outline focus:outline-2 focus:outline-black"
+          href={data.url}
+        >
           {data.meta.title}
         </Link>
       </p>

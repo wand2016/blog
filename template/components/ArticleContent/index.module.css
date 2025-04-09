@@ -97,6 +97,11 @@
 .content a {
   text-decoration: underline;
 }
+.content a:focus {
+  outline-style: solid;
+  outline-width: 2px;
+  outline-color: black;
+}
 
 .content > figure {
   margin: 2rem;

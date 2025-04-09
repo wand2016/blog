@@ -16,7 +16,7 @@ export default function Pagination({ totalCount, current = 1, basePath = '', q }
         <li key={p}>
           {current !== p ? (
             <Link
-              className="flex justify-center items-center size-10 rounded underline hover:bg-gray-200"
+              className="flex justify-center items-center size-10 rounded underline hover:bg-gray-200 focus:outline focus:outline-2 focus:outline-black"
               href={`${basePath}/p/${p}` + (q ? `?q=${q}` : '')}
             >
               {p}

@@ -23,7 +23,7 @@ export default function Share({ url, title, hashtags, className = '' }: Props) {
     <ul className={`flex gap-4 justify-center ${className}`}>
       <li className="w-64px h-64px">
         <TwitterShareButton
-          className="align-bottom"
+          className="align-bottom rounded-xl focus:outline focus:outline-2 focus:outline-black"
           url={url}
           title={title}
           hashtags={hashtags}
@@ -34,7 +34,7 @@ export default function Share({ url, title, hashtags, className = '' }: Props) {
       </li>
       <li className="w-64px h-64px">
         <FacebookShareButton
-          className="align-bottom"
+          className="align-bottom rounded-xl focus:outline focus:outline-2 focus:outline-black"
           url={url}
           hashtag={hashtags[0] ?? undefined}
           aria-label="Facebook share button"
@@ -44,7 +44,7 @@ export default function Share({ url, title, hashtags, className = '' }: Props) {
       </li>
       <li className="w-64px h-64px">
         <LineShareButton
-          className="align-bottom"
+          className="align-bottom rounded-xl focus:outline focus:outline-2 focus:outline-black"
           url={url}
           title={title}
           aria-label="LINE share button"
@@ -54,7 +54,7 @@ export default function Share({ url, title, hashtags, className = '' }: Props) {
       </li>
       <li className="w-64px h-64px">
         <HatenaShareButton
-          className="align-bottom"
+          className="align-bottom rounded-xl focus:outline focus:outline-2 focus:outline-black"
           url={url}
           title={title}
           aria-label="Hatena share button"

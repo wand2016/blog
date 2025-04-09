@@ -12,7 +12,10 @@ type Props = {
 export default function ArticleListItem({ article }: Props) {
   return (
     <li>
-      <Link href={`/articles/${article.id}`} className="block sm:flex sm:gap-4">
+      <Link
+        href={`/articles/${article.id}`}
+        className="block sm:flex sm:gap-4 focus:outline focus:outline-2 focus:outline-black"
+      >
         {article.thumbnail && (
           <ArticleThumbnail
             thumbnail={article.thumbnail}
