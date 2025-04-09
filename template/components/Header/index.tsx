@@ -19,7 +19,7 @@ export default function Header({ menuContent }: Props) {
         style={{ viewTransitionName: 'fixed-header' }}
       >
         <div className="flex justify-between items-center h-12">
-          <Link href="/">
+          <Link href="/" className={'focus:outline focus:outline-2 focus:outline-black'}>
             <Image
               src="/blog_logo.svg"
               alt="wandfuldays"

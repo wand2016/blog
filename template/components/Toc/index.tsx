@@ -8,7 +8,7 @@ type Props = {
 
 export default function Toc({ headings, className = '' }: Props) {
   return (
-    <section className={`bg-gray-100 rounded-lg p-4 text-md  ${className}`}>
+    <section className={`bg-gray-100 rounded-lg p-4 text-md ${className}`}>
       <header className="mb-2 font-bold">目次</header>
       <ol>
         {headings.map((heading) => (
@@ -20,7 +20,7 @@ export default function Toc({ headings, className = '' }: Props) {
             key={heading.id}
           >
             <a
-              className="underline"
+              className="underline focus:outline focus:outline-2 focus:outline-black"
               href={`#${heading.id}`}
               dangerouslySetInnerHTML={{
                 __html: heading.innerHTML,
