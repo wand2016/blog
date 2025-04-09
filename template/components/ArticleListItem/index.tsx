@@ -14,7 +14,7 @@ export default function ArticleListItem({ article }: Props) {
     <li>
       <Link
         href={`/articles/${article.id}`}
-        className="block sm:flex sm:gap-4 focus:outline focus:outline-2 focus:outline-black"
+        className="block sm:flex sm:gap-4 active:bg-gray-100 hover:bg-gray-100"
       >
         {article.thumbnail && (
           <ArticleThumbnail

@@ -19,7 +19,7 @@ export default function Header({ menuContent }: Props) {
         style={{ viewTransitionName: 'fixed-header' }}
       >
         <div className="flex justify-between items-center h-12">
-          <Link href="/" className={'focus:outline focus:outline-2 focus:outline-black'}>
+          <Link href="/" className={'active:ring-2'}>
             <Image
               src="/blog_logo.svg"
               alt="wandfuldays"
@@ -30,7 +30,7 @@ export default function Header({ menuContent }: Props) {
           </Link>
           {menuOpen ? (
             <button
-              className="border-none background-transparent mr-4 focus:outline-none"
+              className="border-none background-transparent mr-4"
               type="button"
               aria-label="メニューを閉じるボタン"
               onClick={() => setMenuOpen(false)}
@@ -39,7 +39,7 @@ export default function Header({ menuContent }: Props) {
             </button>
           ) : (
             <button
-              className="border-none background-transparent mr-4 focus:outline-none"
+              className="border-none background-transparent mr-4"
               type="button"
               aria-label="メニューを開くボタン"
               onClick={() => setMenuOpen(true)}

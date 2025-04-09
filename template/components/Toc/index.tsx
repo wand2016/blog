@@ -20,7 +20,7 @@ export default function Toc({ headings, className = '' }: Props) {
             key={heading.id}
           >
             <a
-              className="underline focus:outline focus:outline-2 focus:outline-black"
+              className="link-text"
               href={`#${heading.id}`}
               dangerouslySetInnerHTML={{
                 __html: heading.innerHTML,

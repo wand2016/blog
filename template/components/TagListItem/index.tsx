@@ -12,7 +12,7 @@ export default function TagListItem({ tag, hasLink = true }: Props) {
   return (
     <li className="inline-block">
       <Container
-        className="bg-gray-100 rounded px-2 py-1 text-sm whitespace-nowrap focus:outline focus:outline-2 focus:outline-black inline-block"
+        className="bg-gray-100 rounded px-2 py-1 text-sm whitespace-nowrap inline-block"
         href={hasLink ? `/tags/${tag.id}` : undefined}
       >
         <div className="flex gap-1 items-center">
@@ -25,12 +25,12 @@ export default function TagListItem({ tag, hasLink = true }: Props) {
 }
 
 const Container = ({
-  className,
+  className = '',
   href,
   children,
 }: PropsWithChildren<{ className?: string; href?: string }>) => {
   return href ? (
-    <Link href={href} className={className}>
+    <Link href={href} className={`${className} active:ring-2 hover:bg-gray-200`}>
       {children}
     </Link>
   ) : (
