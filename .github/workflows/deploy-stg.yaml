@@ -19,8 +19,7 @@ jobs:
           role-session-name: deploy
           aws-region: us-east-1
       - name: install
-        # Next 15.3.1 時点、 optionalDependencies を omit しないと LGPL3.0 の sharp が入ってしまう
-        run: npm ci --omit=optional
+        run: npm ci
         working-directory: template
       - name: build
         run: npm run build

@@ -15,7 +15,7 @@ jobs:
       - name: Git clone the repository
         uses: actions/checkout@v4
       - name: install
-        # Next 15.3.1 時点、 optionalDependencies を omit しないと LGPL3.0 の sharp が入ってしまう
+        # Next 15.3.1 時点、 optionalDependencies を omit しないと LGPL3.0 の sharp が入ってしまう(使ってない)
         run: npm ci --omit=optional
         working-directory: template
       - name: check licenses
