@@ -1,11 +1,13 @@
+import { ReactNode } from 'react';
+
 import TagList from '@/components/TagList';
 import { getAllTagIds, getTag } from '@/libs/microcms';
 
 type Props = {
-  children: React.ReactNode;
-  params: {
+  children: ReactNode;
+  params: Promise<{
     tagId: string;
-  };
+  }>;
 };
 
 export async function generateStaticParams() {
@@ -15,7 +17,7 @@ export async function generateStaticParams() {
 }
 
 export default async function TagsLayout({ children, params }: Props) {
-  const { tagId } = params;
+  const { tagId } = await params;
   const tag = await getTag(tagId);
   return (
     <>

@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { Suspense } from 'react';
+import { ReactNode, Suspense } from 'react';
 
 export const metadata: Metadata = {
   robots: {
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  draft: React.ReactNode;
+  draft: ReactNode;
 };
 
 export default function DraftLayout({ draft }: Props) {
