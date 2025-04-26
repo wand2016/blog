@@ -8,6 +8,8 @@ import { MutableRefObject, ReactElement, useEffect, useRef, useState } from 'rea
 
 type Props = { menuContent: ReactElement };
 
+const MENU_SCROLL_THRESHOLD = 48;
+
 export default function Header({ menuContent }: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuHidden, setMenuHidden] = useState(false);
@@ -21,7 +23,7 @@ export default function Header({ menuContent }: Props) {
         prevY.current = currentY;
         return;
       }
-      if (currentY > prevY.current) {
+      if (currentY > MENU_SCROLL_THRESHOLD && currentY > prevY.current) {
         setMenuHidden(true);
       } else {
         setMenuHidden(false);
@@ -44,7 +46,7 @@ export default function Header({ menuContent }: Props) {
           'z-50',
           'fixed',
           'top-0',
-          menuHidden ? '-translate-y-32' : 'translate-y-0',
+          menuHidden ? '-translate-y-12' : 'translate-y-0',
           'transform-transition',
           'duration-300',
         ])}
