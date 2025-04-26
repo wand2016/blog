@@ -1,10 +1,10 @@
 import { Fragment } from 'react';
 
+import ArticleListItem from '../ArticleListItem';
+
 import DisplayHorizontal from '@/components/adsense/DisplayHorizontal';
 import { LIMIT } from '@/constants';
 import { Article } from '@/libs/microcms';
-
-import ArticleListItem from '../ArticleListItem';
 
 type Props = {
   articles?: Article[];
@@ -18,7 +18,7 @@ export default function ArticleList({ articles }: Props) {
     return <p>記事がありません。</p>;
   }
   return (
-    <ul className="flex flex-col gap-8">
+    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
       {articles.map((article, index) => (
         <Fragment key={article.id}>
           <ArticleListItem article={article} />

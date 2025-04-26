@@ -61,7 +61,7 @@ export default async function RootLayout({ children }: Props) {
           strategy="afterInteractive"
         />
         <Header menuContent={<Nav tags={tags.contents} />} />
-        <main className="w-full max-w-[720px] p-6 mx-auto flex flex-col gap-8">{children}</main>
+        <main className="w-full max-w-[960px] p-6 mx-auto flex flex-col gap-8">{children}</main>
         {!!process.env.GOOGLE_ADSENSE_PUBLISHER_ID &&
           !!process.env.GOOGLE_ADSENSE_SLOT_MULTIPLEX_HORIZONTAL && (
             <MultiplexHorizontal

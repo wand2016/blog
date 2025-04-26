@@ -1,3 +1,7 @@
+import PublishedDate from '../Date';
+import Profile from '../Profile';
+import TagList from '../TagList';
+
 import ArticleContent from '@/components/ArticleContent';
 import ArticleThumbnail from '@/components/ArticleThumbnail';
 import ArticleTitle from '@/components/ArticleTitle';
@@ -7,10 +11,6 @@ import InArticleAdsPortal from '@/components/adsense/InArticleAdsPortal';
 import { HeadingTuple } from '@/libs/extractHeadings';
 import { getGlobalTags } from '@/libs/getGlobalTags';
 import { type Article } from '@/libs/microcms';
-
-import PublishedDate from '../Date';
-import Profile from '../Profile';
-import TagList from '../TagList';
 
 type Props = {
   data: Omit<Article, 'content'>;
@@ -30,7 +30,7 @@ export default function Article({
   adSlotDisplayHorizontal,
 }: Props) {
   return (
-    <main data-pagefind-body>
+    <article data-pagefind-body className="w-full max-w-[720px] mx-auto">
       <div className="flex flex-col gap-4 mb-8">
         {data.thumbnail && (
           <ArticleThumbnail
@@ -102,6 +102,6 @@ export default function Article({
           adSlot={adSlotDisplayHorizontal}
         />
       )}
-    </main>
+    </article>
   );
 }

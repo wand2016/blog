@@ -20,7 +20,7 @@ export const generateMetadata = async (_: {}, parent: ResolvingMetadata): Promis
 
 export default function Page() {
   return (
-    <main data-pagefind-body>
+    <article data-pagefind-body className="w-full max-w-[720px] mx-auto">
       <ArticleTitle className="mb-4">プライバシーポリシー</ArticleTitle>
       <ArticleContent>
         {/*TODO: お問い合わせやコメントを実装したらコメントアウトを外す*/}
@@ -53,6 +53,6 @@ export default function Page() {
         当ブログは基本的にリンクフリーです。リンクを行う場合の許可や連絡は不要です。
         ただし、インラインフレームの使用や画像の直リンクはご遠慮ください。
       </ArticleContent>
-    </main>
+    </article>
   );
 }

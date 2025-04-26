@@ -1,11 +1,10 @@
 import Link from 'next/link';
 
-import ArticleThumbnail from '@/components/ArticleThumbnail';
-import { Article } from '@/libs/microcms';
-
 import PublishedDate from '../Date';
 import TagList from '../TagList';
 
+import ArticleThumbnail from '@/components/ArticleThumbnail';
+import { Article } from '@/libs/microcms';
 
 type Props = {
   article: Article;
@@ -16,7 +15,7 @@ export default function ArticleListItem({ article }: Props) {
     <li>
       <Link
         href={`/articles/${article.id}`}
-        className="block sm:flex sm:gap-4 active:bg-gray-100 hover:bg-gray-100"
+        className="block active:bg-gray-100 hover:bg-gray-100 rounded-lg h-full"
       >
         {article.thumbnail && (
           <ArticleThumbnail
@@ -31,14 +30,14 @@ export default function ArticleListItem({ article }: Props) {
                 h: 126,
               },
             }}
-            className="w-full sm:max-w-none h-auto border-solid border border-gray-200 shadow-sm sm:w-[240px] rounded-2xl sm:rounded-lg"
+            className="w-full h-auto border-solid border border-gray-200 shadow-sm rounded-t-lg"
             // @ts-expect-error nosuchkey
             style={{ viewTransitionName: `thumbnail-${article.id}` }}
           />
         )}
-        <dl className="flex flex-col gap-2 mt-2 sm:mt-0">
+        <dl className="flex flex-col gap-2 rounded-b-lg p-2">
           <dt
-            className="text-2xl font-bold"
+            className="text-xl font-bold"
             // @ts-expect-error nosuchkey
             style={{ viewTransitionName: `title-${article.id}` }}
           >
