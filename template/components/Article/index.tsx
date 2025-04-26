@@ -1,6 +1,3 @@
-import PublishedDate from '../Date';
-import Profile from '../Profile';
-import TagList from '../TagList';
 
 import ArticleContent from '@/components/ArticleContent';
 import ArticleThumbnail from '@/components/ArticleThumbnail';
@@ -11,6 +8,10 @@ import InArticleAdsPortal from '@/components/adsense/InArticleAdsPortal';
 import { HeadingTuple } from '@/libs/extractHeadings';
 import { getGlobalTags } from '@/libs/getGlobalTags';
 import { type Article } from '@/libs/microcms';
+
+import PublishedDate from '../Date';
+import Profile from '../Profile';
+import TagList from '../TagList';
 
 type Props = {
   data: Omit<Article, 'content'>;

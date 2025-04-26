@@ -1,10 +1,11 @@
 import { Fragment } from 'react';
 
-import ArticleListItem from '../ArticleListItem';
 
 import DisplayHorizontal from '@/components/adsense/DisplayHorizontal';
 import { LIMIT } from '@/constants';
 import { Article } from '@/libs/microcms';
+
+import ArticleListItem from '../ArticleListItem';
 
 type Props = {
   articles?: Article[];
