@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Link from 'next/link';
 
 import PublishedDate from '../Date';
@@ -15,7 +16,21 @@ export default function ArticleListItem({ article }: Props) {
     <li>
       <Link
         href={`/articles/${article.id}`}
-        className="block active:bg-gray-100 hover:bg-gray-100 border-solid border border-gray-200 rounded-lg h-full shadow-sm"
+        className={clsx([
+          'block',
+          'active:bg-gray-100',
+          'hover:bg-gray-100',
+          'border-solid',
+          'border',
+          'border-gray-200',
+          'rounded-lg',
+          'h-full',
+          'shadow-sm',
+          'duration-300',
+          'transition-translate',
+          'active:-translate-y-0.5',
+          'hover:-translate-y-0.5',
+        ])}
       >
         {article.thumbnail && (
           <ArticleThumbnail
