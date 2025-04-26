@@ -39,4 +39,4 @@ export default function ArticleList({ articles }: Props) {
 }
 
 // 一覧に2箇所広告を出す
-const adInterval = LIMIT / 2;
+const adInterval = 4;

@@ -15,7 +15,7 @@ export default function ArticleListItem({ article }: Props) {
     <li>
       <Link
         href={`/articles/${article.id}`}
-        className="block active:bg-gray-100 hover:bg-gray-100 rounded-lg h-full"
+        className="block active:bg-gray-100 hover:bg-gray-100 border-solid border border-gray-200 rounded-lg h-full shadow-sm"
       >
         {article.thumbnail && (
           <ArticleThumbnail
@@ -30,12 +30,12 @@ export default function ArticleListItem({ article }: Props) {
                 h: 126,
               },
             }}
-            className="w-full h-auto border-solid border border-gray-200 shadow-sm rounded-t-lg"
+            className="w-full h-auto border-solid border-b border-gray-200 rounded-t-lg"
             // @ts-expect-error nosuchkey
             style={{ viewTransitionName: `thumbnail-${article.id}` }}
           />
         )}
-        <dl className="flex flex-col gap-2 rounded-b-lg p-2">
+        <dl className="flex flex-col gap-2 h-full rounded-b-lg p-2">
           <dt
             className="text-xl font-bold"
             // @ts-expect-error nosuchkey
