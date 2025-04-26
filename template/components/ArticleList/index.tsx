@@ -1,11 +1,8 @@
 import { Fragment } from 'react';
 
-
-import DisplayHorizontal from '@/components/adsense/DisplayHorizontal';
-import { LIMIT } from '@/constants';
+import ArticleListItem from '@/components/ArticleListItem';
+import InFeed from '@/components/adsense/InFeed';
 import { Article } from '@/libs/microcms';
-
-import ArticleListItem from '../ArticleListItem';
 
 type Props = {
   articles?: Article[];
@@ -24,12 +21,12 @@ export default function ArticleList({ articles }: Props) {
         <Fragment key={article.id}>
           <ArticleListItem article={article} />
           {!!process.env.GOOGLE_ADSENSE_PUBLISHER_ID &&
-            !!process.env.GOOGLE_ADSENSE_SLOT_DISPLAY_HORIZONTAL &&
-            index % adInterval === adInterval - 1 && (
+            !!process.env.GOOGLE_ADSENSE_SLOT_IN_FEED &&
+            (index === 3 || index === 8) && (
               <li>
-                <DisplayHorizontal
+                <InFeed
                   googleAdsensePublisherId={process.env.GOOGLE_ADSENSE_PUBLISHER_ID}
-                  adSlot={process.env.GOOGLE_ADSENSE_SLOT_DISPLAY_HORIZONTAL}
+                  adSlot={process.env.GOOGLE_ADSENSE_SLOT_IN_FEED}
                 />
               </li>
             )}
@@ -38,6 +35,3 @@ export default function ArticleList({ articles }: Props) {
     </ul>
   );
 }
-
-// 一覧に2箇所広告を出す
-const adInterval = 4;

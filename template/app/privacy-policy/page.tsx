@@ -4,7 +4,10 @@ import ArticleContent from '@/components/ArticleContent';
 import ArticleTitle from '@/components/ArticleTitle';
 import { SITE_NAME } from '@/libs/siteMetadata';
 
-export const generateMetadata = async (_: {}, parent: ResolvingMetadata): Promise<Metadata> => ({
+export const generateMetadata = async (
+  _: object,
+  parent: ResolvingMetadata,
+): Promise<Metadata> => ({
   title: 'プライバシーポリシー',
   description: 'プライバシーポリシー・免責事項です。',
   // @ts-expect-error 型が合わない

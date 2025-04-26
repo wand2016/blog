@@ -7,6 +7,7 @@ type Props = {
   googleAdsensePublisherId: string;
   adSlot: string;
   adLayout?: string;
+  adLayoutKey?: string;
   adFormat?: string;
   fullWidthResponsive?: boolean;
 };
@@ -17,6 +18,7 @@ export default function AdSenseIns({
   adSlot,
   adFormat,
   adLayout,
+  adLayoutKey,
   fullWidthResponsive,
 }: Props) {
   useLayoutEffect(() => {
@@ -30,6 +32,7 @@ export default function AdSenseIns({
       data-ad-slot={adSlot}
       data-ad-format={adFormat}
       data-ad-layout={adLayout}
+      data-ad-layout-key={adLayoutKey}
       data-full-width-responsive={`${fullWidthResponsive}`}
     />
   );

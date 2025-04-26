@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { MenuIcon, XIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { MutableRefObject, ReactElement, useEffect, useRef, useState } from 'react';
+import { ReactElement, useEffect, useRef, useState } from 'react';
 
 type Props = { menuContent: ReactElement };
 
