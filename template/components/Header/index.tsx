@@ -1,19 +1,53 @@
 'use client';
 
+import clsx from 'clsx';
 import { MenuIcon, XIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ReactElement, useState } from 'react';
+import { MutableRefObject, ReactElement, useEffect, useRef, useState } from 'react';
 
 type Props = { menuContent: ReactElement };
 
 export default function Header({ menuContent }: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuHidden, setMenuHidden] = useState(false);
+
+  const prevY = useRef<number | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      if (prevY.current === null) {
+        prevY.current = currentY;
+        return;
+      }
+      if (currentY > prevY.current) {
+        setMenuHidden(true);
+      } else {
+        setMenuHidden(false);
+      }
+      prevY.current = currentY;
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <>
       <header
-        className="w-full bg-white shadow-md z-50 top-0 fixed"
+        className={clsx([
+          'w-full',
+          'bg-white',
+          'shadow-md',
+          'z-50',
+          'fixed',
+          'top-0',
+          menuHidden ? '-translate-y-32' : 'translate-y-0',
+          'transform-transition',
+          'duration-300',
+        ])}
         // NOTE: View Transition よりも前面に出すためには view-transition-name を設定する必要がある
         // @ts-expect-error nosuchkey
         style={{ viewTransitionName: 'fixed-header' }}
