@@ -1,9 +1,11 @@
-import { getList } from '@/libs/microcms';
-import { LIMIT } from '@/constants';
-import Pagination from '@/components/Pagination';
-import ArticleList from '@/components/ArticleList';
-import Share from '@/components/Share';
 import { Metadata } from 'next';
+
+import ArticleList from '@/components/ArticleList';
+import Pagination from '@/components/Pagination';
+import Share from '@/components/Share';
+import { LIMIT } from '@/constants';
+import { getList } from '@/libs/microcms';
+
 
 export const metadata: Metadata = {
   alternates: {

@@ -1,7 +1,8 @@
-import { Writer } from '@/libs/microcms';
+import Image from 'next/image';
 
 import { formatImageSrc } from '@/libs/formatImageSrc';
-import Image from 'next/image';
+import { Writer } from '@/libs/microcms';
+
 
 type Props = {
   writer?: Writer;

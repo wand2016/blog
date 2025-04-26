@@ -1,6 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+
 import AdSenseIns from '@/components/adsense/AdSenseIns';
 
 type Props = {

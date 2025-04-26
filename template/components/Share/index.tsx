@@ -7,8 +7,8 @@ import {
   HatenaShareButton,
   LineIcon,
   LineShareButton,
-  XIcon,
   TwitterShareButton,
+  XIcon,
 } from 'react-share';
 
 type Props = {

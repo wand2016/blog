@@ -1,5 +1,6 @@
-import { HeadingTuple } from '@/libs/extractHeadings';
 import clsx from 'clsx';
+
+import { HeadingTuple } from '@/libs/extractHeadings';
 
 type Props = {
   headings: ReadonlyArray<HeadingTuple>;

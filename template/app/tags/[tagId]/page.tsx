@@ -1,21 +1,22 @@
-import { getList, getTag } from '@/libs/microcms';
-import { LIMIT } from '@/constants';
-import Pagination from '@/components/Pagination';
-import ArticleList from '@/components/ArticleList';
 import { Metadata, ResolvingMetadata } from 'next';
-import { SITE_NAME } from '@/libs/siteMetadata';
+
+import ArticleList from '@/components/ArticleList';
+import Pagination from '@/components/Pagination';
+import { LIMIT } from '@/constants';
+import { getList, getTag } from '@/libs/microcms';
 
 type Props = {
-  params: {
+  params: Promise<{
     tagId: string;
-  };
+  }>;
 };
 
 export const generateMetadata = async (
   { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> => {
-  const tag = await getTag(params.tagId);
+  const { tagId } = await params;
+  const tag = await getTag(tagId);
 
   return {
     title: `${tag.name} の記事一覧`,
@@ -25,13 +26,13 @@ export const generateMetadata = async (
       title: `${tag.name} の記事一覧`,
     },
     alternates: {
-      canonical: `/tags/${params.tagId}/`,
+      canonical: `/tags/${tagId}/`,
     },
   };
 };
 
 export default async function Page({ params }: Props) {
-  const { tagId } = params;
+  const { tagId } = await params;
   const data = await getList({
     limit: LIMIT,
     filters: `tags[contains]${tagId}`,

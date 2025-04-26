@@ -1,8 +1,8 @@
 'use client';
 
+import { MenuIcon, XIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { MenuIcon, XIcon } from 'lucide-react';
 import { ReactElement, useState } from 'react';
 
 type Props = { menuContent: ReactElement };
@@ -19,7 +19,7 @@ export default function Header({ menuContent }: Props) {
         style={{ viewTransitionName: 'fixed-header' }}
       >
         <div className="flex justify-between items-center h-12">
-          <Link href="/" className={'active:ring-2'}>
+          <Link href="/" className="active:ring-2">
             <Image
               src="/blog_logo.svg"
               alt="wandfuldays"

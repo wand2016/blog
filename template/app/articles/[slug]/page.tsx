@@ -1,22 +1,24 @@
 import { Metadata, ResolvingMetadata } from 'next';
-import { getDetail, getAllBlogIds } from '@/libs/microcms';
+
 import Article from '@/components/Article';
-import { getGlobalTags } from '@/libs/getGlobalTags';
 import { extractHeadings } from '@/libs/extractHeadings';
 import { formatImageSrc } from '@/libs/formatImageSrc';
 import { formatRichText } from '@/libs/formatRichText';
+import { getGlobalTags } from '@/libs/getGlobalTags';
+import { getAllBlogIds, getDetail } from '@/libs/microcms';
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const data = await getDetail(params.slug);
+  const { slug } = await params;
+  const data = await getDetail(slug);
 
   return {
     title: data.title,
@@ -30,7 +32,7 @@ export async function generateMetadata(
       images: formatImageSrc(data?.thumbnail?.url),
     },
     alternates: {
-      canonical: `/articles/${params.slug}/`,
+      canonical: `/articles/${slug}/`,
     },
   };
 }
@@ -42,7 +44,8 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: Props) {
-  const data = await getDetail(params.slug);
+  const { slug } = await params;
+  const data = await getDetail(slug);
 
   // avoid `/` duplication
   const baseUrlRaw = process.env.BASE_URL ?? '';
@@ -56,7 +59,7 @@ export default async function Page({ params }: Props) {
       data={data}
       formattedContent={content}
       headings={!!data.use_toc ? headings : undefined}
-      shareUrl={`${baseUrl}articles/${params.slug}`}
+      shareUrl={`${baseUrl}articles/${slug}`}
       googleAdsensePublisherId={process.env.GOOGLE_ADSENSE_PUBLISHER_ID}
       adSlotDisplayHorizontal={process.env.GOOGLE_ADSENSE_SLOT_DISPLAY_HORIZONTAL}
     />

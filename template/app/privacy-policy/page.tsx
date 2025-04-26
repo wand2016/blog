@@ -1,7 +1,8 @@
 import { Metadata, ResolvingMetadata } from 'next';
-import { SITE_NAME } from '@/libs/siteMetadata';
-import ArticleTitle from '@/components/ArticleTitle';
+
 import ArticleContent from '@/components/ArticleContent';
+import ArticleTitle from '@/components/ArticleTitle';
+import { SITE_NAME } from '@/libs/siteMetadata';
 
 export const generateMetadata = async (_: {}, parent: ResolvingMetadata): Promise<Metadata> => ({
   title: 'プライバシーポリシー',

@@ -1,6 +1,8 @@
-import { Tag } from '@/libs/microcms';
-import TagListItem from '../TagListItem';
 import { CSSProperties } from 'react';
+
+import { Tag } from '@/libs/microcms';
+
+import TagListItem from '../TagListItem';
 
 type Props = {
   tags: Tag[];

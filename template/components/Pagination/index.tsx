@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import { LIMIT } from '@/constants';
 
 type Props = {
@@ -11,7 +12,7 @@ type Props = {
 export default function Pagination({ totalCount, current = 1, basePath = '', q }: Props) {
   const pages = Array.from({ length: Math.ceil(totalCount / LIMIT) }).map((_, i) => i + 1);
   return (
-    <ul className={`flex justify-center items-center gap-2`}>
+    <ul className="flex justify-center items-center gap-2">
       {pages.map((p) => (
         <li key={p}>
           {current !== p ? (

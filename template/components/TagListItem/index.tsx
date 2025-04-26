@@ -1,7 +1,8 @@
-import Link from 'next/link';
-import { Tag } from '@/libs/microcms';
 import { TagIcon } from 'lucide-react';
+import Link from 'next/link';
 import { PropsWithChildren } from 'react';
+
+import { Tag } from '@/libs/microcms';
 
 type Props = {
   tag: Tag;
@@ -16,7 +17,7 @@ export default function TagListItem({ tag, hasLink = true }: Props) {
         href={hasLink ? `/tags/${tag.id}` : undefined}
       >
         <div className="flex gap-1 items-center">
-          <TagIcon size={'1em'} alignmentBaseline={'middle'} />
+          <TagIcon size="1em" alignmentBaseline="middle" />
           {tag.name}
         </div>
       </Container>
