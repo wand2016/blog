@@ -9,9 +9,7 @@ import { extractHeadings } from '@/libs/extractHeadings';
 import { formatRichText } from '@/libs/formatRichText';
 import { Blog } from '@/libs/microcms';
 
-type Props = {};
-
-export default function Page({}: Props) {
+export default function Page() {
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
   const draftKey = searchParams.get('draftKey');
