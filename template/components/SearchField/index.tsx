@@ -1,10 +1,11 @@
 'use client';
 
-import { pagefind, loadPagefind } from './pagefind';
-import type { PagefindSearchResult, PagefindSearchFragment } from './types';
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { Search } from 'lucide-react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+
+import { loadPagefind, pagefind } from './pagefind';
+import type { PagefindSearchFragment, PagefindSearchResult } from './types';
 
 export default function SearchField() {
   const [results, setResults] = useState<PagefindSearchResult[]>([]);
@@ -24,16 +25,14 @@ export default function SearchField() {
 
   return (
     <>
-      <div className={`w-full max-w-[600px] h-[40px] sm:mx-auto`}>
+      <div className="w-full max-w-[600px] h-[40px] sm:mx-auto">
         <Search
           width="24px"
           height="24px"
           className="absolute translate-x-[16px] translate-y-[8px]"
         />
         <input
-          className={
-            'py-0 pr-[24px] pl-[48px] w-full h-full border-gray-500 border-solid border rounded-full outline-none focus:outline focus:outline-2 focus:outline-black'
-          }
+          className="py-0 pr-[24px] pl-[48px] w-full h-full border-gray-500 border-solid border rounded-full outline-none focus:outline focus:outline-2 focus:outline-black"
           type="search"
           placeholder="Search..."
           defaultValue=""

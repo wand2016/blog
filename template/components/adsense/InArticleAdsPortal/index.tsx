@@ -1,8 +1,9 @@
 'use client';
 
-import { useLayoutEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+
 import DisplayHorizontal from '@/components/adsense/DisplayHorizontal';
 
 type Props = {

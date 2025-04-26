@@ -9,12 +9,12 @@ export default function Footer({ className = '' }: Props) {
     <footer className={`text-center ${className}`}>
       <ul className="flex gap-4 items-center justify-center">
         <li>
-          <Link className="text-sm link-text" href={'/'}>
+          <Link className="text-sm link-text" href="/">
             ブログトップ
           </Link>
         </li>
         <li>
-          <Link className="text-sm link-text" href={'/privacy-policy'}>
+          <Link className="text-sm link-text" href="/privacy-policy">
             プライバシーポリシー
           </Link>
         </li>

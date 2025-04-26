@@ -1,10 +1,11 @@
 import { Metadata, ResolvingMetadata } from 'next';
-import { getDetail, getAllBlogIds } from '@/libs/microcms';
+
 import Article from '@/components/Article';
-import { getGlobalTags } from '@/libs/getGlobalTags';
 import { extractHeadings } from '@/libs/extractHeadings';
 import { formatImageSrc } from '@/libs/formatImageSrc';
 import { formatRichText } from '@/libs/formatRichText';
+import { getGlobalTags } from '@/libs/getGlobalTags';
+import { getAllBlogIds, getDetail } from '@/libs/microcms';
 
 type Props = {
   params: {

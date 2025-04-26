@@ -1,5 +1,5 @@
-import { getAllTagIds, getTag } from '@/libs/microcms';
 import TagList from '@/components/TagList';
+import { getAllTagIds, getTag } from '@/libs/microcms';
 
 type Props = {
   children: React.ReactNode;

@@ -1,14 +1,17 @@
-import { getTagList } from '@/libs/microcms';
-import { LIMIT } from '@/constants';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import Nav from '@/components/Nav';
-import './globals.scss';
-import { Metadata } from 'next';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import { Metadata } from 'next';
 import Script from 'next/script';
-import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE } from '@/libs/siteMetadata';
+import { ReactNode } from 'react';
+
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+import Nav from '@/components/Nav';
 import MultiplexHorizontal from '@/components/adsense/MultiplexHorizontal';
+import { LIMIT } from '@/constants';
+import { getTagList } from '@/libs/microcms';
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE } from '@/libs/siteMetadata';
+
+import './globals.scss';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
@@ -31,7 +34,7 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export default async function RootLayout({ children }: Props) {
@@ -55,7 +58,7 @@ export default async function RootLayout({ children }: Props) {
         <Script
           async
           src={`${process.env.IFRAMELY_PROXY_URL}/embed.js`}
-          strategy={'afterInteractive'}
+          strategy="afterInteractive"
         />
         <Header menuContent={<Nav tags={tags.contents} />} />
         <main className="w-full max-w-[720px] p-6 mx-auto flex flex-col gap-8">{children}</main>

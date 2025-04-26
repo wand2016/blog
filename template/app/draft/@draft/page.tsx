@@ -1,12 +1,13 @@
 'use client';
 
-import { Blog } from '@/libs/microcms';
-import Article from '@/components/Article';
+import { MicroCMSContentId, MicroCMSDate, createClient } from 'microcms-js-sdk';
 import { notFound, useSearchParams } from 'next/navigation';
-import { createClient, MicroCMSContentId, MicroCMSDate } from 'microcms-js-sdk';
 import { useEffect, useMemo, useState } from 'react';
+
+import Article from '@/components/Article';
 import { extractHeadings } from '@/libs/extractHeadings';
 import { formatRichText } from '@/libs/formatRichText';
+import { Blog } from '@/libs/microcms';
 
 type Props = {};
 
