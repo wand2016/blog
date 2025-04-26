@@ -1,9 +1,10 @@
 import { Fragment } from 'react';
 
-import ArticleListItem from '../ArticleListItem';
 
 import InFeed from '@/components/adsense/InFeed';
 import { Article } from '@/libs/microcms';
+
+import ArticleListItem from '../ArticleListItem';
 
 type Props = {
   articles?: Article[];
