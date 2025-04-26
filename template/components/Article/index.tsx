@@ -1,3 +1,4 @@
+
 import ArticleContent from '@/components/ArticleContent';
 import ArticleThumbnail from '@/components/ArticleThumbnail';
 import ArticleTitle from '@/components/ArticleTitle';
@@ -30,7 +31,7 @@ export default function Article({
   adSlotDisplayHorizontal,
 }: Props) {
   return (
-    <main data-pagefind-body>
+    <article data-pagefind-body className="w-full max-w-[720px] mx-auto">
       <div className="flex flex-col gap-4 mb-8">
         {data.thumbnail && (
           <ArticleThumbnail
@@ -102,6 +103,6 @@ export default function Article({
           adSlot={adSlotDisplayHorizontal}
         />
       )}
-    </main>
+    </article>
   );
 }

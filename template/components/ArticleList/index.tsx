@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 
+
 import DisplayHorizontal from '@/components/adsense/DisplayHorizontal';
 import { LIMIT } from '@/constants';
 import { Article } from '@/libs/microcms';
@@ -18,7 +19,7 @@ export default function ArticleList({ articles }: Props) {
     return <p>記事がありません。</p>;
   }
   return (
-    <ul className="flex flex-col gap-8">
+    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       {articles.map((article, index) => (
         <Fragment key={article.id}>
           <ArticleListItem article={article} />
@@ -39,4 +40,4 @@ export default function ArticleList({ articles }: Props) {
 }
 
 // 一覧に2箇所広告を出す
-const adInterval = LIMIT / 2;
+const adInterval = 4;

@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Link from 'next/link';
 
 import ArticleThumbnail from '@/components/ArticleThumbnail';
@@ -16,7 +17,21 @@ export default function ArticleListItem({ article }: Props) {
     <li>
       <Link
         href={`/articles/${article.id}`}
-        className="block sm:flex sm:gap-4 active:bg-gray-100 hover:bg-gray-100"
+        className={clsx([
+          'block',
+          'active:bg-gray-100',
+          'hover:bg-gray-100',
+          'border-solid',
+          'border',
+          'border-gray-200',
+          'rounded-lg',
+          'h-full',
+          'shadow-sm',
+          'duration-300',
+          'transition-translate',
+          'active:-translate-y-0.5',
+          'hover:-translate-y-0.5',
+        ])}
       >
         {article.thumbnail && (
           <ArticleThumbnail
@@ -31,14 +46,14 @@ export default function ArticleListItem({ article }: Props) {
                 h: 126,
               },
             }}
-            className="w-full sm:max-w-none h-auto border-solid border border-gray-200 shadow-sm sm:w-[240px] rounded-2xl sm:rounded-lg"
+            className="w-full h-auto border-solid border-b border-gray-200 rounded-t-lg"
             // @ts-expect-error nosuchkey
             style={{ viewTransitionName: `thumbnail-${article.id}` }}
           />
         )}
-        <dl className="flex flex-col gap-2 mt-2 sm:mt-0">
+        <dl className="flex flex-col gap-2 h-full rounded-b-lg p-2">
           <dt
-            className="text-2xl font-bold"
+            className="text-xl font-bold"
             // @ts-expect-error nosuchkey
             style={{ viewTransitionName: `title-${article.id}` }}
           >
