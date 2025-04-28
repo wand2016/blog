@@ -46,7 +46,7 @@ export default function Header({ menuContent }: Props) {
           'z-50',
           'fixed',
           'top-0',
-          menuHidden ? '-translate-y-12' : 'translate-y-0',
+          !menuOpen && menuHidden ? '-translate-y-12' : 'translate-y-0',
           'transform-transition',
           'duration-300',
         ])}

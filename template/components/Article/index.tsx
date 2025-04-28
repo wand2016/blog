@@ -1,17 +1,15 @@
-
 import ArticleContent from '@/components/ArticleContent';
 import ArticleThumbnail from '@/components/ArticleThumbnail';
 import ArticleTitle from '@/components/ArticleTitle';
+import PublishedDate from '@/components/Date';
+import Profile from '@/components/Profile';
 import Share from '@/components/Share';
+import TagList from '@/components/TagList';
 import Toc from '@/components/Toc';
 import InArticleAdsPortal from '@/components/adsense/InArticleAdsPortal';
 import { HeadingTuple } from '@/libs/extractHeadings';
 import { getGlobalTags } from '@/libs/getGlobalTags';
 import { type Article } from '@/libs/microcms';
-
-import PublishedDate from '../Date';
-import Profile from '../Profile';
-import TagList from '../TagList';
 
 type Props = {
   data: Omit<Article, 'content'>;

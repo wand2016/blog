@@ -5,7 +5,7 @@ import InFeed from '@/components/adsense/InFeed';
 import { Article } from '@/libs/microcms';
 
 type Props = {
-  articles?: Article[];
+  articles?: readonly Article[];
 };
 
 export default function ArticleList({ articles }: Props) {

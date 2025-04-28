@@ -10,7 +10,9 @@
     "preview": "http-server out -p 3000",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "format": "prettier --write --ignore-path .gitignore --ignore-path .prettierignore './**/*.{js,jsx,ts,tsx,json,css}'",
+    "fmt": "prettier --write --ignore-path .gitignore --ignore-path .prettierignore './**/*.{js,jsx,ts,tsx,json,css}'",
+    "fmt:fix": "prettier --ignore-path .gitignore --ignore-path .prettierignore './**/*.{js,jsx,ts,tsx,json,css}'",
+    "test": "exit 0",
     "check-license": "license-checker --summary | grep -qvzi gpl"
   },
   "engines": {
