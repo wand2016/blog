@@ -8,9 +8,10 @@ import { Article } from '@/libs/microcms';
 
 type Props = {
   article: Article;
+  enableViewTransition: boolean;
 };
 
-export default function ArticleListItem({ article }: Props) {
+export default function ArticleListItem({ article, enableViewTransition }: Props) {
   return (
     <li className="h-full">
       <Link
@@ -33,6 +34,7 @@ export default function ArticleListItem({ article }: Props) {
       >
         {article.thumbnail && (
           <ArticleThumbnail
+            viewTransitionId={enableViewTransition ? article.id : undefined}
             thumbnail={article.thumbnail}
             sizes={{
               default: {
@@ -45,46 +47,25 @@ export default function ArticleListItem({ article }: Props) {
               },
             }}
             className="w-full h-auto border-solid border-b border-gray-200 rounded-t-lg"
-            // @ts-expect-error nosuchkey
-            style={{ viewTransitionName: `thumbnail-${article.id}` }}
           />
         )}
         <dl className="flex flex-col gap-2 rounded-b-lg p-3">
-          <dt
-            className="text-xl font-bold"
-            // @ts-expect-error nosuchkey
-            style={{ viewTransitionName: `title-${article.id}` }}
-          >
-            {article.title}
-          </dt>
+          <dt className="text-xl font-bold">{article.title}</dt>
           <dd>
             <PublishedDate
               date={article.publishedAt || article.createdAt}
               updatedDate={article.updatedAt}
               className="text-sm"
-              // @ts-expect-error nosuchkey
-              style={{ viewTransitionName: `date-${article.id}` }}
             />
           </dd>
           {article.description && (
             <dd>
-              <p
-                className="text-sm text-gray-500"
-                // @ts-expect-error nosuchkey
-                style={{ viewTransitionName: `description-${article.id}` }}
-              >
-                {article.description}
-              </p>
+              <p className="text-sm text-gray-500">{article.description}</p>
             </dd>
           )}
           {article.tags && article.tags.length > 0 && (
             <dd>
-              <TagList
-                tags={article.tags}
-                hasLink={false}
-                // @ts-expect-error nosuchkey
-                style={{ viewTransitionName: `tags-${article.id}` }}
-              />
+              <TagList tags={article.tags} hasLink={false} />
             </dd>
           )}
         </dl>

@@ -1,12 +1,12 @@
 import { MicroCMSImage } from 'microcms-js-sdk';
-import { CSSProperties } from 'react';
+import { unstable_ViewTransition as ViewTransition } from 'react';
 
 import { formatImageSrc } from '@/libs/formatImageSrc';
 
 type Props = {
+  viewTransitionId?: string;
   thumbnail: MicroCMSImage;
   className?: string;
-  style?: CSSProperties;
   /**
    * SP-first
    */
@@ -25,8 +25,8 @@ type Props = {
   };
 };
 
-export default function ArticleThumbnail({ thumbnail, sizes, className, style }: Props) {
-  return (
+export default function ArticleThumbnail({ viewTransitionId, thumbnail, sizes, className }: Props) {
+  const content = (
     <picture>
       <source
         type="image/webp"
@@ -47,12 +47,17 @@ export default function ArticleThumbnail({ thumbnail, sizes, className, style }:
         src={formatImageSrc(thumbnail.url)}
         alt=""
         className={className}
-        style={style}
         width={1200}
         height={630}
         fetchPriority="high"
         decoding="async"
       />
     </picture>
+  );
+
+  return viewTransitionId ? (
+    <ViewTransition name={`thumbnail${viewTransitionId}`}>{content}</ViewTransition>
+  ) : (
+    content
   );
 }

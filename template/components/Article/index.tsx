@@ -33,6 +33,7 @@ export default function Article({
       <div className="flex flex-col gap-4 mb-8">
         {data.thumbnail && (
           <ArticleThumbnail
+            viewTransitionId={data.id}
             thumbnail={data.thumbnail}
             sizes={{
               default: {
@@ -45,39 +46,16 @@ export default function Article({
               },
             }}
             className="w-full h-auto border border-solid border-gray-200 shadow-md rounded-2xl"
-            // @ts-expect-error nosuchkey
-            style={{ viewTransitionName: `thumbnail-${data.id}` }}
           />
         )}
-        <ArticleTitle
-          // @ts-expect-error nosuchkey
-          style={{ viewTransitionName: `title-${data.id}` }}
-        >
-          {data.title}
-        </ArticleTitle>
+        <ArticleTitle>{data.title}</ArticleTitle>
         <PublishedDate
           date={data.publishedAt || data.createdAt}
           updatedDate={data.updatedAt}
           className="text-sm"
-          // @ts-expect-error nosuchkey
-          style={{ viewTransitionName: `date-${data.id}` }}
         />
-        {data.description && (
-          <p
-            className="text-sm text-gray-500"
-            // @ts-expect-error nosuchkey
-            style={{ viewTransitionName: `description-${data.id}` }}
-          >
-            {data.description}
-          </p>
-        )}
-        {data.tags && data.tags.length > 0 && (
-          <TagList
-            tags={data.tags}
-            // @ts-expect-error nosuchkey
-            style={{ viewTransitionName: `tags-${data.id}` }}
-          />
-        )}
+        {data.description && <p className="text-sm text-gray-500">{data.description}</p>}
+        {data.tags && data.tags.length > 0 && <TagList tags={data.tags} />}
       </div>
       {headings && (
         <div className="flex flex-col justify-content items-center">
