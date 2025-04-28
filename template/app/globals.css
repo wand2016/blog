@@ -1,14 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 @theme {
   --default-ring-width: 3px;
   --default-ring-color: var(--color-blue-500);
 }
 
-@layer components {
-  .alert-info {
+@utility alert-info {
     @apply bg-blue-100 border-blue-500 text-blue-700 py-4 pr-4 pl-12 rounded-lg flex items-center relative;
     &::before {
       @apply content-[""] inline-block w-5 h-5 bg-blue-700 absolute left-4;
@@ -17,7 +14,8 @@
       mask-repeat: no-repeat;
     }
   }
-  .alert-tip {
+
+@utility alert-tip {
     @apply bg-teal-100 border-teal-500 text-teal-700 py-4 pr-4 pl-12 rounded-lg flex items-center relative;
     &::before {
       @apply content-[""] inline-block w-5 h-5 bg-teal-700 absolute left-4;
@@ -26,7 +24,7 @@
       mask-repeat: no-repeat;
     }
   }
-  .alert-warn {
+@utility alert-warn {
     @apply bg-orange-100 border-orange-500 text-orange-700 py-4 pr-4 pl-12 rounded-lg flex items-center relative;
     &::before {
       @apply content-[""] inline-block w-5 h-5 bg-orange-700 absolute left-4;
@@ -36,11 +34,11 @@
     }
   }
 
-  .marker {
+@utility marker {
     @apply bg-yellow-200;
   }
 
-  .table-wrapper {
+@utility table-wrapper {
     @apply relative overflow-x-auto shadow-xs rounded-lg;
     table {
       @apply w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400;
@@ -56,11 +54,11 @@
     }
   }
 
-  .link-text {
+@utility  link-text {
     @apply underline hover:no-underline active:no-underline active:bg-blue-100 active:md:bg-inherit;
   }
 
-  .content {
+@utility content {
     *:first-child {
       margin-top: 0;
     }
@@ -199,7 +197,7 @@
       border: none;
     }
   }
-}
+
 
 :root {
   --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono',
@@ -216,12 +214,6 @@
   --color-border-light: #f3f3f3;
   --color-current: #eee;
   --border-radius: 0.5rem;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
 }
 
 html,
