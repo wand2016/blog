@@ -8,7 +8,7 @@ import Header from '@/components/Header';
 import Nav from '@/components/Nav';
 import MultiplexHorizontal from '@/components/adsense/MultiplexHorizontal';
 import { LIMIT } from '@/constants';
-import { getTagList } from '@/libs/microcms';
+import { getAllBlogIds, getTagList } from '@/libs/microcms';
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE } from '@/libs/siteMetadata';
 
 import './globals.scss';
@@ -38,9 +38,19 @@ type Props = {
 };
 
 export default async function RootLayout({ children }: Props) {
-  const tags = await getTagList({
+  const { contents: tags } = await getTagList({
     limit: LIMIT,
   });
+
+  const tagsWithCount = (
+    await Promise.all(
+      tags.map(async (tag) => ({
+        tag,
+        count: (await getAllBlogIds(`tags[contains]${tag.id}`)).length,
+      })),
+    )
+  ).toSorted((a, b) => b.count - a.count);
+
   return (
     <html lang="ja" className="pt-12 scroll-smooth scroll-pt-12">
       <body>
@@ -60,7 +70,7 @@ export default async function RootLayout({ children }: Props) {
           src={`${process.env.IFRAMELY_PROXY_URL}/embed.js`}
           strategy="afterInteractive"
         />
-        <Header menuContent={<Nav tags={tags.contents} />} />
+        <Header menuContent={<Nav tags={tagsWithCount} />} />
         <main className="w-full max-w-[960px] p-6 mx-auto flex flex-col gap-8">{children}</main>
         {!!process.env.GOOGLE_ADSENSE_PUBLISHER_ID &&
           !!process.env.GOOGLE_ADSENSE_SLOT_MULTIPLEX_HORIZONTAL && (
