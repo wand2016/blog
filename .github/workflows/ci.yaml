@@ -1,0 +1,22 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  ci-frontend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v4
+      - name: install
+        run: npm ci
+        working-directory: template
+      - name: fmt
+        run: npm run fmt
+        working-directory: template
+      - name: lint
+        run: npm run lint
+        working-directory: template
+      - name: test
+        run: npm run test
+        working-directory: template
