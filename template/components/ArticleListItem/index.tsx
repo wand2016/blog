@@ -1,10 +1,9 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 
-import PublishedDate from '../Date';
-import TagList from '../TagList';
-
 import ArticleThumbnail from '@/components/ArticleThumbnail';
+import PublishedDate from '@/components/Date';
+import TagList from '@/components/TagList';
 import { Article } from '@/libs/microcms';
 
 type Props = {
