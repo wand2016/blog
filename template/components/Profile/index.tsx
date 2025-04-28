@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { formatImageSrc } from '@/libs/formatImageSrc';
 import { Writer } from '@/libs/microcms';
 
-
 type Props = {
   writer?: Writer;
   className?: string;

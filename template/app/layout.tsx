@@ -11,7 +11,7 @@ import { LIMIT } from '@/constants';
 import { getAllBlogIds, getTagList } from '@/libs/microcms';
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE } from '@/libs/siteMetadata';
 
-import './globals.scss';
+import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),

@@ -74,8 +74,8 @@
           "idValue": "YuUtxdU2dV",
           "fieldId": "use_toc",
           "name": "目次を使用する(デフォルトfalse)",
-          "kind":"boolean",
-          "required":false
+          "kind": "boolean",
+          "required": false
         }
       ],
       "customFields": []

@@ -14,7 +14,7 @@ export default function TagListItem({ tag, count, hasLink = true }: Props) {
   return (
     <li className="inline-block">
       <Container
-        className="bg-gray-100 rounded px-2 py-1 text-sm whitespace-nowrap inline-block"
+        className="bg-gray-100 rounded-sm px-2 py-1 text-sm whitespace-nowrap inline-block"
         href={hasLink ? `/tags/${tag.id}` : undefined}
       >
         <div className="flex gap-1 items-center">

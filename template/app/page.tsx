@@ -6,7 +6,6 @@ import Share from '@/components/Share';
 import { LIMIT } from '@/constants';
 import { getList } from '@/libs/microcms';
 
-
 export const metadata: Metadata = {
   alternates: {
     canonical: '/',
