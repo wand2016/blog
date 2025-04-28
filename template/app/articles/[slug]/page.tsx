@@ -59,7 +59,7 @@ export default async function Page({ params }: Props) {
       data={data}
       formattedContent={content}
       headings={!!data.use_toc ? headings : undefined}
-      shareUrl={`${baseUrl}articles/${slug}`}
+      shareUrl={`${baseUrl}articles/${slug}/`}
       googleAdsensePublisherId={process.env.GOOGLE_ADSENSE_PUBLISHER_ID}
       adSlotDisplayHorizontal={process.env.GOOGLE_ADSENSE_SLOT_DISPLAY_HORIZONTAL}
     />
