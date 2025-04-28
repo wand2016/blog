@@ -1,12 +1,11 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 
-import ArticleThumbnail from '@/components/ArticleThumbnail';
-import { Article } from '@/libs/microcms';
-
 import PublishedDate from '../Date';
 import TagList from '../TagList';
 
+import ArticleThumbnail from '@/components/ArticleThumbnail';
+import { Article } from '@/libs/microcms';
 
 type Props = {
   article: Article;
@@ -51,7 +50,7 @@ export default function ArticleListItem({ article }: Props) {
             style={{ viewTransitionName: `thumbnail-${article.id}` }}
           />
         )}
-        <dl className="flex flex-col gap-2 h-full rounded-b-lg p-2">
+        <dl className="flex flex-col gap-2 h-full rounded-b-lg p-3">
           <dt
             className="text-xl font-bold"
             // @ts-expect-error nosuchkey
