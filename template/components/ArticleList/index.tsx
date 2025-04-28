@@ -5,13 +5,12 @@ import InFeed from '@/components/adsense/InFeed';
 import { Article } from '@/libs/microcms';
 
 type Props = {
-  articles?: readonly Article[];
+  articles: readonly Article[];
+  /** @default true */
+  enableViewTransition?: boolean;
 };
 
-export default function ArticleList({ articles }: Props) {
-  if (!articles) {
-    return null;
-  }
+export default function ArticleList({ articles, enableViewTransition = true }: Props) {
   if (articles.length === 0) {
     return <p>記事がありません。</p>;
   }
@@ -19,7 +18,7 @@ export default function ArticleList({ articles }: Props) {
     <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       {articles.map((article, index) => (
         <Fragment key={article.id}>
-          <ArticleListItem article={article} />
+          <ArticleListItem article={article} enableViewTransition={enableViewTransition} />
           {!!process.env.GOOGLE_ADSENSE_PUBLISHER_ID &&
             !!process.env.GOOGLE_ADSENSE_SLOT_IN_FEED &&
             (index === 3 || index === 8) && (

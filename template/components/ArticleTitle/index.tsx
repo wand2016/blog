@@ -1,14 +1,9 @@
-import { CSSProperties, PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
 type Props = PropsWithChildren<{
   className?: string;
-  style?: CSSProperties;
 }>;
 
-export default function ArticleTitle({ children, className = '', style }: Props) {
-  return (
-    <h1 className={`text-2xl font-bold ${className}`} style={style}>
-      {children}
-    </h1>
-  );
+export default function ArticleTitle({ children, className = '' }: Props) {
+  return <h1 className={`text-2xl font-bold ${className}`}>{children}</h1>;
 }
