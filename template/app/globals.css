@@ -59,6 +59,7 @@
   @apply underline hover:no-underline active:no-underline active:bg-blue-100 active:md:bg-inherit;
 }
 
+/*TODO tailwind に移植*/
 @utility content {
   *:first-child {
     margin-top: 0;

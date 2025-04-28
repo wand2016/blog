@@ -93,7 +93,7 @@ export default function Article({
           className="mt-8"
         />
       )}
-      <hr className="w-full border-solid border-top my-8" />
+      <hr className="w-full border-solid border-top border-gray-200 my-8" />
       <Profile writer={data.writer} />
       {!!googleAdsensePublisherId && !!adSlotDisplayHorizontal && (
         <InArticleAdsPortal
