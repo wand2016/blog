@@ -24,7 +24,7 @@ export default function ArticleListItem({ article }: Props) {
           'border-gray-200',
           'rounded-lg',
           'h-full',
-          'shadow-sm',
+          'shadow-xs',
           'duration-300',
           'transition-translate',
           'active:-translate-y-0.5',

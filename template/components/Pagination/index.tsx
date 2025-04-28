@@ -17,13 +17,13 @@ export default function Pagination({ totalCount, current = 1, basePath = '', q }
         <li key={p}>
           {current !== p ? (
             <Link
-              className="flex justify-center items-center size-10 rounded link-text hover:bg-gray-200 active:ring-2"
+              className="flex justify-center items-center size-10 rounded-sm link-text hover:bg-gray-200 active:ring-2"
               href={`${basePath}/p/${p}` + (q ? `?q=${q}` : '')}
             >
               {p}
             </Link>
           ) : (
-            <span className="flex justify-center items-center size-10 rounded bg-gray-200">
+            <span className="flex justify-center items-center size-10 rounded-sm bg-gray-200">
               {p}
             </span>
           )}
