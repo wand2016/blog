@@ -12,7 +12,7 @@ type Props = {
 
 export default function ArticleListItem({ article }: Props) {
   return (
-    <li>
+    <li className="h-full">
       <Link
         href={`/articles/${article.id}`}
         className={clsx([
@@ -49,7 +49,7 @@ export default function ArticleListItem({ article }: Props) {
             style={{ viewTransitionName: `thumbnail-${article.id}` }}
           />
         )}
-        <dl className="flex flex-col gap-2 h-full rounded-b-lg p-3">
+        <dl className="flex flex-col gap-2 rounded-b-lg p-3">
           <dt
             className="text-xl font-bold"
             // @ts-expect-error nosuchkey
