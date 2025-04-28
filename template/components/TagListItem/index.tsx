@@ -6,10 +6,11 @@ import { Tag } from '@/libs/microcms';
 
 type Props = {
   tag: Tag;
+  count?: number;
   hasLink?: boolean;
 };
 
-export default function TagListItem({ tag, hasLink = true }: Props) {
+export default function TagListItem({ tag, count, hasLink = true }: Props) {
   return (
     <li className="inline-block">
       <Container
@@ -18,7 +19,7 @@ export default function TagListItem({ tag, hasLink = true }: Props) {
       >
         <div className="flex gap-1 items-center">
           <TagIcon size="1em" alignmentBaseline="middle" />
-          {tag.name}
+          {tag.name} {count && `(${count})`}
         </div>
       </Container>
     </li>
