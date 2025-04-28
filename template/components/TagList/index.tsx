@@ -1,11 +1,10 @@
 import { CSSProperties } from 'react';
 
+import TagListItem from '@/components/TagListItem';
 import { Tag } from '@/libs/microcms';
 
-import TagListItem from '../TagListItem';
-
 type Props = {
-  tags: Tag[];
+  tags: readonly Tag[];
   hasLink?: boolean;
   className?: string;
   style?: CSSProperties;
