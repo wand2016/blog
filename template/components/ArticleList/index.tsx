@@ -5,7 +5,7 @@ import InFeed from '@/components/adsense/InFeed';
 import { Article } from '@/libs/microcms';
 
 type Props = {
-  articles: readonly Article[];
+  articles: readonly Omit<Article, 'related_articles'>[];
   /** @default true */
   enableViewTransition?: boolean;
 };

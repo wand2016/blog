@@ -1,9 +1,9 @@
 import { createClient } from 'microcms-js-sdk';
 import type {
-  MicroCMSQueries,
-  MicroCMSImage,
-  MicroCMSDate,
   MicroCMSContentId,
+  MicroCMSDate,
+  MicroCMSImage,
+  MicroCMSQueries,
 } from 'microcms-js-sdk';
 import { notFound } from 'next/navigation';
 
@@ -22,7 +22,7 @@ export type Writer = {
   MicroCMSDate;
 
 // ブログの型定義
-export type Blog = {
+type BlogBase = {
   title: string;
   description: string;
   content: string;
@@ -41,6 +41,22 @@ export type Blog = {
    * @default false
    */
   use_toc?: boolean;
+};
+
+type RelatedArticle = BlogBase & {
+  /**
+   * 関連記事
+   * 無限再帰にはならない。 (IDのみが返ってくる)
+   */
+  related_articles?: MicroCMSContentId[];
+} & MicroCMSContentId &
+  MicroCMSDate;
+
+export type Blog = BlogBase & {
+  /**
+   * 関連記事
+   */
+  related_articles?: RelatedArticle[];
 };
 
 export type Article = Blog & MicroCMSContentId & MicroCMSDate;

@@ -1,10 +1,23 @@
 {
-  "name": "template",
+  "name": "microCMS template",
   "plan": "Hobby",
+  "schemaVersion": "1.0.0",
   "schema": [
     {
-      "apiId": "API#abcc75ab-d330-4d1d-b617-115086aa1472",
+      "apiId": "API#5caad68a-df63-4ec6-acd8-41553441902f",
+      "apiName": "タグ",
+      "apiDescription": null,
+      "apiEndpoint": "tags",
+      "apiType": "LIST",
+      "apiFields": [
+        { "idValue": "UnuCxoeTDL", "fieldId": "name", "name": "タグ名", "kind": "text" }
+      ],
+      "customFields": []
+    },
+    {
+      "apiId": "API#c7975025-6392-4d01-8f95-c918fd3e40b5",
       "apiName": "ライター",
+      "apiDescription": null,
       "apiEndpoint": "writers",
       "apiType": "LIST",
       "apiFields": [
@@ -20,29 +33,60 @@
       "customFields": []
     },
     {
-      "apiId": "API#489045ef-7e6d-4d26-aa92-3f6a3838eab6",
-      "apiName": "タグ",
-      "apiEndpoint": "tags",
-      "apiType": "LIST",
-      "apiFields": [
-        { "idValue": "UnuCxoeTDL", "fieldId": "name", "name": "タグ名", "kind": "text" }
-      ],
-      "customFields": []
-    },
-    {
-      "apiId": "API#e408eda4-c9ca-4ccf-9ee5-ebcb9057bfdc",
+      "apiId": "API#e5368dad-cb84-4223-8f5d-80306ff2487f",
       "apiName": "ブログ",
+      "apiDescription": null,
       "apiEndpoint": "blog",
       "apiType": "LIST",
       "apiFields": [
-        { "idValue": "k4JiHTLAnk", "fieldId": "title", "name": "タイトル", "kind": "text" },
+        {
+          "idValue": "k4JiHTLAnk",
+          "fieldId": "title",
+          "name": "タイトル",
+          "kind": "text",
+          "isUnique": false
+        },
         { "idValue": "bBbJJZryBm", "fieldId": "description", "name": "概要", "kind": "textArea" },
         {
           "idValue": "lfyeSiGnAH",
           "fieldId": "content",
           "name": "本文",
           "kind": "richEditorV2",
-          "customClassList": [{ "id": "OvfYc2S7Yv", "name": "マーカー", "value": "marker" }]
+          "richEditorV2Options": [
+            "headerOne",
+            "headerTwo",
+            "headerThree",
+            "headerFour",
+            "undo",
+            "redo",
+            "paragraph",
+            "bold",
+            "italic",
+            "underline",
+            "strike",
+            "code",
+            "blockquote",
+            "codeBlock",
+            "listBullet",
+            "listOrdered",
+            "link",
+            "image",
+            "table",
+            "horizontalRule",
+            "textAlign",
+            "oembedly",
+            "clean",
+            "color",
+            "headerFive",
+            "customClass"
+          ],
+          "customClassList": [
+            { "id": "OvfYc2S7Yv", "name": "マーカー", "value": "marker" },
+            { "id": "dYLXvLLKQ2", "name": "広告", "value": "ad-portal" },
+            { "id": "T8eDa50Smu", "name": "情報", "value": "alert-info" },
+            { "id": "UrKfAQLK_2", "name": "注意", "value": "alert-warn" },
+            { "id": "FLnuYYJzsu", "name": "アドバイス", "value": "alert-tip" }
+          ]
         },
         {
           "idValue": "CRNO9YkC1_",
@@ -55,14 +99,14 @@
           "fieldId": "tags",
           "name": "タグ",
           "kind": "relationList",
-          "referenceKey": "API#489045ef-7e6d-4d26-aa92-3f6a3838eab6"
+          "referenceKey": "API#5caad68a-df63-4ec6-acd8-41553441902f"
         },
         {
           "idValue": "uFAzjRFFmk",
           "fieldId": "writer",
           "name": "ライター",
           "kind": "relation",
-          "referenceKey": "API#abcc75ab-d330-4d1d-b617-115086aa1472"
+          "referenceKey": "API#c7975025-6392-4d01-8f95-c918fd3e40b5"
         },
         {
           "idValue": "cEYZlfcx0b",
@@ -76,6 +120,13 @@
           "name": "目次を使用する(デフォルトfalse)",
           "kind": "boolean",
           "required": false
+        },
+        {
+          "idValue": "JYTQUl3tue",
+          "fieldId": "related_articles",
+          "name": "関連記事",
+          "kind": "relationList",
+          "referenceKey": "API#e5368dad-cb84-4223-8f5d-80306ff2487f"
         }
       ],
       "customFields": []
