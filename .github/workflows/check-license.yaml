@@ -15,8 +15,6 @@ jobs:
       - name: Git clone the repository
         uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
-        with:
-          version: 10
       - name: install
         # Next 15.3.1 時点、 optionalDependencies の LGPL3.0 の sharp が入ってしまう(使ってない)
         run: pnpm i
