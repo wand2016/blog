@@ -21,3 +21,17 @@ jobs:
         run: pnpm frontend test
       - name: type check
         run: pnpm frontend typecheck
+
+  ci-eslint-plugin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - name: install
+        run: pnpm i
+      - name: fmt
+        run: pnpm eslint-plugin fmt
+      - name: test
+        run: pnpm eslint-plugin test
