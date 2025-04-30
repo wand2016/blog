@@ -7,7 +7,7 @@
     ".": "./index.js"
   },
   "scripts": {
-    "test": "node tests/enforce-foo-bar.test.js"
+    "test": "mocha tests/**/*.test.js"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +16,11 @@
   "devDependencies": {
     "@types/estree": "^1.0.7",
     "@types/estree-jsx": "^1.0.5",
-    "eslint": "^9.25.1"
+    "@typescript-eslint/parser": "^8.31.1",
+    "@typescript-eslint/typescript-estree": "^8.31.1",
+    "eslint": "^9.25.1",
+    "mocha": "^11.1.0",
+    "prettier": "^3.5.3"
   },
   "peerDependencies": {
     "eslint": "^9.25.1"

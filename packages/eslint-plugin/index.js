@@ -5,11 +5,11 @@ module.exports = {
     recommended: {
       plugins: ["wandfuldays"],
       rules: {
-        "wandfuldays/enforce-foo-bar": "error",
+        "wandfuldays/app-router-params-prop-promise": "error",
       },
     },
   },
   rules: {
-    "enforce-foo-bar": require("./rules/enforce-foo-bar"),
+    "app-router-params-prop-promise": require("./rules/app-router-params-prop-promise"),
   },
 };
