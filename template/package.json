@@ -12,6 +12,7 @@
     "lint:fix": "next lint --fix",
     "fmt": "prettier --ignore-path .gitignore --ignore-path .prettierignore './**/*.{js,jsx,ts,tsx,json,css}'",
     "fmt:fix": "prettier --write --ignore-path .gitignore --ignore-path .prettierignore './**/*.{js,jsx,ts,tsx,json,css}'",
+    "typecheck": "tsc --noEmit",
     "test": "exit 0",
     "check-license": "license-checker --summary | grep -qvzi gpl"
   },

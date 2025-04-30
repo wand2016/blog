@@ -51,7 +51,6 @@ export default function Header({ menuContent }: Props) {
           'duration-300',
         ])}
         // NOTE: View Transition よりも前面に出すためには view-transition-name を設定する必要がある
-        // @ts-expect-error nosuchkey
         style={{ viewTransitionName: 'fixed-header' }}
       >
         <div className="flex justify-between items-center h-12">

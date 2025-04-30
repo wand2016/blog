@@ -12,6 +12,9 @@ jobs:
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502
         with:
@@ -19,11 +22,9 @@ jobs:
           role-session-name: deploy
           aws-region: us-east-1
       - name: install
-        run: npm ci
-        working-directory: template
+        run: pnpm i
       - name: build
-        run: npm run build
-        working-directory: template
+        run: pnpm frontend build
         env:
           MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
           MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}

@@ -1,11 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: "npm"
-    directory: "/template/"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "npm"
-    directory: "/infra/"
+    directory: "/"
     schedule:
       interval: "weekly"
   - package-ecosystem: "github-actions"
