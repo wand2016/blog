@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { HeadingTuple } from '@/libs/extractHeadings';
 
 type Props = {
-  headings: ReadonlyArray<HeadingTuple>;
+  headings: readonly HeadingTuple[];
   className?: string;
 };
 

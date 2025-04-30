@@ -16,7 +16,7 @@ import { type Article } from '@/libs/microcms';
 type Props = {
   data: Omit<Article, 'content'>;
   formattedContent: string;
-  headings?: ReadonlyArray<HeadingTuple>;
+  headings?: readonly HeadingTuple[];
   shareUrl?: string;
   googleAdsensePublisherId?: string;
   adSlotDisplayHorizontal?: string;

@@ -19,7 +19,7 @@ export default function DisplayHorizontal({ googleAdsensePublisherId, adSlot }: 
       googleAdsensePublisherId={googleAdsensePublisherId}
       adSlot={adSlot}
       adFormat="auto"
-      fullWidthResponsive={true}
+      fullWidthResponsive
     />
   );
 }
