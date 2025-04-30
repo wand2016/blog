@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "name": "eslint-plugin-wandfuldays",
+  "version": "1.0.0",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "scripts": {
+    "test": "node tests/enforce-foo-bar.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/estree": "^1.0.7",
+    "@types/estree-jsx": "^1.0.5",
+    "eslint": "^9.25.1"
+  },
+  "peerDependencies": {
+    "eslint": "^9.25.1"
+  }
+}
