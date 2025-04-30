@@ -1,20 +1,18 @@
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-
 import { FlatCompat } from '@eslint/eslintrc';
-import eslintPluginImport from 'eslint-plugin-import';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 const compat = new FlatCompat({
-  baseDirectory: __dirname,
+  baseDirectory: import.meta.dirname,
 });
 
 const eslintConfig = [
   ...compat.extends('next/core-web-vitals', 'next/typescript', 'plugin:wandfuldays/recommended'),
   {
-    plugins: { import: eslintPluginImport },
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
     rules: {
       'import/order': [
         'error',
@@ -29,10 +27,6 @@ const eslintConfig = [
       ],
       'import/imports-first': 'error',
       'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'never' }],
-    },
-  },
-  {
-    rules: {
       '@typescript-eslint/array-type': 'error',
     },
   },
