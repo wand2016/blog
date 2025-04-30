@@ -4,7 +4,7 @@ const rule = {
     type: "problem",
     docs: {
       description:
-        "children: ReactNode should be replaced with PropsWithChildren.",
+        "Template literal with single expression should be replaced with String casting.",
     },
     fixable: "code",
     schema: [],
