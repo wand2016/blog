@@ -12,7 +12,7 @@ type Props = {
 };
 
 export default function DraftLayout({ draft }: Props) {
-  return `${process.env.USE_DRAFT ?? ''}` === 'true' ? (
+  return (process.env.USE_DRAFT ?? '') === 'true' ? (
     <Suspense fallback={null}>{draft}</Suspense>
   ) : null;
 }

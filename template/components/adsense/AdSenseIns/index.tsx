@@ -33,7 +33,7 @@ export default function AdSenseIns({
       data-ad-format={adFormat}
       data-ad-layout={adLayout}
       data-ad-layout-key={adLayoutKey}
-      data-full-width-responsive={`${fullWidthResponsive}`}
+      data-full-width-responsive={String(fullWidthResponsive)}
     />
   );
 }

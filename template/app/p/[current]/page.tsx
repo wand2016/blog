@@ -35,7 +35,7 @@ export async function generateStaticParams() {
   // NOTE: 最低1ページ用意しないと SSG が失敗する
   const page = Math.max(Math.ceil(data.length / LIMIT), 1);
 
-  return Array.from({ length: page }).map((_, i) => ({ current: `${i + 1}` }));
+  return Array.from({ length: page }).map((_, i) => ({ current: String(i + 1) }));
 }
 
 export default async function Page({ params }: Props) {
