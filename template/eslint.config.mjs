@@ -31,6 +31,11 @@ const eslintConfig = [
       'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'never' }],
     },
   },
+  {
+    rules: {
+      '@typescript-eslint/array-type': 'error',
+    },
+  },
 ];
 
 export default eslintConfig;
