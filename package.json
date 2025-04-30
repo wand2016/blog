@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "infra": "pnpm -F \"infra\"",
-    "frontend": "pnpm -F \"nextjs-simple-blog-template\""
+    "frontend": "pnpm -F \"nextjs-simple-blog-template\"",
+    "eslint-plugin": "pnpm -F \"eslint-plugin-wandfuldays\""
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,30 @@
+{
+  "private": true,
+  "name": "eslint-plugin-wandfuldays",
+  "version": "1.0.0",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "scripts": {
+    "fmt": "prettier --ignore-path .gitignore --ignore-path .prettierignore './**/*.{js,jsx,ts,tsx,json,css}'",
+    "fmt:fix": "prettier --write --ignore-path .gitignore --ignore-path .prettierignore './**/*.{js,jsx,ts,tsx,json,css}'",
+    "test": "mocha tests/**/*.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/estree": "^1.0.7",
+    "@types/estree-jsx": "^1.0.5",
+    "@typescript-eslint/parser": "^8.31.1",
+    "@typescript-eslint/typescript-estree": "^8.31.1",
+    "eslint": "^9.25.1",
+    "mocha": "^11.1.0",
+    "prettier": "^3.5.3"
+  },
+  "peerDependencies": {
+    "eslint": "^9.25.1"
+  }
+}

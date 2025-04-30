@@ -12,7 +12,7 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  ...compat.extends('next/core-web-vitals', 'next/typescript', 'plugin:wandfuldays/recommended'),
   {
     plugins: { import: eslintPluginImport },
     rules: {
