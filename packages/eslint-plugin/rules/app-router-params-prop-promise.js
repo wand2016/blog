@@ -5,11 +5,12 @@ const rule = {
     docs: {
       description: "App Router params prop should be a Promise.",
     },
-    fixable: undefined,
+    fixable: "code",
     schema: [],
   },
   create(context) {
     const filename = context.filename ?? context.getFileName();
+    const sourceCode = context.sourceCode ?? context.getSourceCode();
 
     return {
       /**
@@ -31,6 +32,16 @@ const rule = {
           node,
           message:
             "App Router 配下のページの params prop は Promise である必要があります。",
+          fix(fixer) {
+            const typeAnnotation = sourceCode.getText(
+              node.typeAnnotation.typeAnnotation,
+            );
+            const newTypeAnnotation = `Promise<${typeAnnotation}>`;
+            return fixer.replaceText(
+              node.typeAnnotation.typeAnnotation,
+              newTypeAnnotation,
+            );
+          },
         });
       },
     };

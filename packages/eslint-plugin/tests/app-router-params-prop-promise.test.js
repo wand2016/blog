@@ -44,6 +44,13 @@ type Props = {
   };
 }        
 `,
+      output: `
+type Props = {
+  params: Promise<{
+    id: string;
+  }>;
+}        
+`,
       filename: "project/app/hoge/page.tsx",
       errors: [
         {
