@@ -27,6 +27,7 @@ const eslintConfig = [
       ],
       'import/imports-first': 'error',
       'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'never' }],
+      'react/jsx-boolean-value': ['error'],
       '@typescript-eslint/array-type': 'error',
     },
   },
