@@ -9,7 +9,7 @@ const rule = {
     schema: [],
   },
   create(context) {
-    const filename = context.filename ?? context.getFileName();
+    const filename = context.filename ?? context.getFilename();
     const sourceCode = context.sourceCode ?? context.getSourceCode();
 
     return {
