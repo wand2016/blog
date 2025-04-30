@@ -11,13 +11,13 @@ microCMS 製の [nextjs-simple-blog-template](https://github.com/microcmsio/next
 1. パッケージのインストール
 
 ```bash
-npm ci
+pnpm i
 ```
 
 2. ビルド
 
 ```bash
-npm run build
+pnpm build
 ```
 
 > [!WARNING]
@@ -26,7 +26,7 @@ npm run build
 3. ビルド結果のプレビュー
  
 ```bash
-npm run preview
+pnpm preview
 ```
 
 > [!TIP]
@@ -38,13 +38,13 @@ npm run preview
 Pagefind のインデクシングを行うためにビルドが必要です。
 
 ```bash
-npm run dev:indexing
+pnpm dev:indexing
 ```
 
 4. 開発環境の起動
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 > [!WARNING]

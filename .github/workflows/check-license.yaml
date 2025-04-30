@@ -14,11 +14,10 @@ jobs:
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - name: install
-        # Next 15.3.1 時点、 optionalDependencies を omit しないと LGPL3.0 の sharp が入ってしまう(使ってない)
-        run: npm ci --omit=optional
-        working-directory: template
+        # Next 15.3.1 時点、 optionalDependencies の LGPL3.0 の sharp が入ってしまう(使ってない)
+        run: pnpm i
       - name: check licenses
-        run: npm run check-license
+        run: pnpm frontend check-license
         continue-on-error: false
-        working-directory: template

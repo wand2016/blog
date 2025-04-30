@@ -1,8 +1,9 @@
 import 'highlight.js/styles/github.css';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import hljs from 'highlight.js';
-import { formatImageSrc } from '@/libs/formatImageSrc';
 import { parse } from 'qs';
+
+import { formatImageSrc } from '@/libs/formatImageSrc';
 import { IframelyResponse } from '@/libs/iframely/types';
 
 export const formatRichText = async (richText: string) => {
@@ -11,7 +12,7 @@ export const formatRichText = async (richText: string) => {
     if (!lang) return hljs.highlightAuto(text);
     try {
       return hljs.highlight(text, { language: lang?.replace(/^language-/, '') || '' });
-    } catch (e) {
+    } catch {
       return hljs.highlightAuto(text);
     }
   };

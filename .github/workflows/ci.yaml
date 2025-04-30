@@ -10,18 +10,14 @@ jobs:
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - name: install
-        run: npm ci
-        working-directory: template
+        run: pnpm i
       - name: fmt
-        run: npm run fmt
-        working-directory: template
+        run: pnpm frontend fmt
       - name: lint
-        run: npm run lint
-        working-directory: template
+        run: pnpm frontend lint
       - name: test
-        run: npm run test
-        working-directory: template
+        run: pnpm frontend test
       - name: type check
-        run: npx tsc --noEmit
-        working-directory: template
+        run: pnpm frontend typecheck

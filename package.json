@@ -1,0 +1,15 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "microCMS + Next.js (SSG) のブログシステムです。",
+  "main": "index.js",
+  "packageManager": "pnpm@10.10.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "infra": "pnpm -F \"infra\"",
+    "frontend": "pnpm -F \"nextjs-simple-blog-template\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
