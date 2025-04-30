@@ -16,17 +16,10 @@ const rule = {
       /**
        * @param {import("@typescript-eslint/typescript-estree").TSESTree.TSPropertySignature} node
        */
-      'Program > TSTypeAliasDeclaration:has(>Identifier[name="Props"]) > TSTypeLiteral > TSPropertySignature:has(>Identifier[name="params"])'(
+      'Program > TSTypeAliasDeclaration:has(>Identifier[name="Props"]) > TSTypeLiteral > TSPropertySignature:has(>Identifier[name="params"]):not([typeAnnotation.typeAnnotation.type="TSTypeReference"][typeAnnotation.typeAnnotation.typeName.type="Identifier"][typeAnnotation.typeAnnotation.typeName.name="Promise"])'(
         node,
       ) {
         if (!filename.includes("/app/")) return;
-
-        if (
-          node.typeAnnotation.typeAnnotation.type === "TSTypeReference" &&
-          node.typeAnnotation.typeAnnotation.typeName.type === "Identifier" &&
-          node.typeAnnotation.typeAnnotation.typeName.name === "Promise"
-        )
-          return;
 
         context.report({
           node,
