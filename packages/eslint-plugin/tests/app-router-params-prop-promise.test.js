@@ -22,7 +22,7 @@ type Props = {
   }>;
 }        
 `,
-      filename: "app/hoge/page.tsx",
+      filename: "project/app/hoge/page.tsx",
     },
     {
       code: `
@@ -44,7 +44,7 @@ type Props = {
   };
 }        
 `,
-      filename: "app/hoge/page.tsx",
+      filename: "project/app/hoge/page.tsx",
       errors: [
         {
           message:

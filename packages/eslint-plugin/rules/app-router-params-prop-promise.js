@@ -18,7 +18,7 @@ const rule = {
       'Program > TSTypeAliasDeclaration:has(>Identifier[name="Props"]) > TSTypeLiteral > TSPropertySignature:has(>Identifier[name="params"])'(
         node,
       ) {
-        if (!filename.includes("app/")) return;
+        if (!filename.includes("/app/")) return;
 
         if (
           node.typeAnnotation.typeAnnotation.type === "TSTypeReference" &&
