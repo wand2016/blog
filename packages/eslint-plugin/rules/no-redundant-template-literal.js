@@ -6,10 +6,12 @@ const rule = {
       description:
         "children: ReactNode should be replaced with PropsWithChildren.",
     },
-    fixable: undefined,
+    fixable: "code",
     schema: [],
   },
   create(context) {
+    const sourceCode = context.sourceCode ?? context.getSourceCode();
+
     return {
       /**
        * @param {import("estree").TemplateLiteral} node
@@ -19,7 +21,13 @@ const rule = {
       ) {
         context.report({
           node,
-          message: "boo",
+          message:
+            "単一の式を含むテンプレートリテラルは冗長です。String でキャストしてください。",
+          fix(fixer) {
+            const expression = node.expressions[0];
+            const text = sourceCode.getText(expression);
+            return fixer.replaceText(node, `String(${text})`);
+          },
         });
       },
     };

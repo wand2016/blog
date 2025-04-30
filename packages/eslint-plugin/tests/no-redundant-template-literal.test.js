@@ -31,9 +31,11 @@ ruleTester.run("no-redundant-template-literal", rule, {
   invalid: [
     {
       code: "`${foo}`",
+      output: "String(foo)",
       errors: [
         {
-          message: "boo",
+          message:
+            "単一の式を含むテンプレートリテラルは冗長です。String でキャストしてください。",
           line: 1,
           endLine: 1,
           column: 1,
