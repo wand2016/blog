@@ -16,6 +16,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/eslint": "^9.6.1",
     "@types/estree": "^1.0.7",
     "@types/estree-jsx": "^1.0.5",
     "@typescript-eslint/parser": "^8.31.1",
