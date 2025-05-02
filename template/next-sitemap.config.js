@@ -12,6 +12,7 @@ module.exports = {
     '/apple-icon.png',
     '/manifest.webmanifest',
     '/icon.svg',
+    '/ads.txt',
   ],
   autoLastmod: false,
 };
