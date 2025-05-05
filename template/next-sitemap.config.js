@@ -2,6 +2,10 @@
 module.exports = {
   siteUrl: process.env.BASE_URL,
   generateRobotsTxt: true,
+  robotsTxtOptions: {
+    transformRobotsTxt: async (_, robotsTxt) =>
+      robotsTxt.replace(`# Host\nHost: ${process.env.BASE_URL}\n\n`, ''),
+  },
   sitemapSize: 7000,
   outDir: 'out',
   exclude: [
