@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { unstable_ViewTransition as ViewTransition } from 'react';
 
 import ArticleContent from '@/components/ArticleContent';
@@ -78,6 +79,23 @@ export default function Article({
         </div>
       )}
       <ArticleContent dangerouslySetInnerHTML={{ __html: content }} />
+      <aside className="mt-4 bg-blue-50 p-4 rounded-lg">
+        <p>👉 他の記事も読んでみませんか？</p>
+        <ul>
+          {data.tags?.[0] && (
+            <li>
+              <Link href={`/tags/${data.tags[0].id}`} className="link-text">
+                「{data.tags[0].name}」の記事一覧はこちら
+              </Link>
+            </li>
+          )}
+          <li>
+            <Link href="/" className="link-text">
+              全ての記事一覧はこちら
+            </Link>
+          </li>
+        </ul>
+      </aside>
       {shareUrl && (
         <Share
           url={shareUrl}
