@@ -8,6 +8,7 @@ import { IframelyResponse } from '@/libs/iframely/types';
 
 export const formatRichText = async (richText: string) => {
   const $ = cheerio.load(richText);
+
   const highlight = (text: string, lang?: string) => {
     if (!lang) return hljs.highlightAuto(text);
     try {
@@ -79,5 +80,5 @@ export const formatRichText = async (richText: string) => {
   // テーブルを角丸にするためのラッパー
   $('table').wrap('<div class="table-wrapper"></div>');
 
-  return $.html();
+  return $('body').html();
 };
