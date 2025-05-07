@@ -7,7 +7,7 @@ import { formatImageSrc } from '@/libs/formatImageSrc';
 import { IframelyResponse } from '@/libs/iframely/types';
 
 export const formatRichText = async (richText: string): Promise<string> => {
-  const $ = cheerio.load(richText);
+  const $ = cheerio.load(richText, null, false);
 
   const highlight = (text: string, lang?: string) => {
     if (!lang) return hljs.highlightAuto(text);

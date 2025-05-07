@@ -8,7 +8,7 @@ export type HeadingTuple = {
 };
 
 export const extractHeadings = (html: string): HeadingTuple[] => {
-  const $ = cheerio.load(html);
+  const $ = cheerio.load(html, null, false);
 
   return $('h2,h3,h4')
     .map((_, heading): HeadingTuple => {
