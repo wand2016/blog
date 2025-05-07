@@ -8,11 +8,11 @@ export type HeadingTuple = {
 };
 
 export const extractHeadings = (html: string): HeadingTuple[] => {
-  const $ = cheerio.load(html);
+  const $ = cheerio.load(html, null, false);
 
   return $('h2,h3,h4')
     .map((_, heading): HeadingTuple => {
-      const element: HTMLElement = $(heading).get(0);
+      const element = $(heading).get(0)!;
       return {
         tagName: element.tagName,
         headingNumber: parseInt(element.tagName[1], 10),
