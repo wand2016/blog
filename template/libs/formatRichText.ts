@@ -6,7 +6,7 @@ import { parse } from 'qs';
 import { formatImageSrc } from '@/libs/formatImageSrc';
 import { IframelyResponse } from '@/libs/iframely/types';
 
-export const formatRichText = async (richText: string) => {
+export const formatRichText = async (richText: string): Promise<string> => {
   const $ = cheerio.load(richText);
 
   const highlight = (text: string, lang?: string) => {
@@ -80,5 +80,5 @@ export const formatRichText = async (richText: string) => {
   // テーブルを角丸にするためのラッパー
   $('table').wrap('<div class="table-wrapper"></div>');
 
-  return $('body').html();
+  return $('body').html() ?? '';
 };
