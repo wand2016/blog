@@ -50,7 +50,7 @@ export const formatRichText = async (richText: string): Promise<string> => {
     );
     const json: IframelyResponse = await data.json();
     const html = json['html'];
-    const $replacement = cheerio.load(html);
+    const $replacement = cheerio.load(html, null, false);
     $replacement('iframe').attr('loading', 'lazy');
 
     if (process.env.IFRAMELY_PROXY_URL) {
@@ -80,5 +80,5 @@ export const formatRichText = async (richText: string): Promise<string> => {
   // テーブルを角丸にするためのラッパー
   $('table').wrap('<div class="table-wrapper"></div>');
 
-  return $('body').html() ?? '';
+  return $.html();
 };
