@@ -81,6 +81,9 @@ export const getList = async (queries?: MicroCMSQueries) => {
     .getList<Blog>({
       endpoint: 'blog',
       queries,
+      customRequestInit: {
+        cache: 'force-cache',
+      },
     })
     .catch(notFound);
   return listData;
@@ -92,6 +95,9 @@ export const getAllBlogIds = async (filters?: string) => {
     .getAllContentIds({
       endpoint: 'blog',
       filters,
+      customRequestInit: {
+        cache: 'force-cache',
+      },
     })
     .catch(notFound);
   return listData;
@@ -104,6 +110,9 @@ export const getDetail = async (contentId: string, queries?: MicroCMSQueries) =>
       endpoint: 'blog',
       contentId,
       queries,
+      customRequestInit: {
+        cache: 'force-cache',
+      },
     })
     .catch(notFound);
 
@@ -116,6 +125,9 @@ export const getTagList = async (queries?: MicroCMSQueries) => {
     .getList<Tag>({
       endpoint: 'tags',
       queries,
+      customRequestInit: {
+        cache: 'force-cache',
+      },
     })
     .catch(notFound);
 
@@ -128,6 +140,9 @@ export const getAllTagIds = async (filters?: string) => {
     .getAllContentIds({
       endpoint: 'tags',
       filters,
+      customRequestInit: {
+        cache: 'force-cache',
+      },
     })
     .catch(notFound);
 
@@ -141,6 +156,9 @@ export const getTag = async (contentId: string, queries?: MicroCMSQueries) => {
       endpoint: 'tags',
       contentId,
       queries,
+      customRequestInit: {
+        cache: 'force-cache',
+      },
     })
     .catch(notFound);
 
