@@ -16,7 +16,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@aws-sdk/client-ssm": "^3.799.0",
+    "@aws-sdk/client-ssm": "^3.817.0",
     "cognito-at-edge": "^1.5.3",
     "esbuild": "^0.25.3"
   }
