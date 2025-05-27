@@ -16,16 +16,16 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@types/eslint": "^9.6.1",
-    "@types/estree": "^1.0.7",
-    "@types/estree-jsx": "^1.0.5",
-    "@typescript-eslint/parser": "^8.31.1",
-    "@typescript-eslint/typescript-estree": "^8.31.1",
-    "eslint": "^9.25.1",
-    "mocha": "^11.1.0",
-    "prettier": "^3.5.3"
+    "@types/eslint": "9.6.1",
+    "@types/estree": "1.0.7",
+    "@types/estree-jsx": "1.0.5",
+    "@typescript-eslint/parser": "8.32.1",
+    "@typescript-eslint/typescript-estree": "8.32.1",
+    "eslint": "9.27.0",
+    "mocha": "11.5.0",
+    "prettier": "3.5.3"
   },
   "peerDependencies": {
-    "eslint": "^9.25.1"
+    "eslint": "9.27.0"
   }
 }
