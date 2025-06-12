@@ -35,8 +35,10 @@ jobs:
           GOOGLE_ADSENSE_SLOT_IN_FEED: ${{ secrets.GOOGLE_ADSENSE_SLOT_IN_FEED }}
           INQUIRY_GOOGLE_FORM_URL: ${{ secrets.INQUIRY_GOOGLE_FORM_URL_PRD }}
           IFRAMELY_PROXY_URL: ${{ secrets.IFRAMELY_PROXY_URL_PRD }}
+      # TTLの短いキャッシュを設定する。
+      # キャッシュ自体は行われ、 CloudFront-S3間ではETagに基づいた条件付きリクエストが行われ、更新されていなければキャッシュが活用される
       - name: Copy index.html to s3
         run: |
           aws s3 sync --delete --exclude '*.html' --exclude '*.txt' --exclude '*.xml' --exclude 'pagefind/*' ./out/ s3://${{ secrets.BUCKET_NAME_PRD }}/ --cache-control max-age=31536000,public
-          aws s3 sync --delete --exclude '*' --include '*.html' --include '*.txt' --include '*.xml' --include 'pagefind/*' ./out/ s3://${{ secrets.BUCKET_NAME_PRD }}/ --cache-control no-cache
+          aws s3 sync --delete --exclude '*' --include '*.html' --include '*.txt' --include '*.xml' --include 'pagefind/*' ./out/ s3://${{ secrets.BUCKET_NAME_PRD }}/ --cache-control max-age=60,public
         working-directory: template
