@@ -21,9 +21,15 @@ type Props = {
       h: number;
     };
   };
+  /**
+   * 記事サムネイル画像の読み込み・描画を遅延させます。
+   * 記事下部の「関連記事」など、オフスクリーンの画像読み込みを遅延させるために使用します。
+   * @default false
+   */
+  lazy?: boolean;
 };
 
-export default function ArticleThumbnail({ thumbnail, sizes, className }: Props) {
+export default function ArticleThumbnail({ thumbnail, sizes, className, lazy = false }: Props) {
   return (
     <picture>
       <source
@@ -47,7 +53,8 @@ export default function ArticleThumbnail({ thumbnail, sizes, className }: Props)
         className={className}
         width={1200}
         height={630}
-        fetchPriority="high"
+        loading={lazy ? 'lazy' : 'eager'}
+        fetchPriority={lazy ? 'low' : 'high'}
         decoding="async"
       />
     </picture>

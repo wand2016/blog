@@ -72,7 +72,7 @@ export default async function Page({ params }: Props) {
         <aside>
           <section aria-labelledby="related-posts-heading">
             <h2 className="text-xl font-bold mb-2">関連記事</h2>
-            <ArticleList articles={relatedArticles} enableViewTransition={false} />
+            <ArticleList articles={relatedArticles} enableViewTransition={false} lazy />
           </section>
         </aside>
       )}
