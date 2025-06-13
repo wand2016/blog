@@ -27,9 +27,21 @@ type Props = {
    * @default false
    */
   lazy?: boolean;
+
+  /**
+   * LCP 用。同期的に読み込む
+   * @default false
+   */
+  sync?: boolean;
 };
 
-export default function ArticleThumbnail({ thumbnail, sizes, className, lazy = false }: Props) {
+export default function ArticleThumbnail({
+  thumbnail,
+  sizes,
+  className,
+  lazy = false,
+  sync = false,
+}: Props) {
   return (
     <picture>
       <source
@@ -55,7 +67,7 @@ export default function ArticleThumbnail({ thumbnail, sizes, className, lazy = f
         height={630}
         loading={lazy ? 'lazy' : 'eager'}
         fetchPriority={lazy ? 'low' : 'high'}
-        decoding="async"
+        decoding={sync ? 'sync' : 'async'}
       />
     </picture>
   );

@@ -73,6 +73,7 @@ export const formatRichText = async (richText: string): Promise<string> => {
   }
 
   $('script[src="//cdn.iframe.ly/embed.js"]').remove();
+  $('script[src="htps://cdn.iframe.ly/embed.js"]').remove();
 
   // 広告掲載ポータルの中のダミー文字列を消し込む
   $('.ad-portal').text('');
