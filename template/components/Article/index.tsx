@@ -49,6 +49,7 @@ export default function Article({
                 },
               }}
               className="w-full h-auto border border-solid border-gray-200 shadow-md rounded-2xl"
+              sync
             />
           </ViewTransition>
         )}
