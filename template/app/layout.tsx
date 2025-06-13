@@ -65,11 +65,7 @@ export default async function RootLayout({ children }: Props) {
           />
         )}
         {/*NOTE: iframely の responsive スタイリングで必要*/}
-        <Script
-          async
-          src={`${process.env.IFRAMELY_PROXY_URL}/embed.js`}
-          strategy="afterInteractive"
-        />
+        <Script async src={`${process.env.IFRAMELY_PROXY_URL}/embed.js`} strategy="lazyOnload" />
         <Header menuContent={<Nav tags={tagsWithCount} />} />
         <main className="w-full max-w-[960px] p-6 mx-auto flex flex-col gap-8">{children}</main>
         {!!process.env.GOOGLE_ADSENSE_PUBLISHER_ID &&
