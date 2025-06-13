@@ -61,7 +61,7 @@ export default async function RootLayout({ children }: Props) {
             crossOrigin="anonymous"
             // NOTE: 公式は head 内にいれることを推奨している。
             // beforeInteractive とすることで実現できるが、そうすると Google PageSpeed Insights のスコアが著しく悪くなる
-            strategy="afterInteractive"
+            strategy="lazyOnload"
           />
         )}
         {/*NOTE: iframely の responsive スタイリングで必要*/}
