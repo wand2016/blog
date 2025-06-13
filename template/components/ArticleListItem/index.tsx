@@ -10,9 +10,15 @@ import { Article } from '@/libs/microcms';
 type Props = {
   article: Article;
   enableViewTransition: boolean;
+  /**
+   * 記事サムネイル画像の読み込み・描画を遅延させます。
+   * 記事下部の「関連記事」など、オフスクリーンの画像読み込みを遅延させるために使用します。
+   * @default false
+   */
+  lazy?: boolean;
 };
 
-export default function ArticleListItem({ article, enableViewTransition }: Props) {
+export default function ArticleListItem({ article, enableViewTransition, lazy = false }: Props) {
   const Container = (enableViewTransition ? ViewTransition : Fragment) as unknown as FC<
     PropsWithChildren<{
       name: string;
@@ -54,6 +60,7 @@ export default function ArticleListItem({ article, enableViewTransition }: Props
                 },
               }}
               className="w-full h-auto border-solid border-b border-gray-200 rounded-t-lg"
+              lazy={lazy}
             />
           </Container>
         )}
