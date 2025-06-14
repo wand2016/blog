@@ -33,8 +33,10 @@ export const generateMetadata = async (
       title: `「${tag.name}」の記事一覧|${current}ページ目`,
     },
     alternates: {
-      // 先頭ページはページネーションなしページと同一視する
-      canonical: current === '1' ? `/tags/${tagId}/` : `/tags/${tagId}/p/${current}/`,
+      canonical: `/tags/${tagId}/p/${current}/`,
+    },
+    robots: {
+      index: false,
     },
   };
 };

@@ -24,8 +24,10 @@ export const generateMetadata = async (
       title: `${current}ページ目`,
     },
     alternates: {
-      // 先頭ページはページネーションなしページと同一視する
-      canonical: current === '1' ? '/' : `/p/${current}/`,
+      canonical: `/p/${current}/`,
+    },
+    robots: {
+      index: false,
     },
   };
 };

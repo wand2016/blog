@@ -41,6 +41,11 @@ type BlogBase = {
    * @default false
    */
   use_toc?: boolean;
+  /**
+   * true: 検索インデックス対象外
+   * @default false
+   */
+  noindex?: boolean;
 };
 
 type RelatedArticle = BlogBase & {
