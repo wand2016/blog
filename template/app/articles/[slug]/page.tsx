@@ -35,9 +35,7 @@ export async function generateMetadata(
     alternates: {
       canonical: `/articles/${slug}/`,
     },
-    robots: {
-      index: !data.noindex,
-    },
+    ...(!!data.noindex ? { robots: { index: false } } : {}),
   };
 }
 
