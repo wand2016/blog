@@ -5,6 +5,18 @@ module.exports = {
   robotsTxtOptions: {
     transformRobotsTxt: async (_, robotsTxt) =>
       robotsTxt.replace(`# Host\nHost: ${process.env.BASE_URL}\n\n`, ''),
+    policies: [
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: [
+          // 一覧系ページは Google に「価値のないページ」と見なされてインデックスが外されるので、最初から除外しておく。
+          // TODO: 価値のある一覧ページを提供できるようになったら戻す
+          '/p/', // 絞り込みなしページネーション
+          '/tags/', // タグ絞り込みページネーション
+        ],
+      },
+    ],
   },
   sitemapSize: 7000,
   outDir: 'out',
