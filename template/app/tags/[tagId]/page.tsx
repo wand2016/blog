@@ -28,6 +28,9 @@ export const generateMetadata = async (
     alternates: {
       canonical: `/tags/${tagId}/`,
     },
+    robots: {
+      index: false,
+    },
   };
 };
 

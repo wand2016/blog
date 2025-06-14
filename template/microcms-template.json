@@ -4,7 +4,7 @@
   "schemaVersion": "1.0.0",
   "schema": [
     {
-      "apiId": "API#5caad68a-df63-4ec6-acd8-41553441902f",
+      "apiId": "API#2957a304-e94f-43ee-8713-7b655c2ab3ed",
       "apiName": "タグ",
       "apiDescription": null,
       "apiEndpoint": "tags",
@@ -15,7 +15,7 @@
       "customFields": []
     },
     {
-      "apiId": "API#c7975025-6392-4d01-8f95-c918fd3e40b5",
+      "apiId": "API#532c793b-d8e0-4797-a467-198fd26beab2",
       "apiName": "ライター",
       "apiDescription": null,
       "apiEndpoint": "writers",
@@ -33,7 +33,7 @@
       "customFields": []
     },
     {
-      "apiId": "API#e5368dad-cb84-4223-8f5d-80306ff2487f",
+      "apiId": "API#69650b41-5354-41ee-9e97-2534c8eb6cbb",
       "apiName": "ブログ",
       "apiDescription": null,
       "apiEndpoint": "blog",
@@ -99,14 +99,14 @@
           "fieldId": "tags",
           "name": "タグ",
           "kind": "relationList",
-          "referenceKey": "API#5caad68a-df63-4ec6-acd8-41553441902f"
+          "referenceKey": "API#2957a304-e94f-43ee-8713-7b655c2ab3ed"
         },
         {
           "idValue": "uFAzjRFFmk",
           "fieldId": "writer",
           "name": "ライター",
           "kind": "relation",
-          "referenceKey": "API#c7975025-6392-4d01-8f95-c918fd3e40b5"
+          "referenceKey": "API#532c793b-d8e0-4797-a467-198fd26beab2"
         },
         {
           "idValue": "cEYZlfcx0b",
@@ -126,8 +126,9 @@
           "fieldId": "related_articles",
           "name": "関連記事",
           "kind": "relationList",
-          "referenceKey": "API#e5368dad-cb84-4223-8f5d-80306ff2487f"
-        }
+          "referenceKey": "API#69650b41-5354-41ee-9e97-2534c8eb6cbb"
+        },
+        { "idValue": "uAsSQkrft0", "fieldId": "noindex", "name": "noindex", "kind": "boolean" }
       ],
       "customFields": []
     }
