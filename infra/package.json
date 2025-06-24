@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/aws-lambda": "8.10.149",
+    "@types/aws-lambda": "8.10.150",
     "@types/node": "22.15.30",
     "prettier": "3.5.3",
     "typescript": "5.8.3"
