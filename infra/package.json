@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-ssm": "3.835.0",
-    "cognito-at-edge": "1.5.3",
+    "cognito-at-edge": "git+https://github.com/wand2016/cognito-at-edge.git#76b08b6",
     "esbuild": "0.25.5"
   }
 }
