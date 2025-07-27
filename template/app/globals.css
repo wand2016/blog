@@ -243,6 +243,8 @@ code {
   font-family: menlo, inconsolata, monospace;
 }
 
+/* 広告にも適用されていて怒られそうなので緊急で外す
 iframe {
   border-radius: var(--border-radius);
 }
+*/
