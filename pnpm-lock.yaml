@@ -87,8 +87,8 @@ importers:
         specifier: 0.525.0
         version: 0.525.0(react@19.1.0)
       lucide-static:
-        specifier: 0.511.0
-        version: 0.511.0
+        specifier: 0.532.0
+        version: 0.532.0
       microcms-js-sdk:
         specifier: 3.2.0
         version: 3.2.0
@@ -2365,8 +2365,8 @@ packages:
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  lucide-static@0.511.0:
-    resolution: {integrity: sha512-/MWOjEyGZO84B16BeqbeleinbmeYxOBsbYDt/Yk6xGwMYwDm6dx43jKHMxGDqW9U84qWL13dNvVW0SMADhUSyg==}
+  lucide-static@0.532.0:
+    resolution: {integrity: sha512-2nsZcwIGq6zvh3lAsFie5p4QVcEWyqIt7ri61R8X9YPocT6ji/pezWvYWQSuN07GDhNn+KlY7Z6KaxKmAdxvrw==}
 
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
@@ -5769,7 +5769,7 @@ snapshots:
     dependencies:
       react: 19.1.0
 
-  lucide-static@0.511.0: {}
+  lucide-static@0.532.0: {}
 
   magic-string@0.30.17:
     dependencies:
