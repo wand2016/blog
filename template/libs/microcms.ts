@@ -86,6 +86,7 @@ export const getList = async (queries?: MicroCMSQueries) => {
     .getList<Blog>({
       endpoint: 'blog',
       queries: {
+        ...queries,
         // HACK: 相互リンク等の個別ページを除外
         filters: queries?.filters
           ? `${queries.filters}[and]is_standalone[not_equals]true`
