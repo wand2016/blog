@@ -18,6 +18,11 @@ export default function Footer({ className = '' }: Props) {
             プライバシーポリシー
           </Link>
         </li>
+        <li>
+          <Link className="text-sm link-text" href="/mutual-links">
+            相互リンク
+          </Link>
+        </li>
         {process.env.INQUIRY_GOOGLE_FORM_URL && (
           <li>
             <a

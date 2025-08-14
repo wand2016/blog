@@ -21,6 +21,7 @@ type Props = {
   shareUrl?: string;
   googleAdsensePublisherId?: string;
   adSlotDisplayHorizontal?: string;
+  readMore?: boolean;
 };
 
 export default function Article({
@@ -30,6 +31,7 @@ export default function Article({
   shareUrl,
   googleAdsensePublisherId,
   adSlotDisplayHorizontal,
+  readMore = true,
 }: Props) {
   return (
     <article data-pagefind-body className="w-full max-w-[720px] mx-auto">
@@ -80,23 +82,25 @@ export default function Article({
         </div>
       )}
       <ArticleContent dangerouslySetInnerHTML={{ __html: content }} />
-      <aside className="mt-4 bg-blue-50 p-4 rounded-lg">
-        <p>👉 他の記事も読んでみませんか？</p>
-        <ul>
-          {data.tags?.[0] && (
+      {readMore && (
+        <aside className="mt-4 bg-blue-50 p-4 rounded-lg">
+          <p>👉 他の記事も読んでみませんか？</p>
+          <ul>
+            {data.tags?.[0] && (
+              <li>
+                <Link href={`/tags/${data.tags[0].id}`} className="link-text">
+                  「{data.tags[0].name}」の記事一覧はこちら
+                </Link>
+              </li>
+            )}
             <li>
-              <Link href={`/tags/${data.tags[0].id}`} className="link-text">
-                「{data.tags[0].name}」の記事一覧はこちら
+              <Link href="/" className="link-text">
+                全ての記事一覧はこちら
               </Link>
             </li>
-          )}
-          <li>
-            <Link href="/" className="link-text">
-              全ての記事一覧はこちら
-            </Link>
-          </li>
-        </ul>
-      </aside>
+          </ul>
+        </aside>
+      )}
       {shareUrl && (
         <Share
           url={shareUrl}
