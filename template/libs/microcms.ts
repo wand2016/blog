@@ -85,7 +85,13 @@ export const getList = async (queries?: MicroCMSQueries) => {
   const listData = await client
     .getList<Blog>({
       endpoint: 'blog',
-      queries,
+      queries: {
+        ...queries,
+        // HACK: 相互リンク等の個別ページを除外
+        filters: queries?.filters
+          ? `${queries.filters}[and]is_standalone[not_equals]true`
+          : 'is_standalone[not_equals]true',
+      },
       customRequestInit: {
         cache: 'force-cache',
       },
@@ -99,7 +105,10 @@ export const getAllBlogIds = async (filters?: string) => {
   const listData = await client
     .getAllContentIds({
       endpoint: 'blog',
-      filters,
+      // HACK: 相互リンク等の個別ページを除外
+      filters: filters
+        ? `${filters}[and]is_standalone[not_equals]true`
+        : 'is_standalone[not_equals]true',
       customRequestInit: {
         cache: 'force-cache',
       },
