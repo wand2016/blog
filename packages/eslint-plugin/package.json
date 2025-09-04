@@ -23,7 +23,7 @@
     "@typescript-eslint/typescript-estree": "8.38.0",
     "eslint": "9.29.0",
     "mocha": "11.7.1",
-    "prettier": "3.5.3"
+    "prettier": "3.6.2"
   },
   "peerDependencies": {
     "eslint": "9.29.0"
