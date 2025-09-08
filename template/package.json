@@ -20,7 +20,7 @@
     "node": ">=18.x"
   },
   "dependencies": {
-    "@next/third-parties": "15.3.2",
+    "@next/third-parties": "15.5.2",
     "cheerio": "1.1.0",
     "clsx": "2.1.1",
     "date-fns": "4.1.0",
