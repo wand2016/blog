@@ -46,7 +46,7 @@
     "eslint": "9.35.0",
     "eslint-config-next": "15.5.2",
     "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-import": "2.32.0",
     "eslint-plugin-wandfuldays": "workspace:*",
     "http-server": "14.1.1",
     "license-checker": "25.0.1",
