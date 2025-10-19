@@ -19,7 +19,7 @@
     "@types/eslint": "9.6.1",
     "@types/estree": "1.0.8",
     "@types/estree-jsx": "1.0.5",
-    "@typescript-eslint/parser": "8.33.1",
+    "@typescript-eslint/parser": "8.46.1",
     "@typescript-eslint/typescript-estree": "8.38.0",
     "eslint": "9.38.0",
     "mocha": "11.7.1",
