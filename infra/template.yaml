@@ -227,7 +227,7 @@ Resources:
       FunctionName: !Sub ${AWS::StackName}-lambdaedge-index-supplier
       CodeUri: ./src/index-supplier/
       Handler: app.handler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Architectures:
         - x86_64
       MemorySize: 128
@@ -341,7 +341,7 @@ Resources:
       FunctionName: !Sub ${AWS::StackName}-lambdaedge-iframely-proxy
       CodeUri: ./src/iframely-proxy/
       Handler: app.handler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Architectures:
         - x86_64
       MemorySize: 128
@@ -516,7 +516,7 @@ Resources:
       FunctionName: !Sub ${AWS::StackName}-lambdaedge-access-control
       CodeUri: ./src/access-control/
       Handler: app.handler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Architectures:
         - x86_64
       MemorySize: 128
