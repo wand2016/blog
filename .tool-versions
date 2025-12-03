@@ -1,4 +1,4 @@
-nodejs 20.18.1
-awscli 2.22.26
-aws-sam-cli 1.132.0
+nodejs 24.11.1
+awscli 2.32.8
+aws-sam-cli 1.150.0
 pnpm 10.10.0
