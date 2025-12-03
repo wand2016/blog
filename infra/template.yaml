@@ -227,7 +227,7 @@ Resources:
       FunctionName: !Sub ${AWS::StackName}-lambdaedge-index-supplier
       CodeUri: ./src/index-supplier/
       Handler: app.handler
-      Runtime: nodejs22.x
+      Runtime: nodejs24.x
       Architectures:
         - x86_64
       MemorySize: 128
@@ -516,7 +516,7 @@ Resources:
       FunctionName: !Sub ${AWS::StackName}-lambdaedge-access-control
       CodeUri: ./src/access-control/
       Handler: app.handler
-      Runtime: nodejs22.x
+      Runtime: nodejs24.x
       Architectures:
         - x86_64
       MemorySize: 128
