@@ -15,9 +15,9 @@ jobs:
       - name: Git clone the repository
         uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
-      - name: install
-        # Next 15.3.1 時点、 optionalDependencies の LGPL3.0 の sharp が入ってしまう(使ってない)
-        run: pnpm i
+      # NOTE: Next 15.3.1 時点、 optionalDependencies の LGPL3.0 の sharp が入ってしまう(使ってない)
       - name: check licenses
-        run: pnpm frontend check-license
+        run: |
+          set -euo pipefail
+          ! pnpm licenses ls --prod --no-optional | grep -q GPL
         continue-on-error: false
