@@ -71,7 +71,7 @@ importers:
     dependencies:
       '@next/third-parties':
         specifier: 15.5.2
-        version: 15.5.2(next@15.4.9(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)
+        version: 15.5.2(next@15.4.10(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)
       cheerio:
         specifier: 1.1.2
         version: 1.1.2
@@ -100,8 +100,8 @@ importers:
         specifier: 3.2.0
         version: 3.2.0
       next:
-        specifier: 15.4.9
-        version: 15.4.9(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: 15.4.10
+        version: 15.4.10(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       qs:
         specifier: 6.14.0
         version: 6.14.0
@@ -153,7 +153,7 @@ importers:
         version: 14.1.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.4.9(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
+        version: 4.2.3(next@15.4.10(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       pagefind:
         specifier: 1.4.0
         version: 1.4.0
@@ -680,8 +680,8 @@ packages:
   '@next/env@13.5.11':
     resolution: {integrity: sha512-fbb2C7HChgM7CemdCY+y3N1n8pcTKdqtQLbC7/EQtPdLvlMUT9JX/dBYl8MMZAtYG4uVMyPFHXckb68q/NRwqg==}
 
-  '@next/env@15.4.9':
-    resolution: {integrity: sha512-OYR0RulK5phnbxxzcLE4/ECgfx1PL3EHrDbjyelJ7jauaO+/Qvj5gG8JPMltB51CygC2KrZ0aAfYLjPYjYY17A==}
+  '@next/env@15.4.10':
+    resolution: {integrity: sha512-knhmoJ0Vv7VRf6pZEPSnciUG1S4bIhWx+qTYBW/AjxEtlzsiNORPk8sFDCEvqLfmKuey56UB9FL1UdHEV3uBrg==}
 
   '@next/eslint-plugin-next@15.5.2':
     resolution: {integrity: sha512-lkLrRVxcftuOsJNhWatf1P2hNVfh98k/omQHrCEPPriUypR6RcS13IvLdIrEvkm9AH2Nu2YpR5vLqBuy6twH3Q==}
@@ -2498,8 +2498,8 @@ packages:
     peerDependencies:
       next: '*'
 
-  next@15.4.9:
-    resolution: {integrity: sha512-/NedNmbiH4Umt/7SohT9VKxEdBt02Lj33xHrukE7d8Li6juT+75sEq4a4U06jggrvdbklKgr78OZEyWZ8XRrtw==}
+  next@15.4.10:
+    resolution: {integrity: sha512-itVlc79QjpKMFMRhP+kbGKaSG/gZM6RCvwhEbwmCNF06CdDiNaoHcbeg0PqkEa2GOcn8KJ0nnc7+yL7EjoYLHQ==}
     engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
     hasBin: true
     peerDependencies:
@@ -3762,7 +3762,7 @@ snapshots:
 
   '@next/env@13.5.11': {}
 
-  '@next/env@15.4.9': {}
+  '@next/env@15.4.10': {}
 
   '@next/eslint-plugin-next@15.5.2':
     dependencies:
@@ -3792,9 +3792,9 @@ snapshots:
   '@next/swc-win32-x64-msvc@15.4.8':
     optional: true
 
-  '@next/third-parties@15.5.2(next@15.4.9(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)':
+  '@next/third-parties@15.5.2(next@15.4.10(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)':
     dependencies:
-      next: 15.4.9(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      next: 15.4.10(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
       third-party-capital: 1.0.20
 
@@ -5846,17 +5846,17 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  next-sitemap@4.2.3(next@15.4.9(react-dom@19.1.1(react@19.1.1))(react@19.1.1)):
+  next-sitemap@4.2.3(next@15.4.10(react-dom@19.1.1(react@19.1.1))(react@19.1.1)):
     dependencies:
       '@corex/deepmerge': 4.0.43
       '@next/env': 13.5.11
       fast-glob: 3.3.3
       minimist: 1.2.8
-      next: 15.4.9(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      next: 15.4.10(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
 
-  next@15.4.9(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
+  next@15.4.10(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
     dependencies:
-      '@next/env': 15.4.9
+      '@next/env': 15.4.10
       '@swc/helpers': 0.5.15
       caniuse-lite: 1.0.30001760
       postcss: 8.4.31
