@@ -4,6 +4,40 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      aws-sdk:
+        patterns:
+          - "@aws-sdk/*"
+          - "@types/aws-lambda"
+      date-fns:
+        patterns:
+          - "date-fns"
+          - "date-fns-tz"
+      eslint:
+        patterns:
+          - "eslint"
+          - "@eslint/*"
+      lucide:
+        patterns:
+          - "lucide-react"
+          - "lucide-static"
+      next:
+        patterns:
+          - "next"
+          - "eslint-config-next"
+      qs:
+        patterns:
+          - "qs"
+          - "@types/qs"
+      tailwindcss:
+        patterns:
+          - "tailwindcss"
+          - "@tailwindcss/*"
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
   - package-ecosystem: "github-actions"
     directory: "/.github/"
     schedule:
