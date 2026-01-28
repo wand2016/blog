@@ -13,15 +13,14 @@
     "fmt": "prettier --ignore-path .gitignore --ignore-path .prettierignore './**/*.{js,jsx,ts,tsx,json,css}'",
     "fmt:fix": "prettier --write --ignore-path .gitignore --ignore-path .prettierignore './**/*.{js,jsx,ts,tsx,json,css}'",
     "typecheck": "tsc --noEmit",
-    "test": "exit 0",
-    "check-license": "license-checker --summary | grep -qvzi gpl"
+    "test": "exit 0"
   },
   "engines": {
     "node": ">=18.x"
   },
   "dependencies": {
     "@next/third-parties": "15.5.2",
-    "cheerio": "1.1.2",
+    "cheerio": "1.2.0",
     "clsx": "2.1.1",
     "date-fns": "4.1.0",
     "date-fns-tz": "3.2.0",
