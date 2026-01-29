@@ -1,11 +1,20 @@
-import { FlatCompat } from '@eslint/eslintrc';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import nextCoreWebVitals from 'eslint-config-next/core-web-vitals';
+import nextTypescript from 'eslint-config-next/typescript';
+import wandfuldays from 'eslint-plugin-wandfuldays';
 
-const compat = new FlatCompat({
-  baseDirectory: import.meta.dirname,
-});
-
-const eslintConfig = [
-  ...compat.extends('next/core-web-vitals', 'next/typescript', 'plugin:wandfuldays/recommended'),
+const eslintConfig = defineConfig([
+  ...nextCoreWebVitals,
+  ...nextTypescript,
+  ...wandfuldays.configs.recommended,
+  globalIgnores([
+    'node_modules/**',
+    '.next/**',
+    'out/**',
+    'build/**',
+    'public/**',
+    'next-env.d.ts',
+  ]),
   {
     languageOptions: {
       parserOptions: {
@@ -31,6 +40,6 @@ const eslintConfig = [
       '@typescript-eslint/array-type': 'error',
     },
   },
-];
+]);
 
 export default eslintConfig;

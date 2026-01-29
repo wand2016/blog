@@ -24,6 +24,7 @@ function InArticleAdsPortalImpl({ googleAdsensePublisherId, adSlot }: Props) {
   const [adPortals, setAdPortals] = useState<Element[]>([]);
 
   useLayoutEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setAdPortals(Array.from(document.querySelectorAll('.ad-portal')));
   }, []);
 
