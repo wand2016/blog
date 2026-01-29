@@ -24,6 +24,7 @@ updates:
         patterns:
           - "next"
           - "eslint-config-next"
+          - '@next/*'
       qs:
         patterns:
           - "qs"

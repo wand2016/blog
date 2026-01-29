@@ -13,9 +13,9 @@ type Props = {
 };
 
 type ParentParams = {
-  params: Promise<{
+  params: {
     tagId: string;
-  }>;
+  };
 };
 
 export const generateMetadata = async (
@@ -41,8 +41,7 @@ export const generateMetadata = async (
   };
 };
 
-export async function generateStaticParams({ params }: ParentParams) {
-  const { tagId } = await params;
+export async function generateStaticParams({ params: { tagId } }: ParentParams) {
   const data = await getAllBlogIds(`tags[contains]${tagId}`);
   // NOTE: 最低1ページ用意しないと SSG が失敗する
   const page = Math.max(Math.ceil(data.length / LIMIT), 1);
