@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import { FC, Fragment, PropsWithChildren, unstable_ViewTransition as ViewTransition } from 'react';
+import { FC, Fragment, PropsWithChildren, ViewTransition } from 'react';
 
 import ArticleThumbnail from '@/components/ArticleThumbnail';
 import PublishedDate from '@/components/Date';
