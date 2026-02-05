@@ -4,10 +4,12 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
       aws-sdk:
         patterns:
           - "@aws-sdk/*"
           - "@types/aws-lambda"
+          - "@smithy/*"
       date-fns:
         patterns:
           - "date-fns"
