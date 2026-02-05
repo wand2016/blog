@@ -95,8 +95,8 @@ importers:
         specifier: 0.548.0
         version: 0.548.0(react@19.2.4)
       lucide-static:
-        specifier: 0.532.0
-        version: 0.532.0
+        specifier: 0.563.0
+        version: 0.563.0
       microcms-js-sdk:
         specifier: 3.2.0
         version: 3.2.0
@@ -2030,6 +2030,7 @@ packages:
 
   glob@10.5.0:
     resolution: {integrity: sha512-DfXN8DfhJ7NH3Oe7cFmu3NCu1wKbkReJ8TorzSAFbSKrlNaQSKfIzqYqVY8zlbs2NLBbWpRiU52GX2PbaBVNkg==}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   globals@14.0.0:
@@ -2414,8 +2415,8 @@ packages:
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  lucide-static@0.532.0:
-    resolution: {integrity: sha512-2nsZcwIGq6zvh3lAsFie5p4QVcEWyqIt7ri61R8X9YPocT6ji/pezWvYWQSuN07GDhNn+KlY7Z6KaxKmAdxvrw==}
+  lucide-static@0.563.0:
+    resolution: {integrity: sha512-O7ZlK+VFfc/G5KYwUb9jO60RlPNKV6Dyu+OgQC/QCiO4FMPIK9qrIIkYHHG6PLgLKvmELmf1eKSAso+D/vAvcg==}
 
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
@@ -5779,7 +5780,7 @@ snapshots:
     dependencies:
       react: 19.2.4
 
-  lucide-static@0.532.0: {}
+  lucide-static@0.563.0: {}
 
   magic-string@0.30.21:
     dependencies:
