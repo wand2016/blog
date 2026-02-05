@@ -10,13 +10,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/aws-lambda": "8.10.150",
+    "@types/aws-lambda": "8.10.160",
     "@types/node": "25.2.0",
     "prettier": "3.8.1",
     "typescript": "5.9.3"
   },
   "dependencies": {
-    "@aws-sdk/client-ssm": "3.967.0",
+    "@aws-sdk/client-ssm": "3.983.0",
     "cognito-at-edge": "git+https://github.com/wand2016/cognito-at-edge.git#74be108",
     "esbuild": "0.27.2"
   }
