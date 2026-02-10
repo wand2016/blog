@@ -9,8 +9,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Git clone the repository
-        uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+        uses: actions/checkout@v6.0.2
+      - uses: pnpm/action-setup@v4.2.0
       - name: install
         run: pnpm i
       - name: fmt
@@ -27,11 +27,65 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Git clone the repository
-        uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+        uses: actions/checkout@v6.0.2
+      - uses: pnpm/action-setup@v4.2.0
       - name: install
         run: pnpm i
       - name: fmt
         run: pnpm eslint-plugin fmt
       - name: test
         run: pnpm eslint-plugin test
+
+  validate-skills:
+    name: Validate Agent Skills with skills-ref
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v7.3.0
+
+      - name: Checkout agentskills repository
+        uses: actions/checkout@v6.0.2
+        with:
+          repository: agentskills/agentskills
+          ref: "e81550daf13536f22cc9712118e14070f524449d" # 2026/02/10 時点での最新コミット
+          path: tools/agentskills
+
+      - name: Setup Python environment with uv
+        shell: bash
+        working-directory: tools/agentskills/skills-ref
+        run: |
+          set -euo pipefail
+          uv sync
+
+      - name: Validate all skills under .claude/skills
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          # Activate venv created in previous step
+          source tools/agentskills/skills-ref/.venv/bin/activate
+
+          if [ ! -d .claude/skills ]; then
+            echo ".claude/skills directory not found. Skipping validation."
+            exit 0
+          fi
+
+          failed=0
+          for d in .claude/skills/*; do
+            if [ -d "$d" ]; then
+              echo "Validating: $d"
+              if ! skills-ref validate "$d"; then
+                echo "Validation failed: $d"
+                failed=1
+              fi
+            fi
+          done
+          if [ "$failed" -ne 0 ]; then
+            echo "Some skills failed validation."
+            exit 1
+          fi
+          echo "All skills validated successfully."
