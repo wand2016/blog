@@ -16,7 +16,7 @@
     "typescript": "5.9.3"
   },
   "dependencies": {
-    "@aws-sdk/client-ssm": "3.988.0",
+    "@aws-sdk/client-ssm": "3.993.0",
     "cognito-at-edge": "git+https://github.com/wand2016/cognito-at-edge.git#74be108",
     "esbuild": "0.27.2"
   }
