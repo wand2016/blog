@@ -93,11 +93,11 @@ importers:
         specifier: 11.11.1
         version: 11.11.1
       lucide-react:
-        specifier: 0.563.0
-        version: 0.563.0(react@19.2.4)
+        specifier: 0.574.0
+        version: 0.574.0(react@19.2.4)
       lucide-static:
-        specifier: 0.563.0
-        version: 0.563.0
+        specifier: 0.574.0
+        version: 0.574.0
       microcms-js-sdk:
         specifier: 3.3.0
         version: 3.3.0
@@ -2381,13 +2381,13 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
-  lucide-react@0.563.0:
-    resolution: {integrity: sha512-8dXPB2GI4dI8jV4MgUDGBeLdGk8ekfqVZ0BdLcrRzocGgG75ltNEmWS+gE7uokKF/0oSUuczNDT+g9hFJ23FkA==}
+  lucide-react@0.574.0:
+    resolution: {integrity: sha512-dJ8xb5juiZVIbdSn3HTyHsjjIwUwZ4FNwV0RtYDScOyySOeie1oXZTymST6YPJ4Qwt3Po8g4quhYl4OxtACiuQ==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  lucide-static@0.563.0:
-    resolution: {integrity: sha512-O7ZlK+VFfc/G5KYwUb9jO60RlPNKV6Dyu+OgQC/QCiO4FMPIK9qrIIkYHHG6PLgLKvmELmf1eKSAso+D/vAvcg==}
+  lucide-static@0.574.0:
+    resolution: {integrity: sha512-UiT40+ciW+w3VSpujK+PoHGjbvWD+EqqiVRzPFFj/Uta61j30wug/sPB/mtdVTCicAm3ASklK0CzEZ+7IZ4Vvw==}
 
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
@@ -5705,11 +5705,11 @@ snapshots:
     dependencies:
       yallist: 3.1.1
 
-  lucide-react@0.563.0(react@19.2.4):
+  lucide-react@0.574.0(react@19.2.4):
     dependencies:
       react: 19.2.4
 
-  lucide-static@0.563.0: {}
+  lucide-static@0.574.0: {}
 
   magic-string@0.30.21:
     dependencies:
