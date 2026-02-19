@@ -30,7 +30,7 @@
     "lucide-static": "0.574.0",
     "microcms-js-sdk": "3.3.0",
     "next": "16.1.6",
-    "qs": "6.14.2",
+    "qs": "6.15.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-share": "5.2.2"
