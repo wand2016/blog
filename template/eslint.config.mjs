@@ -22,6 +22,11 @@ const eslintConfig = defineConfig([
         tsconfigRootDir: import.meta.dirname,
       },
     },
+    settings: {
+      react: {
+        version: '19.2', // workaround: https://github.com/jsx-eslint/eslint-plugin-react/issues/3977#issuecomment-3945790562
+      },
+    },
     rules: {
       'import/order': [
         'error',
