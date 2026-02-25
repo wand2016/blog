@@ -41,7 +41,7 @@
 @utility table-wrapper {
   @apply relative overflow-x-auto shadow-xs rounded-lg;
   table {
-    @apply w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400;
+    @apply w-full text-sm text-left rtl:text-right text-gray-700;
     th,
     td {
       @apply px-4 py-2;
