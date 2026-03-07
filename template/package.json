@@ -16,7 +16,7 @@
     "test": "exit 0"
   },
   "engines": {
-    "node": ">=18.x"
+    "node": ">=24.x"
   },
   "dependencies": {
     "@next/third-parties": "16.1.6",
