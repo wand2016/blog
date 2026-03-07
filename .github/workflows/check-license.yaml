@@ -14,6 +14,9 @@ jobs:
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v6.0.2
+      - uses: actions/setup-node@v6.3.0
+        with:
+          node-version: 24
       - uses: pnpm/action-setup@v4.2.0
       # NOTE: Next 15.3.1 時点、 optionalDependencies の LGPL3.0 の sharp が入ってしまう(使ってない)
       - name: check licenses

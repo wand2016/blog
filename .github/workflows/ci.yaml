@@ -10,6 +10,9 @@ jobs:
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v6.0.2
+      - uses: actions/setup-node@v6.3.0
+        with:
+          node-version: 24
       - uses: pnpm/action-setup@v4.2.0
       - name: install
         run: pnpm i
@@ -28,6 +31,9 @@ jobs:
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v6.0.2
+      - uses: actions/setup-node@v6.3.0
+        with:
+          node-version: 24
       - uses: pnpm/action-setup@v4.2.0
       - name: install
         run: pnpm i
