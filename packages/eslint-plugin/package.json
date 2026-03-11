@@ -21,7 +21,7 @@
     "@types/estree-jsx": "1.0.5",
     "@typescript-eslint/parser": "8.56.1",
     "@typescript-eslint/typescript-estree": "8.56.1",
-    "eslint": "10.0.2",
+    "eslint": "10.0.3",
     "mocha": "11.7.5",
     "prettier": "3.8.1"
   },
