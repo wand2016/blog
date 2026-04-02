@@ -1,6 +1,11 @@
 ---
 name: article-writing
-description: Write blog article from drafts or mind maps.
+description: >-
+  Write blog articles for the wandfuldays blog from drafts, mind maps, or notes.
+  Use this skill whenever the user wants to write or generate a blog post, turn input notes
+  into an article, or asks to create content for wandfuldays.com — even if they don't
+  explicitly say "blog article". Covers SEO, frontmatter, affiliate links, ads placement,
+  and the site's writing style.
 ---
 
 # Article Writing
@@ -88,6 +93,9 @@ thumbnail: "サムネイル案の説明"
 - 1行・1文の目安: 60文字以内
 - h2 セクション数の目安: 3〜6個
 - 画像挿入位置は `(image: キャプション説明)` の形式で示すこと（例: `(image: 完成した棚の全体写真)`）
+  - ただしコードや設定ファイルが中心の記事（プログラミング・CLI手順など）では省略可
 - `(ads)` は導入文の直後と、本文中盤の h2 セクション間に1箇所ずつ挿入すること
 - アフィリエイトリンクは該当する商品・道具に言及した直後に `(affiliate: 商品名)` の形式で示すこと
+- 参考文献・公式ドキュメントは積極的にリンクで引用すること（特にプログラミング・手順系記事）
+- 出力ファイル名は frontmatter の `slug` と一致させること（例: slug が `my-article` なら `my-article.md`）
 - 最後に `## まとめ` セクションを設けること
