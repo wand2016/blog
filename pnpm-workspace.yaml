@@ -17,5 +17,7 @@ overrides:
   glob@>=10.2.0 <10.5.0: ">=10.5.0"
   # CVE-2026-24001
   diff@>=6.0.0 <8.0.3: ">=8.0.3"
+  # CWE-200
+  follow-redirects@<=1.15.11: "^1.16.0"
   # CWE-96
   serialize-javascript@<=7.0.2: ">=7.0.3"
