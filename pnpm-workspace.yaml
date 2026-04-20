@@ -3,6 +3,7 @@ packages:
   - infra
   - template
 overrides:
+  # CVE-2025-62718
   # CVE-2026-40175
   axios@>=1.0.0 <1.15.0: '^1.15.0'
   # CVE-2026-24001
@@ -18,5 +19,8 @@ overrides:
   js-yaml@>=3.0.0 <3.14.2: "^3.14.2"
   # CVE-2025-64718
   js-yaml@>=4.0.0 <4.1.1: "^4.1.1"
+  # CVE-2026-33750
+  # CVE-2026-33671
+  picomatch@<2.3.2: "^2.3.2"
   # CWE-96
   serialize-javascript@<=7.0.2: "^7.0.3"
