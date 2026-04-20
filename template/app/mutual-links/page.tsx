@@ -12,7 +12,6 @@ export async function generateMetadata(_: object, parent: ResolvingMetadata): Pr
     title: data.title,
     description: data.description,
     keywords: getGlobalTags(data),
-    // @ts-expect-error 型が合わない
     openGraph: {
       ...(await parent).openGraph,
       title: data.title,

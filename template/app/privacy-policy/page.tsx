@@ -10,7 +10,6 @@ export const generateMetadata = async (
 ): Promise<Metadata> => ({
   title: 'プライバシーポリシー',
   description: 'プライバシーポリシー・免責事項です。',
-  // @ts-expect-error 型が合わない
   openGraph: {
     ...(await parent).openGraph,
     title: 'プライバシーポリシー',

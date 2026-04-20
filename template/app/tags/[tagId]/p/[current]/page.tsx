@@ -27,7 +27,6 @@ export const generateMetadata = async (
 
   return {
     title: `「${tag.name}」の記事一覧|${current}ページ目`,
-    // @ts-expect-error 型が合わない
     openGraph: {
       ...(await parent).openGraph,
       title: `「${tag.name}」の記事一覧|${current}ページ目`,
