@@ -19,7 +19,7 @@
     "node": ">=24.x"
   },
   "dependencies": {
-    "@next/third-parties": "16.1.6",
+    "@next/third-parties": "16.2.4",
     "cheerio": "1.2.0",
     "clsx": "2.1.1",
     "date-fns": "4.1.0",
@@ -29,7 +29,7 @@
     "lucide-react": "1.7.0",
     "lucide-static": "1.7.0",
     "microcms-js-sdk": "3.3.0",
-    "next": "16.1.7",
+    "next": "16.2.4",
     "qs": "6.15.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
@@ -42,7 +42,7 @@
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "eslint": "10.2.0",
-    "eslint-config-next": "16.1.6",
+    "eslint-config-next": "16.2.4",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-wandfuldays": "workspace:*",
