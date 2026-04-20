@@ -19,8 +19,8 @@
     "@types/eslint": "9.6.1",
     "@types/estree": "1.0.8",
     "@types/estree-jsx": "1.0.5",
-    "@typescript-eslint/parser": "8.56.1",
-    "@typescript-eslint/typescript-estree": "8.56.1",
+    "@typescript-eslint/parser": "8.58.2",
+    "@typescript-eslint/typescript-estree": "8.58.2",
     "eslint": "10.2.0",
     "mocha": "11.7.5",
     "prettier": "3.8.1"
