@@ -36,7 +36,7 @@
     "react-share": "5.2.2"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "4.2.2",
+    "@tailwindcss/postcss": "4.2.4",
     "@types/node": "25.2.0",
     "@types/qs": "6.15.0",
     "@types/react": "19.2.14",
@@ -51,7 +51,7 @@
     "pagefind": "1.4.0",
     "postcss": "8.5.8",
     "prettier": "3.8.1",
-    "tailwindcss": "4.2.2",
+    "tailwindcss": "4.2.4",
     "typescript": "5.9.3"
   }
 }
