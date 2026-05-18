@@ -53,6 +53,9 @@ export default async function RootLayout({ children }: Props) {
 
   return (
     <html lang="ja" className="pt-12 scroll-smooth scroll-pt-12">
+      <head>
+        <link rel="manifest" href="/manifest.json" crossOrigin="use-credentials" />
+      </head>
       <body>
         {!!process.env.GOOGLE_ADSENSE_PUBLISHER_ID && (
           <Script
