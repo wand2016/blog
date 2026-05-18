@@ -7,7 +7,9 @@ minimumReleaseAge: 10080
 overrides:
   # CVE-2025-62718
   # CVE-2026-40175
-  axios@>=1.0.0 <1.15.0: '^1.15.0'
+  # CVE-2026-42044
+  # CVE-2026-42264
+  axios@>=1.0.0 <1.15.2: '^1.15.2'
   # CVE-2026-33750
   brace-expansion@<1.1.13: "^1.1.13"
   # CVE-2026-24001
@@ -26,5 +28,6 @@ overrides:
   # CVE-2026-33750
   # CVE-2026-33671
   picomatch@<2.3.2: "^2.3.2"
+  postcss@<8.5.10: "^8.5.10"
   # CWE-96
   serialize-javascript@<=7.0.2: "^7.0.3"
