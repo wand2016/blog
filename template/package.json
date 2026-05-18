@@ -19,7 +19,7 @@
     "node": ">=24.x"
   },
   "dependencies": {
-    "@next/third-parties": "16.2.4",
+    "@next/third-parties": "16.2.6",
     "cheerio": "1.2.0",
     "clsx": "2.1.1",
     "date-fns": "4.1.0",
@@ -42,7 +42,7 @@
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "eslint": "10.2.1",
-    "eslint-config-next": "16.2.4",
+    "eslint-config-next": "16.2.6",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-wandfuldays": "workspace:*",
