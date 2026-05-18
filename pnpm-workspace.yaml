@@ -2,6 +2,8 @@ packages:
   - packages/*
   - infra
   - template
+onlyBuiltDependencies: []
+minimumReleaseAge: 10080
 overrides:
   # CVE-2025-62718
   # CVE-2026-40175
