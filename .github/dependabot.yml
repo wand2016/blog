@@ -4,6 +4,8 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    cooldown:
+      default-days: 7
     groups:
       aws-sdk:
         patterns:
@@ -45,3 +47,5 @@ updates:
     directory: "/.github/"
     schedule:
       interval: "weekly"
+    cooldown:
+      default-days: 7
