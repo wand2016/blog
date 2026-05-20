@@ -31,8 +31,8 @@
     "microcms-js-sdk": "3.4.0",
     "next": "16.2.6",
     "qs": "6.15.1",
-    "react": "19.2.5",
-    "react-dom": "19.2.5",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
     "react-share": "5.2.2"
   },
   "devDependencies": {
