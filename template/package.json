@@ -30,7 +30,7 @@
     "lucide-static": "1.14.0",
     "microcms-js-sdk": "3.4.0",
     "next": "16.2.6",
-    "qs": "6.15.1",
+    "qs": "6.15.2",
     "react": "19.2.5",
     "react-dom": "19.2.5",
     "react-share": "5.2.2"
@@ -38,7 +38,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "4.2.4",
     "@types/node": "25.2.0",
-    "@types/qs": "6.15.0",
+    "@types/qs": "6.15.1",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "eslint": "10.2.1",
