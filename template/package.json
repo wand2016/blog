@@ -31,15 +31,15 @@
     "microcms-js-sdk": "3.4.0",
     "next": "16.2.6",
     "qs": "6.15.1",
-    "react": "19.2.5",
-    "react-dom": "19.2.5",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
     "react-share": "5.2.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.2.4",
     "@types/node": "25.2.0",
     "@types/qs": "6.15.0",
-    "@types/react": "19.2.14",
+    "@types/react": "19.2.15",
     "@types/react-dom": "19.2.3",
     "eslint": "10.2.1",
     "eslint-config-next": "16.2.6",
